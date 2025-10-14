@@ -1,0 +1,8 @@
+*.a
+*.o
+test*
+Makefile.study
+objs
+.vscode
+a.out
+main.c
