@@ -14,17 +14,11 @@ char	*str_new(const char *buf)
 	size_t	size;
 
 	if (!buf)
-	{
-		write(2, "Error: in [str_new] - buf is NULL", 33);
 		return (NULL);
-	}
 	size = ft_strlen(buf);
 	new_str = (t_str *) malloc(sizeof(t_str) + size + 1);
 	if (!new_str)
-	{
-		write(2, "Error: in [str_new] - malloc error", 34);
 		return (NULL);
-	}
 	new_str->len = size;
 	new_str->capacity = size;
 	ft_memcpy(new_str->buf, buf, size);

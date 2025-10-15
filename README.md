@@ -68,3 +68,67 @@ Below is the directory structure for the **Mandatory Part**, detailing the funct
 └── Makefile
 
 ```
+
+## 🧪 Testing
+
+For unit testing, we chose the Check framework — a lightweight and powerful C testing library. It offers a clean syntax, signal handling, and test isolation, making it ideal for low-level projects like this one.
+
+Since 42's environment doesn't allow sudo access for system-wide installations, we opted for a manual setup ("root-style") by compiling Check from source and installing it locally within the project directory. This approach ensures portability and independence from system-level constraints.
+
+---
+
+## ✅ Local Installation of Check (without `sudo`)
+
+```bash
+git clone https://github.com/libcheck/check.git
+cd check
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=$HOME/.local ..
+make
+make install
+
+cd ..
+cp check/src/check.h.in check.h
+# remove include with error and @ errors
+
+rm -rf check
+```
+
+## 🧪 Simple Test: `test_check.c`
+
+Create a file named `test_check.c` with the following content:
+
+```c
+#include <check.h>
+
+START_TEST(test_example) {
+    ck_assert_int_eq(2 + 2, 4);
+}
+END_TEST
+
+Suite *suite(void) {
+    Suite *s = suite_create("Example");
+    TCase *tc = tcase_create("Core");
+    tcase_add_test(tc, test_example);
+    suite_add_tcase(s, tc);
+    return s;
+}
+
+int main(void) {
+    SRunner *sr = srunner_create(suite());
+    srunner_run_all(sr, CK_NORMAL);
+    srunner_free(sr);
+    return 0;
+}
+```
+
+## Run Makefile: 
+
+```bash
+make test
+```
+
+With this setup, you can test C functions using the **Check** framework — even without administrative privileges. Let me know if you'd like to add examples for testing threads, signals, or subprocesses too!
+
+---

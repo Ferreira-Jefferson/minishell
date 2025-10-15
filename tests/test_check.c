@@ -1,20 +1,11 @@
 #include <check.h>
 
-START_TEST(test_exemplo) {
-    ck_assert_int_eq(2 + 2, 4);
-}
-END_TEST
-
-Suite *suite(void) {
-    Suite *s = suite_create("Exemplo");
-    TCase *tc = tcase_create("Core");
-    tcase_add_test(tc, test_exemplo);
-    suite_add_tcase(s, tc);
-    return s;
-}
+Suite *str_valid(void);
+Suite *str_invalid(void);
 
 int main(void) {
-    SRunner *sr = srunner_create(suite());
+    SRunner *sr = srunner_create(str_valid());
+	srunner_add_suite(sr, str_invalid());
     srunner_run_all(sr, CK_NORMAL);
     srunner_free(sr);
     return 0;
