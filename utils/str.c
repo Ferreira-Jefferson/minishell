@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 13:49:27 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/10/16 13:50:25 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/str.h"
 
-static inline t_str *get_str(const char *buf)
+static inline t_str	*get_str(const char *buf)
 {
 	if (!buf)
 		return (NULL);
-	return ((t_str *)(buf - sizeof(t_str)));	
+	return ((t_str *)(buf - sizeof(t_str)));
 }
 
 size_t	str_len(const char *buf)
@@ -20,7 +31,7 @@ size_t	str_len(const char *buf)
 	return (str->len);
 }
 
-static char *str_make_room(char *buf, size_t addlen)
+static char	*str_make_room(char *buf, size_t addlen)
 {
 	t_str	*str;
 	t_str	*new_str;
@@ -51,7 +62,7 @@ static char	*str_cat_len(char *buf, const void *s, size_t len)
 
 	buf = str_make_room(buf, len);
 	if (!buf)
-		return (NULL); 
+		return (NULL);
 	str = get_str(buf);
 	ft_memcpy(buf + str->len, s, len);
 	str->len += len;
