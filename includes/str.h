@@ -13,9 +13,9 @@ typedef struct s_str {
 	char buf[]; // "Flexible Array Member" (FAM)
 } t_str ;
 
-char	*str_new(const char *init);
 void	str_free(char *buf);
 size_t	str_len(const char *buf);
+char	*str_new(const char *init);
 char	*str_cat(char *buf, const char *s);
 
 #endif
