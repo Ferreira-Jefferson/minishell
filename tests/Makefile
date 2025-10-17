@@ -7,7 +7,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 SRC_DIR = ..
 OBJ_DIR = objs
 INCLUDES = -I$(SRC_DIR)/includes -I$(SRC_DIR)/libft -I$(HOME)/.local/include
-LIBFT = $(SRC_DIR)/libft/libft.a
+LIBFT = $(SRC_DIR)/lib/libft/libft.a
 LDLIBS = -L$(HOME)/.local/lib -lcheck
 
 # Fontes de teste

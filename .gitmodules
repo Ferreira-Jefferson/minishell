@@ -1,3 +1,6 @@
 [submodule "lib/libft"]
 	path = lib/libft
 	url = git@github.com:joaolive/libftx.git
+[submodule "lib/libftx"]
+	path = lib/libftx
+	url = git@github.com:joaolive/libftx.git
