@@ -38,14 +38,14 @@ char	*ht_search(t_hash_table  *table,  char  *key)
 	env_item = table->items[index];
 	while (env_item)
 	{
-		if (ft_isequal(env_item->key, key))
+		if (ft_strncmp(env_item->key, key, ft_strlen(key)))
 			return (env_item->value);
 		env_item = env_item->next;
 	}
 	return (NULL);
 }
 
-void	ht_free_item(t_env_item *env_item)
+static void	ht_free_item(t_env_item *env_item)
 {
 	str_free(env_item->key);
 	str_free(env_item->value);
@@ -62,7 +62,7 @@ void	ht_delete(t_hash_table  *table,  char *key)
 	env_item = table->items[index];
 	if (!env_item)
 		return ;
-	if (ft_isequal(env_item->key, key))
+	if (ft_strncmp(env_item->key, key, ft_strlen(key)))
 	{
 		table->items[index] = env_item->next;
 		return (ht_free_item(env_item));
@@ -71,7 +71,7 @@ void	ht_delete(t_hash_table  *table,  char *key)
 	env_item = env_item->next;
 	while(env_item)
 	{
-		if (ft_isequal(env_item->key, key))
+		if (ft_strncmp(env_item->key, key, ft_strlen(key)))
 		{
 			before->next = env_item->next;
 			return (ht_free_item(env_item));
@@ -79,33 +79,6 @@ void	ht_delete(t_hash_table  *table,  char *key)
 		before = env_item;
 		env_item = env_item->next;
 	}
-}
-
-void	ht_free(t_hash_table  *table)
-{
-	int	i;
-	t_env_item *env_item;
-	t_env_item *to_free;
-
-	if (!table)
-		return ;
-	i = 0;
-	while (i < table->size)
-	{
-		if (table->items[i])
-		{
-			env_item = table->items[i];
-			while (env_item)
-			{
-				to_free = env_item;
-				env_item = env_item->next;
-				ht_free_item(to_free);
-			}
-		}
-		i++;
-	}
-	free(table->items);
-	free(table);
 }
 
 

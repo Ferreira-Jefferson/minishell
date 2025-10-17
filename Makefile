@@ -14,7 +14,7 @@ LIBFT	   = $(LIB_DIR)/libft.a
 INCLUDE_DIRS = -I$(INCLUDES) -I$(LIB_DIR)
 
 MANDATORY_SRC = main.c
-UTILS_SRC	 = str.c str_utils.c
+UTILS_SRC	 = str.c str_utils.c hash_table.c hash_table_utils.c
 
 MANDATORY_SRC_FULL = $(addprefix $(SRC_DIR)/, $(MANDATORY_SRC))
 UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))
