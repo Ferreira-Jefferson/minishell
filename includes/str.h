@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:47:35 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/10/16 13:48:04 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:10:16 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 
 # include "minishell.h"
-# include "../libft/libft.h"
 
 typedef struct s_str {
 	size_t	len;

@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 OBJ_DIR	 = objs
 SRC_DIR	 = src
 UTILS_DIR   = utils
-LIB_DIR	 = libft
+LIB_DIR	 = lib/libft
 INCLUDES	= includes
 
 LIBFT	   = $(LIB_DIR)/libft.a

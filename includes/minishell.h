@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/10/17 10:13:26 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:09:58 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
-# include "lib/libft/include/libft.h"
+# include "../lib/libft/include/libft.h"
 # include "str.h"
 
 #endif

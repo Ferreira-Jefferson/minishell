@@ -6,11 +6,13 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/17 10:11:01 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:09:33 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	main(int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
 	return (0);
 }
