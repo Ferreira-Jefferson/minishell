@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/17 10:11:01 by jtertuli         ###   ########.fr       */
+/*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/10/16 13:47:25 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int argc, char **argv)
-{
-	return (0);
-}
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <stdlib.h>
+# include "str.h"
+
+#endif
