@@ -132,3 +132,34 @@ make test
 With this setup, you can test C functions using the **Check** framework — even without administrative privileges. Let me know if you'd like to add examples for testing threads, signals, or subprocesses too!
 
 ---
+
+
+$> ls -lr | grep Makefile > oi
+id 1: ls CMD
+id 2: -lr ARG
+id 3: | PIPE
+
+sintax: 0
+
+2> 	NULL
+
+ECHO OI > TUDO BEM > COM > VC
+
+echo cmd
+oi arg
+> redir
+tudo fd
+bem arg
+> redir
+com fd
+> redir
+vc fd
+
+valido
+''''ls
+'e'c'h'o oi
+
+aspas impar invalido
+
+echo oi > a > b > c
+
