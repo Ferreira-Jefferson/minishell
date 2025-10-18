@@ -17,8 +17,8 @@ typedef struct s_hash_table {
 unsigned long	hash_djb2(char *str);
 t_hash_table	*ht_create(void);
 void			ht_insert(t_hash_table *table, char *key, char *value);
-char	*ht_search(t_hash_table  *table,  char  *key);
-void	ht_delete(t_hash_table  *table,  char *key);
-void	ht_free(t_hash_table  *table);
+char			*ht_search(t_hash_table  *table,  char  *key);
+void			ht_delete(t_hash_table  *table,  char *key);
+void			ht_free(t_hash_table  *table);
 
 #endif
