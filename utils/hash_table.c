@@ -32,7 +32,7 @@ void	ht_insert(t_hash_table *table, char *key, char *value)
 	table->items[index] = env_item;
 }
 
-char	*ht_search(t_hash_table  *table,  char  *key)
+char	*ht_search(t_hash_table *table, char *key)
 {
 	t_env_item	*env_item;
 	size_t		index;
@@ -41,7 +41,7 @@ char	*ht_search(t_hash_table  *table,  char  *key)
 	env_item = table->items[index];
 	while (env_item)
 	{
-	if (ft_strncmp(env_item->key, key, ft_strlen(key)) == 0)
+		if (ft_strncmp(env_item->key, key, ft_strlen(key)) == 0)
 			return (env_item->value);
 		env_item = env_item->next;
 	}
@@ -55,10 +55,10 @@ static void	ht_free_item(t_env_item *env_item)
 	free(env_item);
 }
 
-void	ht_delete(t_hash_table  *table,  char *key)
+void	ht_delete(t_hash_table *table, char *key)
 {
-	t_env_item *env_item;
-	t_env_item *before;
+	t_env_item	*env_item;
+	t_env_item	*before;
 	size_t		index;
 
 	index = hash_djb2(key) % table->size;
@@ -72,7 +72,7 @@ void	ht_delete(t_hash_table  *table,  char *key)
 	}
 	before = env_item;
 	env_item = env_item->next;
-	while(env_item)
+	while (env_item)
 	{
 		if (ft_strncmp(env_item->key, key, ft_strlen(key)) == 0)
 		{
