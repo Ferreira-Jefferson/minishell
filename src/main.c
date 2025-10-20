@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/20 17:46:40 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/20 17:48:59 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_event_hook(void)
 	{
 		write(1, "^C", 2);
 		rl_done = 1;
-		reset_g_signal_status(); 
+		reset_g_signal_status();
 	}
 	return (0);
 }
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[], char **envp)
 {
 	t_hash_table	*table;
 	char			*input;
-	
+
 	(void)argc;
 	(void)argv;
 	setup_signals();

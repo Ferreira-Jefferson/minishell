@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 t_hash_table	*env_load(char **envp)
 {
 	t_hash_table	*table;
