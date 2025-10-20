@@ -62,8 +62,10 @@ Below is the directory structure for the **Mandatory Part**, detailing the funct
 │       └── b_unset.c
 │
 │   └── utils/
-│       ├── env_hash.c       # **Implementação Customizada de Hash Table para ambiente** [10].
-│       └── dynamic_string.c # **Funções Customizadas de Buffer/String Dinâmica** (substituindo SDS).
+│       ├── hash_table.c       # **Implementação Customizada de Hash Table para ambiente** .
+│       ├── hash_table_utils.c      
+│       ├── str.c  # **Funções Customizadas de Buffer/String Dinâmica** (substituindo SDS).    
+│       └── str_utils.c 
 │
 └── Makefile
 
