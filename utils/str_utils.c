@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:50:37 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/10/16 13:51:10 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/21 14:32:07 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ char	*str_new(const char *buf)
 	ft_memcpy(new_str->buf, buf, size);
 	new_str->buf[size] = '\0';
 	return (new_str->buf);
+}
+
+char *str_replace(char *buf, const char *str)
+{
+	if (!buf)
+		return (NULL);
+	str_free(buf);
+	return (str_new(str));
 }
 
 void	str_free(char *buf)

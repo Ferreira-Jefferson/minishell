@@ -33,25 +33,25 @@ Below is the directory structure for the **Mandatory Part**, detailing the funct
 │
 │   ├── lexer/
 │   │   ├── tokenizer.c      # Tokenização da entrada em tokens brutos.
-│   │   └── quoting.c        # Lógica de aspas (', ") durante a tokenização [2].
+│   │   └── quoting.c        # Lógica de aspas (', ") durante a tokenização.
 │
 │   ├── parser/
-│   │   ├── ast_builder.c    # Constrói a AST a partir dos tokens [3-5].
-│   │   └── struct_init.c    # Funções de alocação de nós da AST (usando malloc) [6].
+│   │   ├── ast_builder.c    # Constrói a AST a partir dos tokens.
+│   │   └── struct_init.c    # Funções de alocação de nós da AST (usando malloc).
 │
 │   ├── expander/
-│   │   ├── variable_exp.c   # Expansão de $VAR e $? [7].
-│   │   └── quote_removal.c  # Remoção de aspas após expansão [8].
+│   │   ├── variable_exp.c   # Expansão de $VAR e $?.
+│   │   └── quote_removal.c  # Remoção de aspas após expansão.
 │
 │   ├── execution/
 │   │   ├── executor.c
-│   │   ├── process_mgmt.c   # Gerenciamento de fork, execve, waitpid [1].
-│   │   └── search_path.c    # Lógica de busca de binários usando PATH e access [1, 9].
+│   │   ├── process_mgmt.c   # Gerenciamento de fork, execve, waitpid.
+│   │   └── search_path.c    # Lógica de busca de binários usando PATH e access.
 │
 │   ├── io/
 │   │   ├── io_redirect.c
 │   │   ├── io_pipe.c
-│   │   └── here_doc.c       # Implementação de << (here-document) [7].
+│   │   └── here_doc.c       # Implementação de << (here-document).
 │	│
 │   └── builtins/            # Comandos built-in
 │       ├── b_cd.c
