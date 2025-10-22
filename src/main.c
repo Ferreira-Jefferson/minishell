@@ -6,21 +6,45 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/20 17:48:59 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/22 12:16:35 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
-int	ft_event_hook(void)
+struct env {
+	char *key;
+	char *value;
+} ;
+
+struct group
 {
-	if (get_g_signal_status() != 0)
+	t_hash_table	*table;
+	char *input;
+};
+
+void expander(struct group *values)
+{
+	char *new_str = str_new("");
+	(void) new_str;
+	char *dollar_sign;
+	char *space_or_end;
+	char *str_to_spander;
+	// char len_var;
+	
+	dollar_sign = ft_strchr(values->input, '$');
+	if (dollar_sign)
 	{
-		write(1, "^C", 2);
-		rl_done = 1;
-		reset_g_signal_status();
+		space_or_end = ft_strchr(dollar_sign, ' ');
+		if (space_or_end)
+			dollar_sign[space_or_end - dollar_sign] = '\0';
+		str_to_spander = str_new(dollar_sign);
+		values->input[dollar_sign - values->input] = '\0';
+		new_str = str_cat(new_str, values->input);
+		printf("[%s]: [%s]\n", str_to_spander, new_str);
+		
 	}
-	return (0);
+	
 }
 
 int	main(int argc, char *argv[], char **envp)
@@ -30,13 +54,13 @@ int	main(int argc, char *argv[], char **envp)
 
 	(void)argc;
 	(void)argv;
-	setup_signals();
-	rl_catch_signals = 0;
-	rl_event_hook = ft_event_hook;
 	table = env_load(envp);
+	struct group values;
+	
+	values.table = table;
 	while (1)
 	{
-		input = readline("teste> ");
+		input = readline("minishell~$ ");
 		if (!input && get_g_signal_status() == 0)
 		{
 			write(1, "exit\n", 5);
@@ -44,7 +68,8 @@ int	main(int argc, char *argv[], char **envp)
 		}
 		if (input[0] != '\0')
 			add_history(input);
-		// função que vai tratar o input
+		values.input = str_new(input);
+		expander(&values);
 		free(input);
 	}
 	ht_free(table);
