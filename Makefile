@@ -50,4 +50,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+run: all
+	valgrind --suppressions=readline.sup --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishell
+
+.PHONY: all clean fclean re run
