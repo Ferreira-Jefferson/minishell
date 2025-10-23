@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:23:05 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/23 09:50:55 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/23 10:07:01 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ t_token	*handle_redir(const char *input, int *i)
 {
 	t_token	*token;
 
-	if (ft_strcmp(input[*i], ">>") == 0)
+	if (ft_strcmp((char *)input, ">>") == 0)
 		token = new_token(TK_APPEND, ft_strdup(">>"));
-	else if (ft_strcmp((int)input[*i], "<<") == 0)
+	else if (ft_strcmp((char *)input, "<<") == 0)
 		token = new_token(TK_HEREDOC, ft_strdup("<<"));
-	else if (input[*i] == ">")
+	else if (input[*i] == '>')
 		token = new_token(TK_REDIR_OUT, ft_strdup(">"));
 	else
 		token = new_token(TK_REDIR_IN, ft_strdup("<"));
@@ -103,7 +103,7 @@ t_token	*handle_and(const char *input, int *i)
 {
 	t_token	*token;
 
-	if (ft_strcmp(input[*i], "&&") == 0)
+	if (ft_strcmp((char *)input, "&&") == 0)
 		token = new_token(TK_AND, ft_strdup("&&"));
 	else
 	{
@@ -119,7 +119,7 @@ t_token	*handle_pipe(const char *input, int *i)
 {
 	t_token	*token;
 
-	if (ft_strcmp(input[*i], "||") == 0)
+	if (ft_strcmp((char *)input, "||") == 0)
 		token = new_token(TK_OR, ft_strdup("||"));
 	else
 		token = new_token(TK_PIPE, ft_strdup("|"));
