@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/10/20 17:42:56 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/23 09:43:26 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
-# include "../lib/libftx/include/libft.h"
+# include "../lib/libft/include/libft.h"
 # include "signals.h"
 # include "str.h"
 # include "hash_table.h"
 # include "utils.h"
+# include "lexer.h"
 
 #endif
