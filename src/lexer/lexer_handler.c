@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:23:05 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/22 18:12:51 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/23 09:50:55 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 int	skip_quotes(const char *input, int *i, char c)
 {
@@ -62,6 +62,7 @@ t_token	*handle_word(const char *input, int *i)
 t_token	*handle_list(const char *input, int *i)
 {
 	t_token	*token;
+	(void) input;
 
 	token = new_token(TK_LIST, ft_strdup(";"));
 	(*i)++;
@@ -86,7 +87,7 @@ t_token	*handle_redir(const char *input, int *i)
 
 	if (ft_strcmp(input[*i], ">>") == 0)
 		token = new_token(TK_APPEND, ft_strdup(">>"));
-	else if (ft_strcmp(input[*i], "<<") == 0)
+	else if (ft_strcmp((int)input[*i], "<<") == 0)
 		token = new_token(TK_HEREDOC, ft_strdup("<<"));
 	else if (input[*i] == ">")
 		token = new_token(TK_REDIR_OUT, ft_strdup(">"));

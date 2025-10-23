@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 09:22:59 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/22 20:23:49 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/23 09:49:01 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 static void	init_dispatch_table(t_token_handler table[])
 {
@@ -56,8 +56,8 @@ t_dlist	*tokenize(const char *input, int i)
 			i++;
 		if (input[i] == '\0')
 			break ;
-		if (table[input[i]] != NULL)
-			token = table[input[i]](input, &i);
+		if (table[(int) input[i]] != NULL)
+			token = table[(int) input[i]](input, &i);
 		else
 			token = handle_word(input, &i);
 		if (!add_token(tokens, token))
