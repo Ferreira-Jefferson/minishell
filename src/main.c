@@ -11,28 +11,59 @@ struct group
 	char *input;
 };
 
+int ex_get_value_variable(char **new_str, char *str)
+{
+	size_t i;
+	char tmp;
+	char *var;
+
+	i = 0;
+	while (str[i] && (ft_isalpha(str[i]) || str[i] == '_'))
+		i++;
+	tmp = str[i];
+	str[i] = '\0';
+	var = str_new(str);
+	str[i] = tmp;
+	*new_str = str_cat(*new_str, "XXX");
+	return (i);
+}
+
+int ex_question_mark(char **new_str)
+{
+	*new_str = str_cat(*new_str, "127");
+	return (1);
+}
+
+int ex_double_dollar(char **new_str)
+{
+	*new_str = str_cat(*new_str, "12345");
+	return (1);
+}
+
 void expander(struct group *values)
 {
 	char *new_str = str_new("");
-	(void) new_str;
-	char *dollar_sign;
-	char *space_or_end;
-	char *str_to_spander;
-	// char len_var;
+	char str_tmp[2];
 	
-	dollar_sign = ft_strchr(values->input, '$');
-	if (dollar_sign)
+	while (*values->input)
 	{
-		space_or_end = ft_strchr(dollar_sign, ' ');
-		if (space_or_end)
-			dollar_sign[space_or_end - dollar_sign] = '\0';
-		str_to_spander = str_new(dollar_sign);
-		values->input[dollar_sign - values->input] = '\0';
-		new_str = str_cat(new_str, values->input);
-		printf("[%s]: [%s]\n", str_to_spander, new_str);
-		
+		if (*values->input == '$')
+		{
+			values->input++;
+			if (*values->input == '$')
+				values->input += ex_double_dollar(&new_str);
+			else if (*values->input == '?')
+				values->input += ex_question_mark(&new_str);
+			else if (ft_isalpha(*values->input))
+				values->input += ex_get_value_variable(&new_str, values->input);
+			continue;
+		}
+		str_tmp[0] = *values->input;
+		str_tmp[1] = '\0';
+		new_str = str_cat(new_str, str_tmp);
+		values->input++;
 	}
-	
+	printf("fim: %s\n", new_str);
 }
 
 int	main(int argc, char *argv[], char **envp)
@@ -59,6 +90,7 @@ int	main(int argc, char *argv[], char **envp)
 		values.input = str_new(input);
 		expander(&values);
 		free(input);
+		str_free(values.input);
 	}
 	ht_free(table);
 	return (0);
