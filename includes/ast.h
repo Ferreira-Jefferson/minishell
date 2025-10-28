@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:53:59 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/22 20:13:50 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/28 08:42:31 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
 
-# include "minishell.h"
+# include "ast.h"
+# include "../lib/libft/include/libft.h"
 
 /**
  * @brief Tipos de nós da AST
@@ -25,6 +26,7 @@
  * NK_OR       -> operador ||  (executa o próximo se o anterior falhar)
  * NK_SUBSHELL -> comandos entre parênteses
  */
+
 typedef enum e_node_kind
 {
 	NK_COMMAND,
@@ -45,20 +47,20 @@ typedef enum e_redir_kind
 
 typedef struct s_redir
 {
-	t_redir_kind	type;
+	t_redir_kind	kind;
 	char			*filename;
 	int				target_fd;
 }	t_redir;
 
 typedef struct s_node
 {
-	t_node_kind	type;
+	t_node_kind	kind;
 }	t_node;
 
 typedef struct s_cmd_node
 {
 	t_node	base;
-	char	**argv;
+	t_dlist	*args;
 	t_dlist	*redirections;
 }	t_cmd_node;
 
@@ -68,6 +70,12 @@ typedef struct s_bin_node
 	t_node	*left;
 	t_node	*right;
 }	t_bin_node;
+
+typedef struct s_pipe_node
+{
+	t_node	base;
+	t_dlist	*commands;
+}	t_pipe_node;
 
 typedef struct s_sub_node
 {

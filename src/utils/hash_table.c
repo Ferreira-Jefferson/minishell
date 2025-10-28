@@ -37,12 +37,14 @@ char	*ht_search(t_hash_table *table, char *key)
 	t_env_item	*env_item;
 	size_t		index;
 
+	if (!table || !key)
+		return (NULL);
 	index = hash_djb2(key) % table->size;
 	env_item = table->items[index];
 	while (env_item)
 	{
 		if (ft_strncmp(env_item->key, key, ft_strlen(key)) == 0)
-			return (env_item->value);
+			return (str_new(env_item->value));
 		env_item = env_item->next;
 	}
 	return (NULL);
