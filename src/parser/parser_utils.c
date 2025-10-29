@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 10:00:31 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/28 17:10:36 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:35:25 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	is_operator(t_token *token)
 		|| kind == TK_OR
 		|| kind == TK_LIST
 		|| kind == TK_LPAREN
-		|| kind == TK_RPAREN);
+		|| kind == TK_RPAREN
+		|| kind == TK_EOF);
 }
 
 t_redir_kind	get_redir_kind(t_token *token)
