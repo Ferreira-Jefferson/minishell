@@ -61,9 +61,10 @@ static void	ex_vars(t_shell_context *sc, char *content, \
 		if (!start_quotes && content[index] == '~' && (index > 0 \
 			&& ft_isspace(content[index - 1])))
 			len = ex_handle_tilde(sc, content, index, new_str);
-		else if (start_quotes != 1 && content[index] == '$' && content[index + 1] != '\0' \
-		&& (!ft_isspace(content[index + 1]) \
-		&& content[index + 1] != '~'))
+		else if (start_quotes != 1 && content[index] == '$' \
+			&& content[index + 1] != '\0' \
+			&& (!ft_isspace(content[index + 1]) \
+			&& content[index + 1] != '~'))
 			len = ex_handler_vars(sc, content, index, new_str);
 		index += len;
 		if (len)
@@ -80,9 +81,9 @@ int	ex_handle_quotes(char **content)
 	int		start_quotes;
 
 	start_quotes = 0;
-	if(*content && *(content)[0] == '\'')
+	if (*content && *(content)[0] == '\'')
 		start_quotes = 1;
-	else if(*content && *(content)[0] == '"')
+	else if (*content && *(content)[0] == '"')
 		start_quotes = 2;
 	if (start_quotes)
 	{
