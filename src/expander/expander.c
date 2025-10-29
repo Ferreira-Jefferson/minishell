@@ -58,10 +58,7 @@ static void	ex_vars(t_shell_context *sc, char *content, \
 	while (content[index])
 	{
 		len = 0;
-		if (!start_quotes && content[index] == '~' && (index > 0 \
-			&& ft_isspace(content[index - 1])))
-			len = ex_handle_tilde(sc, content, index, new_str);
-		else if (start_quotes != 1 && content[index] == '$' \
+		if (start_quotes != 1 && content[index] == '$' \
 			&& content[index + 1] != '\0' \
 			&& (!ft_isspace(content[index + 1]) \
 			&& content[index + 1] != '~'))
@@ -93,16 +90,47 @@ int	ex_handle_quotes(char **content)
 	return (start_quotes);
 }
 
+void ex_tildle(t_shell_context *sc, char *content, \
+	char **new_str, int start_quotes)
+{
+	char	str_tmp[2];
+	char	len;
+	size_t	index;
+
+	index = 0;
+	while (content[index])
+	{
+		len = 0;
+		if (!start_quotes && content[index] == '~' && (index > 0 \
+			&& ft_isspace(content[index - 1])))
+			len = ex_handle_tilde(sc, content, index, new_str);
+		index += len;
+		if (len)
+			continue ;
+		str_tmp[0] = content[index];
+		str_tmp[1] = '\0';
+		*new_str = str_cat(*new_str, str_tmp);
+		index++;
+	}
+}
+
 void	expander(t_shell_context *sc, t_dnode *node)
 {
 	char	*new_str;
 	char	*content;
 	int		start_quotes;
+	(void) sc;
+	(void) ex_vars;
 
 	new_str = str_new("");
 	content = (char *) node->content;
 	start_quotes = ex_handle_quotes(&content);
+
+	ex_tildle(sc, content, &new_str, start_quotes);
+	content = str_new(new_str);
+	new_str = str_replace(new_str, "");
 	ex_vars(sc, content, &new_str, start_quotes);
 	node->content = str_replace(node->content, new_str);
 	str_free(new_str);
+	str_free(content);
 }
