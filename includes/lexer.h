@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:58:07 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/23 09:48:22 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/24 11:56:45 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ t_token	*handle_redir(const char *input, int *i);
 t_token	*handle_and(const char *input, int *i);
 t_token	*handle_pipe(const char *input, int *i);
 t_token	*handle_word(const char *input, int *i);
-
+int		is_operator(t_token *token);
+int		is_redirection(t_token_kind kind);
 #endif
