@@ -9,7 +9,7 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argv;
 
 	t_dnode *node = malloc(sizeof(t_dnode));
-	node->content = str_new("teste ~ ~$HOME $~ ~$ ~+N ~-N A~ ~A A~A ~+/foo ~-/bar $$ $? $VA $USR");
+	node->content = str_new("\\' \\\" \\\\ \\n teste ~ ~$HOME $~ ~$ ~+N ~-N A~ ~A A~A ~+/foo ~-/bar $$ $? $VA $USR");
 	printf("Antes:[%s]\n", (char *)node->content);
 	sc.pid_ms = getpid();
 	//sc.ast_root = create_complex_test_ast();

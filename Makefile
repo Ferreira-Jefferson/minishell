@@ -19,7 +19,7 @@ INCLUDE_DIRS = -I$(INCLUDES) -I$(LIB_DIR)
 MANDATORY_SRC = fake.c main.c signals.c
 UTILS_SRC	  = str.c str_utils.c hash_table.c hash_table_utils.c utils.c
 LEXER_SRC	  = lexer_utils.c lexer.c lexer_handler.c 
-EXPANDER_SRC  = expander.c expander_utils.c 
+EXPANDER_SRC  = expander.c expander_utils.c expander_core.c
 
 MANDATORY_SRC_FULL = $(addprefix $(SRC_DIR)/, $(MANDATORY_SRC))
 UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))

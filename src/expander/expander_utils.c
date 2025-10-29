@@ -6,7 +6,6 @@ char	*ex_get_key(char *str)
 	char	*str_temp;
 
 	str_temp = str_new(str);
-	printf("Antes: %s\n", str_temp);
 	i = 0;
 	while (str_temp[i] && !ft_isspace(str_temp[i]))
 		i++;
