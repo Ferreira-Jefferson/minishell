@@ -13,19 +13,19 @@ static int	ex_handle_tilde(t_shell_context *sc, char *content, \
 	&& (ft_isspace(content[index + 2]) || content[index + 2] == '/'));
 	if (is_valid && content[index + 1] == '+')
 	{
-		key = ex_get_key("PWD");
+		key = ex_get_key(str_new("PWD"));
 		ex_get_value_variable(sc, new_str, key);
 		len = 2;
 	}
 	else if (is_valid && content[index + 1] == '-')
 	{
-		key = ex_get_key("OLDPWD");
+		key = ex_get_key(str_new("OLDPWD"));
 		ex_get_value_variable(sc, new_str, key);
 		len = 2;
 	}
 	else if (content[index + 1] && ft_isspace(content[index + 1]))
 	{
-		key = ex_get_key("HOME");
+		key = ex_get_key(str_new("HOME"));
 		ex_get_value_variable(sc, new_str, key);
 		len = 1;
 	}
@@ -44,7 +44,7 @@ static int	ex_handler_vars(t_shell_context *sc, char *content, \
 	else if (content[index] == '?')
 		len += ex_question_mark(sc, new_str);
 	else if (ft_isalnum(content[index]))
-		len += ex_get_value_variable(sc, new_str, ex_get_key(&content[index]));
+		len += ex_get_value_variable(sc, new_str, ex_get_key(str_new(&content[index])));
 	return (len);
 }
 
@@ -58,17 +58,20 @@ static void	ex_vars(t_shell_context *sc, char *content, \
 	index = 0;
 	while (content[index])
 	{
-		len = 0;
-		if (!start_quotes && content[index] == '~' && (index > 0 \
-			&& ft_isspace(content[index - 1])))
-			len = ex_handle_tilde(sc, content, index, new_str);
-		if (!len && content[index] == '$' && content[index + 1] != '\0' \
-			&& (!ft_isspace(content[index + 1]) && content[index + 1] != '~'))
-			len = ex_handler_vars(sc, content, index, new_str);
-		if (len)
+		if (!start_quotes)
 		{
-			index += len;
-			continue ;
+			len = 0;
+			if (content[index] == '~' && (index > 0 \
+				&& ft_isspace(content[index - 1])))
+				len = ex_handle_tilde(sc, content, index, new_str);
+			if (!len && content[index] == '$' && content[index + 1] != '\0' \
+				&& (!ft_isspace(content[index + 1]) && content[index + 1] != '~'))
+				len = ex_handler_vars(sc, content, index, new_str);
+			if (len)
+			{
+				index += len;
+				continue ;
+			}
 		}
 		str_tmp[0] = content[index];
 		str_tmp[1] = '\0';
@@ -77,6 +80,20 @@ static void	ex_vars(t_shell_context *sc, char *content, \
 	}
 }
 
+int	ex_handle_quotes(char **content)
+{
+	int		start_quotes;
+
+	start_quotes = (*content && *(content)[0] == '\'');
+	start_quotes += (*content && *(content)[0] == '"');
+	if (start_quotes)
+	{
+		(*content)[str_len(*content) - 1] = '\0';
+		(*content)++;
+		return (1);
+	}
+	return (0);
+}
 void	expander(t_shell_context *sc, t_dnode *node)
 {
 	char	*new_str;
@@ -85,7 +102,7 @@ void	expander(t_shell_context *sc, t_dnode *node)
 
 	new_str = str_new("");
 	content = (char *) node->content;
-	start_quotes = (content && content[0] == '"');
+	start_quotes = ex_handle_quotes(&content);
 	ex_vars(sc, content, &new_str, start_quotes);
 	node->content = str_replace(node->content, new_str);
 	str_free(new_str);

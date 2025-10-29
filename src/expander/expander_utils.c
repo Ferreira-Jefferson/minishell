@@ -6,11 +6,14 @@ char	*ex_get_key(char *str)
 	char	*str_temp;
 
 	str_temp = str_new(str);
+	printf("Antes: %s\n", str_temp);
 	i = 0;
 	while (str_temp[i] && !ft_isspace(str_temp[i]))
 		i++;
 	str_temp[i] = '\0';
-	return (str_temp);
+	str = str_replace(str, str_temp);
+	str_free(str_temp);
+	return (str);
 }
 
 int	ex_get_value_variable(t_shell_context *sc, char **new_str, char *key)

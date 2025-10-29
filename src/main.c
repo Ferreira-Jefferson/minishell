@@ -10,7 +10,7 @@ int	main(int argc, char *argv[], char **envp)
 
 	t_dnode *node = malloc(sizeof(t_dnode));
 	node->content = str_new("teste ~ $~ ~$ ~+N ~-N A~ ~A A~A ~+/foo ~-/bar $$ $? $VA $USR");
-
+	printf("Antes:[%s]\n", (char *)node->content);
 	sc.pid_ms = getpid();
 	//sc.ast_root = create_complex_test_ast();
 	sc.status = 0;
@@ -19,7 +19,7 @@ int	main(int argc, char *argv[], char **envp)
 	sc.env_copy = env_load(envp);
 
 	expander(&sc, node);
-	printf(":[%s]\n", (char *)node->content);
+	printf("Depois:[%s]\n", (char *)node->content);
 	str_free(node->content);
 	free(node);
 	ht_free(sc.env_global);
