@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:14:36 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/29 10:52:17 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/29 11:35:30 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static bool	handle_redirection(t_cmd_node *cmd_node, t_dlist *tokens)
 	if (!build_redir(cmd_node, token, kind))
 		return (false);
 	free(token);
+	return (true);
 }
 
 static bool	build_simple_cmd(t_cmd_node *cmd_node, t_token *token, t_dlist *tokens)
@@ -68,7 +69,7 @@ static bool	build_simple_cmd(t_cmd_node *cmd_node, t_token *token, t_dlist *toke
 	}
 	else if (is_redirection(token->kind))
 	{
-		if (!handle_redirection(cmd_node, token))
+		if (!handle_redirection(cmd_node, tokens))
 			return (false);
 	}
 	return (true);

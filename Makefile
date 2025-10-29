@@ -7,6 +7,7 @@ OBJ_DIR	 = objs
 SRC_DIR	 = src
 UTILS_DIR   = $(SRC_DIR)/utils
 LEXER_DIR   = $(SRC_DIR)/lexer
+PARSER_DIR   = $(SRC_DIR)/parser
 LIB_DIR	 = lib/libft
 INCLUDES	= includes
 
@@ -16,17 +17,20 @@ INCLUDE_DIRS = -I$(INCLUDES) -I$(LIB_DIR)
 
 MANDATORY_SRC = main.c signals.c
 UTILS_SRC	  = str.c str_utils.c hash_table.c hash_table_utils.c utils.c
-LEXER_SRC	  = lexer_utils.c lexer.c lexer_handler.c 
+LEXER_SRC	  = lexer_utils.c lexer.c lexer_handler.c
+PARSER_SRC = constructors.c destructors.c parse_and_or.c parse_cmd_list.c parse_pipeline.c parse_primary.c parse_simple_cmd.c parser_utils.c
 
 MANDATORY_SRC_FULL = $(addprefix $(SRC_DIR)/, $(MANDATORY_SRC))
 UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))
 LEXER_SRC_FULL	 = $(addprefix $(LEXER_DIR)/, $(LEXER_SRC))
+PARSER_SRC_FULL	 = $(addprefix $(PARSER_DIR)/, $(PARSER_SRC))
 
 MANDATORY_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(MANDATORY_SRC_FULL:.c=.o)))
 UTILS_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(UTILS_SRC_FULL:.c=.o)))
 LEXER_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(LEXER_SRC_FULL:.c=.o)))
+PARSER_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(PARSER_SRC_FULL:.c=.o)))
 
-OBJS = $(MANDATORY_OBJ) $(UTILS_OBJ) $(LEXER_OBJ)
+OBJS = $(MANDATORY_OBJ) $(UTILS_OBJ) $(LEXER_OBJ) $(PARSER_OBJ)
 
 all: $(NAME)
 
@@ -40,11 +44,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.c 
+$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(LEXER_DIR)/%.c 
+$(OBJ_DIR)/%.o: $(LEXER_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(PARSER_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
 

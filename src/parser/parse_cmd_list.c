@@ -6,15 +6,15 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:35:07 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/29 09:35:21 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/29 11:31:55 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-static t_node	*build_list(t_dlist *tokens, t_dnode *left_node)
+static t_node	*build_list(t_dlist *tokens, t_node *left_node)
 {
-	t_dnode		*right_node;
+	t_node		*right_node;
 	t_bin_node	*new_ast;
 
 	right_node = parse_and_or(tokens);

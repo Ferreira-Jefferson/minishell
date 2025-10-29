@@ -6,13 +6,13 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:35:58 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/29 09:40:44 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/29 11:30:12 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-static t_dnode	*build_and_or(t_dnode *left_node, t_token_kind kind, t_dlist *tokens)
+static t_node	*build_and_or(t_node *left_node, t_token_kind kind, t_dlist *tokens)
 {
 	t_node			*right_node;
 	t_bin_node		*new_ast;
@@ -34,6 +34,7 @@ static t_dnode	*build_and_or(t_dnode *left_node, t_token_kind kind, t_dlist *tok
 		return (NULL);
 	}
 	left_node = (t_node *) new_ast;
+	return (left_node);
 }
 
 t_node	*parse_and_or(t_dlist *tokens)
