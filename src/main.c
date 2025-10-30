@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/30 08:12:43 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/30 12:21:13 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,39 @@ int	ft_event_hook(void)
 	return (0);
 }
 
+t_shell_context	*ft_setup_sc(char **envp)
+{
+	t_shell_context	*sc;
+
+	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
+
+	sc->pid_ms = getpid();
+	//sc->ast_root = create_complex_test_ast();
+	sc->status = 0;
+	sc->env_local = NULL;
+	sc->env_global = env_load(envp);
+	sc->env_copy = env_load(envp);
+
+	return (sc);
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
-	t_hash_table	*table;
-	char			*input;
+	t_shell_context	*sc;
+	char	*input;
 
+	t_dnode *node = malloc(sizeof(t_dnode));
+	node->content = str_new("\\' \\\" \\\\ \\n teste ~ ~$HOME $~ ~$ ~+N ~-N A~ ~A A~A ~+/foo ~-/bar $$ $? $VA $USR");
+	
 	(void)argc;
 	(void)argv;
+	sc = ft_setup_sc(envp);
+	printf("Antes:[%s]\n", (char *)node->content);
+		expander(sc, node);
+	printf("Depois:[%s]\n", (char *)node->content);
 	setup_signals();
 	rl_catch_signals = 0;
 	rl_event_hook = ft_event_hook;
-	table = env_load(envp);
 	while (1)
 	{
 		input = readline("teste> ");
@@ -44,10 +66,11 @@ int	main(int argc, char *argv[], char **envp)
 		}
 		if (input[0] != '\0')
 			add_history(input);
-		if (ft_strcmp(input, "clear") == 0)
-			clear_history();
+		node->content = str_new(input);
+		expander(sc, node);
+		printf("[%s]\n", (char *) node->content);
 		free(input);
 	}
-	ht_free(table);
+	// ht_free(table);
 	return (0);
 }

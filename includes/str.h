@@ -16,5 +16,6 @@ void	str_free(char *buf);
 size_t	str_len(const char *buf);
 char	*str_new(const char *init);
 char	*str_cat(char *buf, const char *s);
+char	*str_replace(char *buf, const char *str);
 
 #endif
