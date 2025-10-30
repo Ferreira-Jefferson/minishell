@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/23 09:21:13 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/30 08:12:43 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	main(int argc, char *argv[], char **envp)
 		}
 		if (input[0] != '\0')
 			add_history(input);
-		// função que vai tratar o input
+		if (ft_strcmp(input, "clear") == 0)
+			clear_history();
 		free(input);
 	}
 	ht_free(table);
