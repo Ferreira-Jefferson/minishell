@@ -19,5 +19,7 @@ void	ex_vars(t_shell_context *sc, char *content, \
 	char **new_str, int start_quotes);
 void	ex_scape(t_shell_context *sc, char *content, \
 	char **new_str, int start_quotes);
+void	ex_asterisk(t_shell_context *sc, char *content, \
+	char **new_str, int start_quotes);
 
 #endif

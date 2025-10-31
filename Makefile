@@ -35,6 +35,7 @@ LEXER_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(LEXER_SRC_FULL:.c=.o)))
 PARSER_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(PARSER_SRC_FULL:.c=.o)))
 EXPANDER_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(EXPANDER_SRC_FULL:.c=.o)))
 
+vpath %.c $(SRC_DIR) $(UTILS_DIR) $(LEXER_DIR) $(PARSER_DIR) $(EXPANDER_DIR)
 OBJS = $(MANDATORY_OBJ) $(UTILS_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXPANDER_OBJ)
 
 all: $(NAME)
@@ -45,23 +46,7 @@ $(NAME): $(LIBFT) $(OBJS)
 $(LIBFT):
 	$(MAKE) -C $(LIB_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(LEXER_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(PARSER_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(EXPANDER_DIR)/%.c
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
 

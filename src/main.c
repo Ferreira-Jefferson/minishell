@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/30 12:21:13 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/31 09:56:00 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_shell_context	*ft_setup_sc(char **envp)
 
 	sc->pid_ms = getpid();
 	//sc->ast_root = create_complex_test_ast();
-	sc->status = 0;
+	sc->last_status = 0;
 	sc->env_local = NULL;
 	sc->env_global = env_load(envp);
 	sc->env_copy = env_load(envp);

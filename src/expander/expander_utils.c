@@ -7,7 +7,7 @@ char	*ex_get_key(char *str)
 
 	str_temp = str_new(str);
 	i = 0;
-	while (str_temp[i] && !ft_isspace(str_temp[i]))
+	while (str_temp[i] && !ft_isspace(str_temp[i]) && str_temp[i] != '*')
 		i++;
 	str_temp[i] = '\0';
 	str = str_replace(str, str_temp);
@@ -40,7 +40,7 @@ int	ex_question_mark(t_shell_context *sc, char **new_str)
 {
 	char	*question_mark;
 
-	question_mark = ft_itoa(sc->status);
+	question_mark = ft_itoa(sc->last_status);
 	*new_str = str_cat(*new_str, question_mark);
 	free(question_mark);
 	return (1);

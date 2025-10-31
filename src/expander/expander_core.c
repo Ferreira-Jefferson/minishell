@@ -52,6 +52,8 @@ static int	ex_handler_vars(t_shell_context *sc, char *content, \
 
 	index++;
 	len = 1;
+	if (content[index] == '*')
+		len += 1;
 	if (content[index] == '$')
 		len += ex_double_dollar(sc, new_str);
 	else if (content[index] == '?')
