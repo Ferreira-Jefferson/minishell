@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/10/23 09:43:26 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/31 11:13:21 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,22 @@
 # include "hash_table.h"
 # include "utils.h"
 # include "lexer.h"
+
+typedef struct s_node	t_node;
+
+typedef struct s_shell_context
+{
+	char			*input;
+	t_node			*ast_root;		 // Raiz da árvore sintática
+	t_hash_table	*env_global;	 // Tabela de variáveis de ambiente
+	t_hash_table	*env_copy;		 // Cópia Tabela de variáveis de ambiente
+	t_hash_table	*env_local;		 // Variáveis locais (não exportadas)
+	char			*cwd;			 // Diretório atual
+	char			*last_command;	 // Último comando executado
+	int				is_interactive;  // Modo interativo ou script
+	int				should_exit;	 // Flag para encerrar o shell
+	int				pid_ms;			 // pid do minishell inicial
+	int				last_status;	 // last status code
+}   t_shell_context;
 
 #endif

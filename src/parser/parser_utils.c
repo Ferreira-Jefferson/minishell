@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 10:00:31 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/29 15:35:25 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/31 09:57:05 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	is_redirection(t_token_kind kind)
 {
 	return (kind == TK_REDIR_IN
-		|| kind ==TK_REDIR_OUT
-		|| kind == RK_HEREDOC
-		|| kind == RK_APPEND);
+		|| kind == TK_REDIR_OUT
+		|| kind == TK_HEREDOC
+		|| kind == TK_APPEND);
 }
 
 int	is_invalid_operator(t_token *token)

@@ -6,13 +6,13 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:23:05 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/23 16:32:52 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/30 14:38:56 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	skip_quotes(const char *input, int *i, char c)
+static int	skip_quotes(const char *input, int *i, char c)
 {
 	(*i)++;
 	while (input[*i] && input[*i] != c)

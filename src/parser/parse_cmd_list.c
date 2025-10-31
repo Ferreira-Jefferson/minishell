@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:35:07 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/29 11:31:55 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/31 10:45:15 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_node	*parse_cmd_list(t_dlist *tokens)
 	while (tokens->size && ((t_token *)tokens->head->content)->kind == TK_LIST)
 	{
 		ft_dlstremove_node(tokens, tokens->head, free_token);
+		if (tokens->size && ((t_token *)tokens->head->content)->kind == TK_EOF)
+			break ;
 		if (!tokens->size || is_invalid_operator(tokens->head->content))
 		{
 			free_node(left_node);
