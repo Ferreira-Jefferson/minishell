@@ -1,6 +1,6 @@
 #include "expander.h"
 
-void	ex_asterisk(t_shell_context *sc, char *content, \
+void	ex_wildcard(t_shell_context *sc, char *content, \
 	char **new_str, int start_quotes)
 {
 	char	str_tmp[2];
@@ -76,7 +76,7 @@ void	expander(t_shell_context *sc, t_dnode *node)
 	ex_vars(sc, content, &new_str, start_quotes);
 	content = str_new(new_str);
 	new_str = str_replace(new_str, "");
-	ex_asterisk(sc, content, &new_str, start_quotes);
+	ex_wildcard(sc, content, &new_str, start_quotes);
 	node->content = str_replace(node->content, new_str);
 	str_free(new_str);
 	str_free(content);
