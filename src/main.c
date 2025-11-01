@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/31 17:06:18 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/01 14:48:52 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_shell_context	*ft_setup_sc(char **envp)
 	sc->pid_ms = getpid();
 	//sc->ast_root = create_complex_test_ast();
 	sc->last_status = 0;
+	sc->last_signal = 2;
 	sc->env_local = NULL;
 	sc->env_global = env_load(envp);
 	sc->env_copy = env_load(envp);
@@ -73,6 +74,7 @@ int	main(int argc, char *argv[], char **envp)
 		input = readline("teste> ");
 		if (!input && get_g_signal_status() == 0)
 		{
+			
 			write(1, "exit\n", 5);
 			break ;
 		}
