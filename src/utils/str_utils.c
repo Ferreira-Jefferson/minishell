@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:50:37 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/01 09:58:30 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/10/30 10:49:16 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@ char	*str_new(const char *buf)
 	size_t	size;
 
 	if (!buf)
-		size = 0;
-	else
-		size = ft_strlen(buf);
+		return (NULL);
+	size = ft_strlen(buf);
 	new_str = (t_str *) malloc(sizeof(t_str) + size + 1);
 	if (!new_str)
 		return (NULL);
 	new_str->len = size;
 	new_str->capacity = size;
-	if (buf)
-		ft_memcpy(new_str->buf, buf, size);
+	ft_memcpy(new_str->buf, buf, size);
 	new_str->buf[size] = '\0';
 	return (new_str->buf);
 }
