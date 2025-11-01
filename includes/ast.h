@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:53:59 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/28 08:42:31 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/01 10:00:34 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define AST_H
 
 # include "ast.h"
+# include "lexer.h"
 # include "../lib/libft/include/libft.h"
 
 /**
@@ -83,4 +84,24 @@ typedef struct s_sub_node
 	t_node	*sub_ast;
 }	t_sub_node;
 
+t_cmd_node		*new_cmd_node(void);
+t_bin_node		*new_bin_node(t_node_kind kind, t_node *left, t_node *right);
+t_pipe_node		*new_pipe_node(void);
+t_sub_node		*new_sub_node(t_node *sub_ast);
+t_redir			*new_redir(t_redir_kind kind, char *filename);
+void			free_node(void *data);
+void			free_redir(void *data);
+void			free_cmd_node(t_cmd_node *node);
+void			free_bin_node(t_bin_node *node);
+void			free_sub_node(t_sub_node *node);
+void			free_pipe(t_pipe_node *node);
+t_node			*parse_and_or(t_dlist *tokens);
+t_node			*parse_cmd_list(t_dlist *tokens);
+t_node			*parse_pipeline(t_dlist *tokens);
+t_node			*parse_primary(t_dlist *tokens);
+t_node			*parse_simple_cmd(t_dlist *tokens);
+int				is_redirection(t_token_kind kind);
+int				is_invalid_operator(t_token *token);
+int				is_operator(t_token *token);
+t_redir_kind	get_redir_kind(t_token *token);
 #endif

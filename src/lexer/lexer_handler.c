@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:23:05 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/23 10:07:01 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/10/23 16:32:52 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ t_token	*handle_word(const char *input, int *i)
 	while (input[*i] && !ft_isspace(input[*i])
 		&& !ft_strchr("|&<>();", input[*i]))
 	{
-		if (input[*i] == '\\' && input[*i + 1])
-			*i += 2;
-		else if (input[*i] == '\\')
-			(*i)++;
+		if (input[*i] == '\\')
+			*i += 1 + (input[*i + 1] != 0);
 		else if (input[*i] == '\'' || input[*i] == '"')
 		{
 			quotes = input[*i];
@@ -84,10 +82,12 @@ t_token	*handle_paren(const char *input, int *i)
 t_token	*handle_redir(const char *input, int *i)
 {
 	t_token	*token;
+	char	c;
 
-	if (ft_strcmp((char *)input, ">>") == 0)
+	c = input[*i];
+	if (c == '>' && input[*i + 1] == '>')
 		token = new_token(TK_APPEND, ft_strdup(">>"));
-	else if (ft_strcmp((char *)input, "<<") == 0)
+	else if (c == '<' && input[*i + 1] && input[*i + 1] == '<')
 		token = new_token(TK_HEREDOC, ft_strdup("<<"));
 	else if (input[*i] == '>')
 		token = new_token(TK_REDIR_OUT, ft_strdup(">"));
@@ -102,8 +102,10 @@ t_token	*handle_redir(const char *input, int *i)
 t_token	*handle_and(const char *input, int *i)
 {
 	t_token	*token;
+	char	c;
 
-	if (ft_strcmp((char *)input, "&&") == 0)
+	c = input[*i];
+	if (c == '&' && input[*i + 1] && input[*i + 1] == '&')
 		token = new_token(TK_AND, ft_strdup("&&"));
 	else
 	{
@@ -118,8 +120,10 @@ t_token	*handle_and(const char *input, int *i)
 t_token	*handle_pipe(const char *input, int *i)
 {
 	t_token	*token;
+	char	c;
 
-	if (ft_strcmp((char *)input, "||") == 0)
+	c = input[*i];
+	if (c == '|' && input[*i + 1] && input[*i + 1] == '|')
 		token = new_token(TK_OR, ft_strdup("||"));
 	else
 		token = new_token(TK_PIPE, ft_strdup("|"));

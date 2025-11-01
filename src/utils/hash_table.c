@@ -37,7 +37,7 @@ char	*ht_search(t_hash_table *table, char *key)
 	t_env_item	*env_item;
 	size_t		index;
 
-	if (!table || !key)
+	if (!table)
 		return (NULL);
 	index = hash_djb2(key) % table->size;
 	env_item = table->items[index];

@@ -28,8 +28,12 @@ void	ex_tildle(t_shell_context *sc, char *content, \
 	while (content[index])
 	{
 		len = 0;
-		if (!start_quotes && content[index] == '~' && (index > 0 \
-			&& ft_isspace(content[index - 1])))
+		if (!start_quotes && content[index] == '~' && content[index + 1] == '\0')
+		{
+			len = ex_handle_tilde(sc, content, index, new_str);
+		}
+		else if (!start_quotes && content[index] == '~' && \
+			(index == 0 || (index > 0 && ft_isspace(content[index - 1]))))
 			len = ex_handle_tilde(sc, content, index, new_str);
 		index += len;
 		if (len)
@@ -48,6 +52,8 @@ static int	ex_handler_vars(t_shell_context *sc, char *content, \
 
 	index++;
 	len = 1;
+	if (content[index] == '*')
+		len += 1;
 	if (content[index] == '$')
 		len += ex_double_dollar(sc, new_str);
 	else if (content[index] == '?')

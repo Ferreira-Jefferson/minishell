@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 13:50:37 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/01 09:58:30 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/str.h"
 
@@ -7,7 +18,7 @@ static inline t_str	*get_str(const char *buf)
 		return (NULL);
 	return ((t_str *)(buf - sizeof(t_str)));
 }
-
+	
 char	*str_new(const char *buf)
 {
 	t_str	*new_str;

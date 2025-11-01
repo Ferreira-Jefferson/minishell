@@ -8,8 +8,8 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 	char	*key;
 
 	len = 0;
-	is_valid = (content && content[index + 1] != '\0' \
-	&& (ft_isspace(content[index + 2]) || content[index + 2] == '/'));
+	is_valid = content && (content[index + 1] == '\0' || \
+		(ft_isspace(content[index + 2]) || content[index + 2] == '/'));
 	if (is_valid && content[index + 1] == '+')
 	{
 		key = ex_get_key(str_new("PWD"));
@@ -20,7 +20,7 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 		key = ex_get_key(str_new("OLDPWD"));
 		len = 2;
 	}
-	else if (content[index + 1] && ft_isspace(content[index + 1]))
+	else if (content[index + 1] == '\0' || ft_isspace(content[index + 1]))
 	{
 		key = ex_get_key(str_new("HOME"));
 		len = 1;
@@ -47,6 +47,9 @@ void	expander(t_shell_context *sc, t_dnode *node)
 	content = str_new(new_str);
 	new_str = str_replace(new_str, "");
 	ex_vars(sc, content, &new_str, start_quotes);
+	content = str_new(new_str);
+	new_str = str_replace(new_str, "");
+	ex_wildcard(sc, content, &new_str, start_quotes);
 	node->content = str_replace(node->content, new_str);
 	str_free(new_str);
 	str_free(content);
