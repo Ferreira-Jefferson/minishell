@@ -1,32 +1,5 @@
 #include "expander.h"
 
-void	ex_wildcard(t_shell_context *sc, char *content, \
-	char **new_str, int start_quotes)
-{
-	char	str_tmp[2];
-	//char	len;
-	size_t	index;
-
-	(void) sc;
-	index = 0;
-	while (content[index])
-	{
-		if (!start_quotes)
-		{
-			if (content[index] == '*' && ((index == 0 || ft_isspace(content[index - 1]))))
-			{
-				// *new_str = str_cat(*new_str, "EXPANDIR");
-				// index++ ;
-				// continue ;
-			}
-		}
-		str_tmp[0] = content[index];
-		str_tmp[1] = '\0';
-		*new_str = str_cat(*new_str, str_tmp);
-		index++;
-	}
-}
-
 int	ex_handle_tilde(t_shell_context *sc, char *content, \
 	int index, char **new_str)
 {

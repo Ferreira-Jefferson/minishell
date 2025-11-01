@@ -21,7 +21,7 @@ MANDATORY_SRC = main.c signals.c
 UTILS_SRC	  = str.c str_utils.c hash_table.c hash_table_utils.c utils.c
 LEXER_SRC	  = lexer_utils.c lexer.c lexer_handler.c
 PARSER_SRC = constructors.c destructors.c parse_and_or.c parse_cmd_list.c parse_pipeline.c parse_primary.c parse_simple_cmd.c parser_utils.c
-EXPANDER_SRC  = expander.c expander_utils.c expander_core.c
+EXPANDER_SRC  = expander.c expander_utils.c expander_core.c expander_wildcard.c
 
 MANDATORY_SRC_FULL = $(addprefix $(SRC_DIR)/, $(MANDATORY_SRC))
 UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))
