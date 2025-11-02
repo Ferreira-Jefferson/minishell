@@ -65,15 +65,15 @@ int main(int argc, char *argv[])
 
 	int i=0;
 	printf("%d : %s\n", getpid(), ft_get_pid());
-	
+	char *pattern = "./";
 	dirp = opendir(argv[1]);
-	printf("dirp: %d\n", dirp == NULL);
+	printf("dirp: %d [%s]:[%s]\n", dirp == NULL, pattern, argv[1]);
 	while (dirp && (dire = readdir(dirp)) != NULL)
 	{
 		if (dire->d_name[0] == '.' && ft_strlen(dire->d_name) <= 2)
 			continue ;
-		if (custom_match(argv[1], dire->d_name))
-			printf("[%d]: [%s] [%d]\n", i++, dire->d_name, dire->d_type);
+		//if (custom_match(argv[1], dire->d_name))
+			//printf("[%d]: [%s] [%d]\n", i++, dire->d_name, dire->d_type);
 	}
 	closedir(dirp);
 	return (0);

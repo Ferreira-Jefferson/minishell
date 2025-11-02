@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/31 17:06:18 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/01 17:40:39 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, char *argv[], char **envp)
 			add_history(input);
 		node->content = str_new(input);
 		expander(sc, node);
-		printf("[%s]\n", (char *) node->content);
+		printf("main: [%s]\n", (char *) node->content);
 		free(input);
 	}
 	// ht_free(table);

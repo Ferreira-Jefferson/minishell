@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/01 15:58:46 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:18:48 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_shell_context
 	t_hash_table	*env_global;	 // Tabela de variáveis de ambiente
 	t_hash_table	*env_copy;		 // Cópia Tabela de variáveis de ambiente
 	t_hash_table	*env_local;		 // Variáveis locais (não exportadas)
-	char			*cwd;			 // Diretório atual
+	char			*pwd;			 // Diretório atual
 	char			*last_command;	 // Último comando executado
 	int				is_interactive;  // Modo interativo ou script
 	int				should_exit;	 // Flag para encerrar o shell

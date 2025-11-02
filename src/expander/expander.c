@@ -40,9 +40,6 @@ void	expander(t_shell_context *sc, t_dnode *node)
 	new_str = str_new("");
 	content = (char *) node->content;
 	start_quotes = ex_quotes(&content);
-	ex_scape(sc, content, &new_str, start_quotes);
-	content = str_new(new_str);
-	new_str = str_replace(new_str, "");
 	ex_tildle(sc, content, &new_str, start_quotes);
 	content = str_new(new_str);
 	new_str = str_replace(new_str, "");
@@ -50,6 +47,9 @@ void	expander(t_shell_context *sc, t_dnode *node)
 	content = str_new(new_str);
 	new_str = str_replace(new_str, "");
 	ex_wildcard(sc, content, &new_str, start_quotes);
+	content = str_new(new_str);
+	new_str = str_replace(new_str, "");
+	ex_scape(sc, content, &new_str, start_quotes);
 	node->content = str_replace(node->content, new_str);
 	str_free(new_str);
 	str_free(content);
