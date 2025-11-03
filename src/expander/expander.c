@@ -8,8 +8,8 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 	char	*key;
 
 	len = 0;
-	is_valid = content && (content[index + 1] == '\0' || \
-		(ft_isspace(content[index + 2]) || content[index + 2] == '/'));
+	is_valid = (content && (content[index + 1] == '\0' || \
+		(ft_isspace(content[index + 2]) || content[index + 2] == '/')));
 	if (is_valid && content[index + 1] == '+')
 	{
 		key = ex_get_key(str_new("PWD"));
@@ -29,7 +29,6 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 		ex_get_value_variable(sc, new_str, key);
 	return (len);
 }
-
 
 void	expander(t_shell_context *sc, t_dnode *node)
 {

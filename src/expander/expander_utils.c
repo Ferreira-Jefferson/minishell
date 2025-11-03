@@ -19,7 +19,7 @@ int	ex_get_value_variable(t_shell_context *sc, char **new_str, char *key)
 {
 	char	*value;
 	int		len;
-		
+
 	value = ht_search(sc->env_local, key);
 	if (!value)
 		value = ht_search(sc->env_global, key);

@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/01 16:18:48 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:15:49 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include <dirent.h>
 
 typedef struct s_node t_node;
 typedef struct s_shell_context t_shell_context;

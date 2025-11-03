@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 10:00:31 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/31 09:57:05 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:49:30 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	is_invalid_operator(t_token *token)
 	t_token_kind	kind;
 
 	kind = token->kind;
-	return (kind == TK_PIPE
-			|| kind == TK_AND
-			|| kind == TK_OR
-			|| kind == TK_LIST
+	return (kind == TK_PIPE \
+			|| kind == TK_AND \
+			|| kind == TK_OR \
+			|| kind == TK_LIST \
 			|| kind == TK_EOF);
 }
 
@@ -68,8 +68,8 @@ void	free_node(void *data)
 	node = (t_node *)data;
 	if (node->kind == NK_COMMAND)
 		free_cmd_node((t_cmd_node *)node);
-	else if (node->kind == NK_LIST
-			|| node->kind == NK_OR
+	else if (node->kind == NK_LIST \
+			|| node->kind == NK_OR \
 			|| node->kind == NK_AND)
 		free_bin_node((t_bin_node *)node);
 	else if (node->kind == NK_PIPE)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destructors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:59:53 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/28 17:10:31 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:48:23 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,3 @@ void	free_pipe(t_pipe_node *node)
 	ft_dlstdestroy(&node->commands, free_node);
 	free(node);
 }
-

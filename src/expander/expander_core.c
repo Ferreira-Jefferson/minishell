@@ -28,7 +28,8 @@ void	ex_tildle(t_shell_context *sc, char *content, \
 	while (content[index])
 	{
 		len = 0;
-		if (!start_quotes && content[index] == '~' && content[index + 1] == '\0')
+		if (!start_quotes && content[index] == '~' && \
+			content[index + 1] == '\0')
 		{
 			len = ex_handle_tilde(sc, content, index, new_str);
 		}
@@ -95,8 +96,8 @@ void	ex_scape(t_shell_context *sc, char *content, \
 {
 	char	str_tmp[2];
 	size_t	index;
-	(void) sc;
 
+	(void) sc;
 	index = 0;
 	while (content[index])
 	{
@@ -110,9 +111,3 @@ void	ex_scape(t_shell_context *sc, char *content, \
 		index++;
 	}
 }
-
-//echo \' \" \\ \n teste ~ ~$HOME $~ ~$ ~+N ~-N A~ ~A A~A ~+/foo ~-/bar $$ $? $VA $USR
-
-// ' " \ n teste /nfs/homes/jtertuli ~/nfs/homes/jtertuli $~ ~$ ~+N ~-N A~ ~A A~A /nfs/homes/jtertuli/42sp/personal/minishell/foo /nfs/homes/jtertuli/42sp/personal/minishell/bar 333295 0
-
-// ' " \ n teste /nfs/homes/jtertuli ~/nfs/homes/jtertuli $~ ~$ ~+N ~-N A~ ~A A~A /nfs/homes/jtertuli/42sp/personal/minishell/foo /nfs/homes/jtertuli/42sp/personal/minishell/bar 332250 0  

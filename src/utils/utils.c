@@ -28,3 +28,31 @@ t_hash_table	*env_load(char **envp)
 	}
 	return (table);
 }
+
+char	*ft_str_toupper(char *str)
+{
+	char	*aux;
+	int		i;
+
+	i = 0;
+	aux = str_new(str);
+	while (aux[i])
+	{
+		aux[i] = ft_toupper(aux[i]);
+		i++;
+	}
+	return (aux);
+}
+
+void	ft_free_str_vector(char **str_vector)
+{
+	char	**aux;
+
+	aux = str_vector;
+	while (*aux)
+	{
+		free(*aux);
+		aux++;
+	}
+	free(str_vector);
+}
