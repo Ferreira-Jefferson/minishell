@@ -4,11 +4,101 @@
 #include <unistd.h>
 #include <dirent.h>
 
+char	*ft_str_toupper(char *str)
+{
+	char *aux;
+	int	i;
+
+	i = 0;
+	aux = str_new(str);
+	while (aux[i])
+	{
+		aux[i] = ft_toupper(aux[i]);
+		i++;
+	}
+	return (aux);
+}
+
+void	ft_free_str_vector(char **str_vector)
+{
+	char	**aux;
+
+	aux = str_vector;
+	while (*aux)
+	{
+		free(*aux);
+		aux++;
+	}
+	free(str_vector);
+}
+
+char *join_file_name(char **split, char *all_file_name)
+{
+	all_file_name = str_replace(all_file_name, "");
+	while (*split)
+	{
+		if (str_len(all_file_name) > 0)
+			all_file_name = str_cat(all_file_name, " ");
+		all_file_name = str_cat(all_file_name, *split);		
+		split++;
+	}
+	return (all_file_name);
+}
+
+int compare_strings(const void *a, const void *b) {
+    const char *str1 = *(const char **)a;
+    const char *str2 = *(const char **)b;
+    return strcmp(str1, str2);
+}
+
+int asterisk_in_start(char *str)
+{
+	int k;
+
+	k = 0;
+	while (str[k] == '*')
+		k++;
+	return (k);
+}
+
+char *sort_file_name(char *all_file_name)
+{
+	char **split = ft_split(all_file_name, '\n');
+	int i;
+	int j;
+
+	char *tmp;
+
+	i = 0;
+	while (split[i])
+	{
+		j = i + 1;
+		while (split[j])
+		{
+			if (ft_strcmp(ft_str_toupper(split[i]) + asterisk_in_start(split[i])
+			, ft_str_toupper(split[j]) + asterisk_in_start(split[j])) > 0)
+			{
+				tmp = split[i];
+				split[i] = split[j];
+				split[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+	if (split[0])
+		all_file_name = join_file_name(split, all_file_name);
+	ft_free_str_vector(split);
+	return (all_file_name);
+}
+
 int match_with_pattern(const char *pattern, char *target)
 {
 	int i;
 	int j;
 
+	if (ft_strcmp((char *)pattern, "*") == 0 && target[0] != '.')
+		return (1);
 	if (pattern[0] != '*' && pattern[0] != target[0])
 		return (0);
 	if (pattern[ft_strlen(pattern) - 1] != '*' && \
@@ -44,13 +134,13 @@ int match_with_pattern(const char *pattern, char *target)
 	return (1);
 }
 
-static void handle_not_bar(char **new_str, char *pattern)
+char *handle_not_bar(char *pattern)
 {
 	DIR *dirp;
 	struct dirent *dire;
-	(void) new_str;
-	(void) pattern;
+	char *all_file_name;
 
+	all_file_name = str_new("");
 	dirp = opendir(".");
 	while (dirp)
 	{
@@ -58,27 +148,29 @@ static void handle_not_bar(char **new_str, char *pattern)
 		if (!dire)
 			break ;
 		if (match_with_pattern(pattern, dire->d_name))
-				printf("%s\n", dire->d_name);
+		{
+			if (str_len(all_file_name))
+				all_file_name = str_cat(all_file_name, "\n");
+			all_file_name = str_cat(all_file_name, dire->d_name);
+		}
 	}
-	printf("\n");
+	return (sort_file_name(all_file_name));
 }
 
-static void	ex_handler_wildcard(t_shell_context *sc, char **new_str, char *pattern)
+char *ex_handler_wildcard(t_shell_context *sc, char *pattern)
 {
 	DIR *dirp;
 	struct dirent *dire;
 
 	(void) sc;
-	(void) new_str;
-	//char *all_dir = str_new("");
-	//char **split_bar;
-	
+
 	dire = NULL;
 	if (!ft_strchr(pattern, '/'))
-		handle_not_bar(new_str, pattern);
+		return (handle_not_bar(pattern));
 	else {
 		dirp = opendir(pattern);
 		closedir(dirp);
+		return (NULL);
 	}
 }
 
@@ -123,8 +215,12 @@ void	ex_wildcard(t_shell_context *sc, char *content, \
 	char **content_split = ft_split(content, ' ');
 	while (*content_split)
 	{
+		if (str_len(*new_str))
+			*new_str = str_cat(*new_str, " ");
 		if (ft_strchr(*content_split, '*'))
-			ex_handler_wildcard(sc, new_str, *content_split);
+			*new_str = str_cat(*new_str, ex_handler_wildcard(sc, *content_split));
+		else
+			*new_str = str_cat(*new_str, *content_split);
 		content_split++;
 	}
 }
