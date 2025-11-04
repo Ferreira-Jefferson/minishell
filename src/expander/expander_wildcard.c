@@ -89,7 +89,11 @@ void	ex_wildcard(t_shell_context *sc, char *content, \
 {
 	char	**content_split;
 
-	(void) start_quotes;
+	if (start_quotes || ft_strchr(content, '/'))
+	{
+		*new_str = str_replace(*new_str, content);
+		return ;
+	}
 	remove_duplicated_wildcard(&content);
 	content_split = ft_split(content, ' ');
 	while (*content_split)
