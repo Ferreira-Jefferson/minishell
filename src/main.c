@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/04 14:58:36 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:57:31 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,13 @@ int	main(int argc, char *argv[], char **envp)
 	// 	expander(sc, node);
 	// printf("Depois:[%s]\n", (char *)node->content);
 	printf("\n");
-	printf("%s\n", b_export(sc));
+	node->content = str_new("VARX");
+	set_export(sc, node);
+	node->content = str_new("VARY=");
+	set_export(sc, node);
+	node->content = str_new("VARZ=100");
+	set_export(sc, node);
+	printf("%s\n", b_env(sc));
 	printf("\n");
 	setup_signals();
 	rl_catch_signals = 0;

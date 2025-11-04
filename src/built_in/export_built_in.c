@@ -20,7 +20,27 @@ static void print_export(t_env_item *env_item, char **str_env)
 	free(env_item);
 }
 
-char *b_export(t_shell_context *sc)
+void	set_export(t_shell_context *sc, t_dnode *node)
+{
+	char *content;
+	char **split;
+
+	content = node->content;
+	split = ft_split(content, '=');
+	if (!split)
+		return ;
+	if (ft_strchr(content, '='))
+	{
+		if (split[1] == NULL)
+			ht_insert(sc->env, split[0], "", (t_env_type)EXPORT);
+		else
+			ht_insert(sc->env, split[0], split[1], (t_env_type)EXPORT);
+	}
+	else
+		ht_insert(sc->env, split[0], NULL, (t_env_type)EXPORT);
+}
+
+char	*b_export(t_shell_context *sc)
 {
 	t_hash_table *table;
 	t_env_item	*env_item;

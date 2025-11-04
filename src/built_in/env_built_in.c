@@ -29,7 +29,8 @@ char *b_env(t_shell_context *sc)
 		if (table->items[i])
 		{
 			env_item = table->items[i];
-			if (env_item->type == ENV)
+			if (env_item->type == ENV || \
+				(env_item->type == EXPORT && env_item->value != NULL))
 				print_env(env_item, &str_env);
 		}
 		i++;
