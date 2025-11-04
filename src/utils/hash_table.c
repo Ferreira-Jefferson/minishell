@@ -17,7 +17,7 @@ t_hash_table	*ht_create(void)
 	return (table);
 }
 
-void	ht_insert(t_hash_table *table, char *key, char *value)
+void	ht_insert(t_hash_table *table, char *key, char *value, t_env_type type)
 {
 	t_env_item		*env_item;
 	size_t			index;
@@ -27,6 +27,7 @@ void	ht_insert(t_hash_table *table, char *key, char *value)
 		return ;
 	env_item->key = str_new(key);
 	env_item->value = str_new(value);
+	env_item->type = type;
 	index = hash_djb2(key) % table->size;
 	env_item->next = table->items[index];
 	table->items[index] = env_item;

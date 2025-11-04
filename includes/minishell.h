@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/01 16:18:48 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:47:41 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include <dirent.h>
 
 typedef struct s_node t_node;
 typedef struct s_shell_context t_shell_context;
@@ -33,6 +34,7 @@ typedef struct s_shell_context t_shell_context;
 # include "lexer.h"
 # include "expander.h"
 # include "ast.h"
+# include "built_in.h"
 
 typedef struct s_node	t_node;
 
@@ -40,9 +42,8 @@ typedef struct s_shell_context
 {
 	char			*input;
 	t_node			*ast_root;		 // Raiz da árvore sintática
-	t_hash_table	*env_global;	 // Tabela de variáveis de ambiente
+	t_hash_table	*env;	 		// Tabela de variáveis de ambiente
 	t_hash_table	*env_copy;		 // Cópia Tabela de variáveis de ambiente
-	t_hash_table	*env_local;		 // Variáveis locais (não exportadas)
 	char			*pwd;			 // Diretório atual
 	char			*last_command;	 // Último comando executado
 	int				is_interactive;  // Modo interativo ou script

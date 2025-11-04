@@ -22,4 +22,9 @@ void	ex_scape(t_shell_context *sc, char *content, \
 void	ex_wildcard(t_shell_context *sc, char *content, \
 	char **new_str, int start_quotes);
 
+void	remove_duplicated_wildcard(char **content);
+char	*sort_file_name(char *all_file_name, int i, int j);
+int		wild_in_start(char *str);
+char	*join_file_name(char **split, char *all_file_name);
+
 #endif

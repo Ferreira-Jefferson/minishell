@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/01 17:40:39 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:47:10 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ t_shell_context	*ft_setup_sc(char **envp)
 	sc->pid_ms = getpid();
 	//sc->ast_root = create_complex_test_ast();
 	sc->last_status = 0;
-	sc->env_local = NULL;
-	sc->env_global = env_load(envp);
+	sc->env = env_load(envp);
 	sc->env_copy = env_load(envp);
 
 	return (sc);
@@ -62,9 +61,12 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 	sc = ft_setup_sc(envp);
-	printf("Antes:[%s]\n", (char *)node->content);
-		expander(sc, node);
-	printf("Depois:[%s]\n", (char *)node->content);
+	// printf("Antes:[%s]\n", (char *)node->content);
+	// 	expander(sc, node);
+	// printf("Depois:[%s]\n", (char *)node->content);
+	printf("\n");
+	printf("%s\n", b_env(sc));
+	printf("\n");
 	setup_signals();
 	rl_catch_signals = 0;
 	rl_event_hook = ft_event_hook;

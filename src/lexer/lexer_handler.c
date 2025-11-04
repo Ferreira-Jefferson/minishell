@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:23:05 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/30 14:38:56 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:51:01 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_token	*handle_word(const char *input, int *i)
 t_token	*handle_list(const char *input, int *i)
 {
 	t_token	*token;
-	(void) input;
 
+	(void) input;
 	token = new_token(TK_LIST, ft_strdup(";"));
 	(*i)++;
 	return (token);

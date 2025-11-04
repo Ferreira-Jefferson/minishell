@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_and_or.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:35:58 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/29 11:30:12 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:50:19 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-static t_node	*build_and_or(t_node *left_node, t_token_kind kind, t_dlist *tokens)
+static t_node	*build_and_or(t_node *left_node, \
+	t_token_kind kind, t_dlist *tokens)
 {
 	t_node			*right_node;
 	t_bin_node		*new_ast;
@@ -53,7 +54,8 @@ t_node	*parse_and_or(t_dlist *tokens)
 		if (kind != TK_AND && kind != TK_OR)
 			break ;
 		ft_dlstremove_node(tokens, tokens->head, free_token);
-		if (!tokens->size || is_invalid_operator((t_token *)tokens->head->content))
+		if (!tokens->size || \
+			is_invalid_operator((t_token *)tokens->head->content))
 		{
 			free_node(left_node);
 			return (NULL);
