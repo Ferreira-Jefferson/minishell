@@ -1,20 +1,26 @@
 #include "built_in.h"
 
-static void print_env(t_env_item *env_item, char **str_env)
+static void print_export(t_env_item *env_item, char **str_env)
 {
 	while (env_item)
 	{
 		if (str_len(*str_env) > 0 && (env_item + 1))
 			*str_env = str_cat(*str_env, "\n");
+		*str_env = str_cat(*str_env, "declare -x ");
 		*str_env = str_cat(*str_env, env_item->key);
-		*str_env = str_cat(*str_env, "=");
-		*str_env = str_cat(*str_env, env_item->value);
+		if (env_item->value != NULL)
+		{
+			*str_env = str_cat(*str_env, "=");
+			*str_env = str_cat(*str_env, "\"");
+			*str_env = str_cat(*str_env, env_item->value);
+			*str_env = str_cat(*str_env, "\"");
+		}
 		env_item = env_item->next;
 	}
 	free(env_item);
 }
 
-char *b_env(t_shell_context *sc)
+char *b_export(t_shell_context *sc)
 {
 	t_hash_table *table;
 	t_env_item	*env_item;
@@ -29,10 +35,9 @@ char *b_env(t_shell_context *sc)
 		if (table->items[i])
 		{
 			env_item = table->items[i];
-			if (env_item->type == ENV)
-				print_env(env_item, &str_env);
+			print_export(env_item, &str_env);
 		}
 		i++;
 	}
-	return (str_env);
+	return (sort_export(str_env, 0, 0));
 }
