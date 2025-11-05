@@ -5,8 +5,6 @@ static char	*join_str_export(char **split, char *str_export_split)
 	str_export_split = str_replace(str_export_split, "");
 	while (*split)
 	{
-		if (str_len(str_export_split) > 0)
-			str_export_split = str_cat(str_export_split, " ");
 		str_export_split = str_cat(str_export_split, *split);
 		str_export_split = str_cat(str_export_split, "\n");
 		split++;
@@ -25,7 +23,8 @@ char	*sort_export(char *str_export, int i, int j)
 		j = i + 1;
 		while (split[j])
 		{
-			if (ft_strcmp(ft_str_toupper(split[i]), ft_str_toupper(split[j])) > 0)
+			if (ft_strcmp(ft_str_toupper(split[i]), \
+				ft_str_toupper(split[j])) > 0)
 			{
 				tmp = split[i];
 				split[i] = split[j];

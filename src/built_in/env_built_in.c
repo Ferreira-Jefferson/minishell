@@ -1,6 +1,6 @@
 #include "built_in.h"
 
-static void print_env(t_env_item *env_item, char **str_env)
+static void	print_env(t_env_item *env_item, char **str_env)
 {
 	while (env_item)
 	{
@@ -14,12 +14,12 @@ static void print_env(t_env_item *env_item, char **str_env)
 	free(env_item);
 }
 
-char *b_env(t_shell_context *sc)
+char	*b_env(t_shell_context *sc)
 {
-	t_hash_table *table;
-	t_env_item	*env_item;
-	char		*str_env;
-	int			i;
+	t_hash_table	*table;
+	t_env_item		*env_item;
+	char			*str_env;
+	int				i;
 
 	i = 0;
 	str_env = str_new("");

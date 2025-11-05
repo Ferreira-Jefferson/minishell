@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/04 11:47:41 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/05 08:23:52 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 # include <readline/history.h>
 # include <stdbool.h>
 # include <dirent.h>
+# include <signal.h>
 
-typedef struct s_node t_node;
-typedef struct s_shell_context t_shell_context;
+typedef struct s_node	t_node;
+typedef struct s_shell_context	t_shell_context;
 
 # include "../lib/libft/include/libft.h"
 # include "signals.h"

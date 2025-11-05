@@ -1,15 +1,5 @@
 #include "expander.h"
 
-int asterisk_in_start(char *str)
-{
-	int k;
-
-	k = 0;
-	while (str[k] == '*')
-		k++;
-	return (k);
-}
-
 static int	is_valid_pattern(const char *pattern, char *target)
 {
 	if (ft_strcmp((char *)pattern, "*") == 0 && target[0] != '.')
@@ -54,7 +44,6 @@ int	match_with_pattern(const char *pattern, char *target, int i, int j)
 	return (1);
 }
 
-
 char	*handle_not_bar(char *pattern)
 {
 	DIR				*dirp;
@@ -87,7 +76,8 @@ char	*ex_handler_wildcard(t_shell_context *sc, char *pattern)
 	dire = NULL;
 	if (!ft_strchr(pattern, '/'))
 		return (handle_not_bar(pattern));
-	else {
+	else
+	{
 		dirp = opendir(pattern);
 		closedir(dirp);
 		return (NULL);

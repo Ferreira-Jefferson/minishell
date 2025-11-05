@@ -1,6 +1,6 @@
 #include "built_in.h"
 
-static void print_export(t_env_item *env_item, char **str_env)
+static void	create_export_list(t_env_item *env_item, char **str_env)
 {
 	while (env_item)
 	{
@@ -20,32 +20,50 @@ static void print_export(t_env_item *env_item, char **str_env)
 	free(env_item);
 }
 
+int	ft_isvalid_key(char *key)
+{
+	if (ft_strcmp(key, "_") == 0)
+		return (0);
+	while (*key)
+	{
+		if (!ft_isalnum(*key) && *key != '_')
+			return (0);
+		key++;
+	}
+	return (1);
+}
+
 void	set_export(t_shell_context *sc, t_dnode *node)
 {
-	char *content;
-	char **split;
+	char	*content;
+	char	**split;
 
 	content = node->content;
 	split = ft_split(content, '=');
 	if (!split)
 		return ;
+	if (!ft_isvalid_key(split[0]))
+	{
+		if (split[0][0] == '#')
+			return (b_export(sc));
+		printf("bash: export: '%s': not a valid identifier\n", split[0]);
+	}
 	if (ft_strchr(content, '='))
 	{
 		if (split[1] == NULL)
-			ht_insert(sc->env, split[0], "", (t_env_type)EXPORT);
-		else
-			ht_insert(sc->env, split[0], split[1], (t_env_type)EXPORT);
+			return (ht_insert(sc->env, split[0], "", (t_env_type)EXPORT));
+		ht_insert(sc->env, split[0], split[1], (t_env_type)EXPORT);
 	}
 	else
 		ht_insert(sc->env, split[0], NULL, (t_env_type)EXPORT);
 }
 
-char	*b_export(t_shell_context *sc)
+void	b_export(t_shell_context *sc)
 {
-	t_hash_table *table;
-	t_env_item	*env_item;
-	char		*str_env;
-	int			i;
+	t_hash_table	*table;
+	t_env_item		*env_item;
+	char			*str_env;
+	int				i;
 
 	i = 0;
 	str_env = str_new("");
@@ -55,9 +73,9 @@ char	*b_export(t_shell_context *sc)
 		if (table->items[i])
 		{
 			env_item = table->items[i];
-			print_export(env_item, &str_env);
+			create_export_list(env_item, &str_env);
 		}
 		i++;
 	}
-	return (sort_export(str_env, 0, 0));
+	printf("%s\n", sort_export(str_env, 0, 0));
 }

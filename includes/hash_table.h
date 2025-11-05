@@ -7,7 +7,7 @@ typedef enum e_env_type {
 	ENV,
 	EXPORT,
 	SET
-} t_env_type;
+}	t_env_type;
 
 typedef struct s_env_item {
 	char				*key;

@@ -3,8 +3,8 @@
 
 # include "minishell.h"
 
-char *b_env(t_shell_context *sc);
-char *b_export(t_shell_context *sc);
+char	*b_env(t_shell_context *sc);
+void	b_export(t_shell_context *sc);
 void	set_export(t_shell_context *sc, t_dnode *node);
 
 // export_utils.c
