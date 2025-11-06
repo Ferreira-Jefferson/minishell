@@ -37,7 +37,7 @@ void	expander(t_shell_context *sc, t_dnode *node)
 	int		start_quotes;
 
 	new_str = str_new("");
-	content = (char *) node->content;
+	content = str_new(node->content);
 	start_quotes = ex_quotes(&content);
 	ex_tildle(sc, content, &new_str, start_quotes);
 	content = str_new(new_str);
@@ -49,7 +49,7 @@ void	expander(t_shell_context *sc, t_dnode *node)
 	content = str_new(new_str);
 	new_str = str_replace(new_str, "");
 	ex_scape(sc, content, &new_str, start_quotes);
-	node->content = str_replace(node->content, new_str);
+	node->content = ft_strdup(new_str);
 	str_free(new_str);
 	str_free(content);
 }

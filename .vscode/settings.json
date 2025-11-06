@@ -3,6 +3,8 @@
 		"minishell.h": "c",
 		"libft.h": "c",
 		"unistd.h": "c",
-		"ranges": "c"
+		"ranges": "c",
+		"built_in.h": "c",
+		"numbers": "c"
 	}
 }

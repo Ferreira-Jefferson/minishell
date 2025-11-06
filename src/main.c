@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/05 08:19:58 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:30:58 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,41 @@ int	main(int argc, char *argv[], char **envp)
 	t_shell_context	*sc;
 	char	*input;
 
+	(void) argc;
+	(void) argv;
+	t_dlist	*args = ft_dlstinit();	
 	t_dnode *node = malloc(sizeof(t_dnode));
-	node->content = str_new("\\' \\\" \\\\ \\n teste ~ ~$HOME $~ ~$ ~+N ~-N A~ ~A A~A ~+/foo ~-/bar $$ $? $VA $USR");
-	
-	(void)argc;
-	(void)argv;
+	// node->content = str_new("\\' \\\" \\\\ \\n teste ~ ~$HOME $~ ~$ ~+N ~-N A~ ~A A~A ~+/foo ~-/bar $$ $? $VA $USR");
+	node->content = ft_strdup("-$HOME");
+	ft_dlstinsert_node_at(args, node, 0);
+
+	t_dnode *node_2 = malloc(sizeof(t_dnode));
+	node_2->content = ft_strdup("-$HOME");
+	ft_dlstinsert_node_at(args, node_2, 1);
+
 	sc = ft_setup_sc(envp);
+	printf("\n");
+	b_echo(sc, args);
+	printf("###\n");
+	free(node->content);
+	free(node_2->content);
 	// printf("Antes:[%s]\n", (char *)node->content);
 	// 	expander(sc, node);
 	// printf("Depois:[%s]\n", (char *)node->content);
-	printf("\n");
-	node->content = str_new("#");
-	set_export(sc, node);
-	node->content = str_new("#a=");
-	set_export(sc, node);
-	node->content = str_new("a@=300");
-	set_export(sc, node);
+	
+	// node->content = str_new("#");
+	// set_export(sc, node);
+	// node->content = str_new("#a=");
+	// set_export(sc, node);
+	// node->content = str_new("a@=300");
+	// set_export(sc, node);
 	//b_export(sc);
+	
 	printf("\n");
+
+	return (0);
 	setup_signals();
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
 	rl_event_hook = ft_event_hook;
 	while (1)
 	{
