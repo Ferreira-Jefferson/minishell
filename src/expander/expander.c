@@ -30,6 +30,27 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 	return (len);
 }
 
+void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, char **new_str)
+{
+	char	str_tmp[2];
+	size_t	index;
+
+	(void) sc;
+	index = 0;
+	while (content[index])
+	{
+		if ((content[index] && content[index + 1]) && \
+			(content[index] == '"' && content[index + 1] == '"'))
+			index += 2;
+		str_tmp[0] = content[index];
+		str_tmp[1] = '\0';
+		*new_str = str_cat(*new_str, str_tmp);
+		if (content[index] == '\0')
+			return ;
+		index++;
+	}
+}
+
 void	expander(t_shell_context *sc, t_dnode *node)
 {
 	char	*new_str;
@@ -46,6 +67,9 @@ void	expander(t_shell_context *sc, t_dnode *node)
 	content = str_new(new_str);
 	new_str = str_replace(new_str, "");
 	ex_wildcard(sc, content, &new_str, start_quotes);
+	content = str_new(new_str);
+	new_str = str_replace(new_str, "");
+	ex_remove_duplicate_quotes(sc, content, &new_str);
 	content = str_new(new_str);
 	new_str = str_replace(new_str, "");
 	ex_scape(sc, content, &new_str, start_quotes);

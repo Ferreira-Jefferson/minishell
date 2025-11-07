@@ -7,7 +7,8 @@ char	*ex_get_key(char *str)
 
 	str_temp = str_new(str);
 	i = 0;
-	while (str_temp[i] && !ft_isspace(str_temp[i]) && str_temp[i] != '*')
+	while (str_temp[i] && !ft_isspace(str_temp[i]) \
+		&& str_temp[i] != '*' && str_temp[i] != '"')
 		i++;
 	str_temp[i] = '\0';
 	str = str_replace(str, str_temp);

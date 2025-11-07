@@ -61,7 +61,6 @@ t_shell_context	*ft_setup_sc(char **envp)
 	t_shell_context	*sc;
 
 	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
-
 	sc->pid_ms = getpid();
 	//sc->ast_root = create_complex_test_ast();
 	sc->last_status = 0;

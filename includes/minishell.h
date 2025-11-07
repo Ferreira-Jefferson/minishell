@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/07 16:01:31 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:26:12 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@
 
 # include "../lib/libft/include/libft.h"
 
+# include "lexer.h"
+# include "ast.h"
+# include "hash_table.h"
 # include "utils.h"
 # include "signals.h"
 # include "str.h"
-# include "hash_table.h"
-# include "lexer.h"
 # include "expander.h"
-# include "ast.h"
 # include "built_in.h"
 
 #endif

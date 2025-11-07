@@ -1,6 +1,8 @@
 #ifndef UTILS_H
 # define UTILS_H
 
+typedef struct s_node 	t_node;
+
 typedef struct s_shell_context
 {
 	char			*input;

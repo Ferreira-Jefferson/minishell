@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/07 11:58:51 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:14:43 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,27 @@ int	main(int argc, char *argv[], char **envp)
 
 	(void) argc;
 	(void) argv;
-	t_dlist	*args = ft_dlstinit();	
+	// t_dlist	*args = ft_dlstinit();	
 	t_dnode *node = malloc(sizeof(t_dnode));
-	// node->content = str_new("\\' \\\" \\\\ \\n teste ~ ~$HOME $~ ~$ ~+N ~-N A~ ~A A~A ~+/foo ~-/bar $$ $? $VA $USR");
+	node->content = str_new("\"$USR\"\"oi\"\"\"");
 
 	sc = ft_setup_sc(envp);
 	
-	node->content = ft_strdup("ZDOTDIR1=1000");
-	ft_dlstinsert_node_at(args, node, 0);
+	// node->content = ft_strdup("ZDOTDIR1=1000");
+	// ft_dlstinsert_node_at(args, node, 0);
 
-	t_dnode *node_2 = malloc(sizeof(t_dnode));
-	node_2->content = ft_strdup("ZDOTDIR");
-	ft_dlstinsert_node_at(args, node_2, 1);
+	// t_dnode *node_2 = malloc(sizeof(t_dnode));
+	// node_2->content = ft_strdup("ZDOTDIR");
+	// ft_dlstinsert_node_at(args, node_2, 1);
 
-	b_set_export(sc, args);
-	b_export(sc);
+	// b_set_export(sc, args);
+	// b_export(sc);
 	// printf("\n");
 	// b_echo(sc, args);
 
-	// printf("Antes:[%s]\n", (char *)node->content);
-	// 	expander(sc, node);
-	// printf("Depois:[%s]\n", (char *)node->content);
+	printf("Antes:[%s]\n", (char *)node->content);
+		expander(sc, node);
+	printf("Depois:[%s]\n", (char *)node->content);
 	
 	// node->content = str_new("VAR=1000");
 	// set_export(sc, node);
@@ -72,11 +72,11 @@ int	main(int argc, char *argv[], char **envp)
 	// set_export(sc, node);
 	//b_export(sc);
 
-	free(node->content);
-	free(node_2->content);
-	free(node);
-	free(node_2);
-	ft_dlstdestroy(&args, NULL);
+	// free(node->content);
+	// free(node_2->content);
+	// free(node);
+	// free(node_2);
+	// ft_dlstdestroy(&args, NULL);
 
 	free_sc(sc);
 	
