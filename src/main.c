@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/07 09:18:39 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/07 11:58:51 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,6 @@ int	ft_event_hook(void)
 	return (0);
 }
 
-t_shell_context	*ft_setup_sc(char **envp)
-{
-	t_shell_context	*sc;
-
-	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
-
-	sc->pid_ms = getpid();
-	//sc->ast_root = create_complex_test_ast();
-	sc->last_status = 0;
-	sc->env = env_load(envp);
-	sc->env_copy = env_load(envp);
-
-	return (sc);
-}
-
 int	main(int argc, char *argv[], char **envp)
 {
 	t_shell_context	*sc;
@@ -62,26 +47,19 @@ int	main(int argc, char *argv[], char **envp)
 	// node->content = str_new("\\' \\\" \\\\ \\n teste ~ ~$HOME $~ ~$ ~+N ~-N A~ ~A A~A ~+/foo ~-/bar $$ $? $VA $USR");
 
 	sc = ft_setup_sc(envp);
-
-	node->content = str_new("VAR=1000");
-	set_export(sc, node);
-
-	str_free(node->content);
-	node->content = ft_strdup("HOME");
+	
+	node->content = ft_strdup("ZDOTDIR1=1000");
 	ft_dlstinsert_node_at(args, node, 0);
 
 	t_dnode *node_2 = malloc(sizeof(t_dnode));
-	node_2->content = ft_strdup("GIT_ASKPASS");
+	node_2->content = ft_strdup("ZDOTDIR");
 	ft_dlstinsert_node_at(args, node_2, 1);
 
-	ht_print(sc->env);
-	b_uset(sc, args);
-	printf("\n###\n\n");
-	ht_print(sc->env);
+	b_set_export(sc, args);
+	b_export(sc);
 	// printf("\n");
 	// b_echo(sc, args);
-	// free(node->content);
-	// free(node_2->content);
+
 	// printf("Antes:[%s]\n", (char *)node->content);
 	// 	expander(sc, node);
 	// printf("Depois:[%s]\n", (char *)node->content);
@@ -93,6 +71,14 @@ int	main(int argc, char *argv[], char **envp)
 	// node->content = str_new("a@=300");
 	// set_export(sc, node);
 	//b_export(sc);
+
+	free(node->content);
+	free(node_2->content);
+	free(node);
+	free(node_2);
+	ft_dlstdestroy(&args, NULL);
+
+	free_sc(sc);
 	
 	printf("\n");
 

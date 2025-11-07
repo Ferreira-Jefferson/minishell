@@ -21,16 +21,26 @@ void	ht_insert(t_hash_table *table, char *key, char *value, t_env_type type)
 {
 	t_env_item		*env_item;
 	size_t			index;
+	char			*search_value;
 
 	env_item = (t_env_item *) malloc(sizeof(t_env_item));
 	if (!env_item)
 		return ;
+	search_value = ht_search(table, key);
+	if (search_value && value == NULL)
+	{
+		free(env_item);
+		str_free(search_value);
+		return ;
+	}
 	env_item->key = str_new(key);
 	env_item->value = str_new(value);
 	env_item->type = type;
 	index = hash_djb2(key) % table->size;
 	env_item->next = table->items[index];
 	table->items[index] = env_item;
+	if (search_value)
+		str_free(search_value);
 }
 
 char	*ht_search(t_hash_table *table, char *key)
@@ -49,13 +59,6 @@ char	*ht_search(t_hash_table *table, char *key)
 		env_item = env_item->next;
 	}
 	return (NULL);
-}
-
-static void	ht_free_item(t_env_item *env_item)
-{
-	str_free(env_item->key);
-	str_free(env_item->value);
-	free(env_item);
 }
 
 void	ht_delete(t_hash_table *table, char *key)
@@ -85,4 +88,26 @@ void	ht_delete(t_hash_table *table, char *key)
 		before = env_item;
 		env_item = env_item->next;
 	}
+}
+
+void ht_update_insert(t_hash_table *table, char *key, char *value, t_env_type type)
+{
+	size_t		index;
+	t_env_item	*item;
+
+	if (!table || !key)
+		return ;
+	index = hash_djb2(key) % table->size;
+	item = table->items[index];
+	while (item)
+	{
+		if (ft_strcmp(item->key, key) == 0)
+		{
+			if (value)
+				item->value = str_replace(item->value, value);
+			return ;
+		}
+		item = item->next;
+	}
+	ht_insert(table, key, value, type);
 }

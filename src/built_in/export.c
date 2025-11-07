@@ -20,50 +20,13 @@ static void	create_export_list(t_env_item *env_item, char **str_env)
 	free(env_item);
 }
 
-int	ft_isvalid_key(char *key)
-{
-	if (ft_strcmp(key, "_") == 0)
-		return (0);
-	while (*key)
-	{
-		if (!ft_isalnum(*key) && *key != '_')
-			return (0);
-		key++;
-	}
-	return (1);
-}
-
-void	set_export(t_shell_context *sc, t_dnode *node)
-{
-	char	*content;
-	char	**split;
-
-	content = node->content;
-	split = ft_split(content, '=');
-	if (!split)
-		return ;
-	if (!ft_isvalid_key(split[0]))
-	{
-		if (split[0][0] == '#')
-			return (b_export(sc));
-		printf("bash: export: '%s': not a valid identifier\n", split[0]);
-	}
-	if (ft_strchr(content, '='))
-	{
-		if (split[1] == NULL)
-			return (ht_insert(sc->env, split[0], "", (t_env_type)EXPORT));
-		ht_insert(sc->env, split[0], split[1], (t_env_type)EXPORT);
-	}
-	else
-		ht_insert(sc->env, split[0], NULL, (t_env_type)EXPORT);
-}
-
 void	b_export(t_shell_context *sc)
 {
 	t_hash_table	*table;
 	t_env_item		*env_item;
 	char			*str_env;
 	int				i;
+	char			*sorted;
 
 	i = 0;
 	str_env = str_new("");
@@ -77,5 +40,7 @@ void	b_export(t_shell_context *sc)
 		}
 		i++;
 	}
-	printf("%s\n", sort_export(str_env, 0, 0));
+	sorted = sort_export(str_env, 0, 0);
+	printf("%s\n", sorted);
+	str_free(sorted);
 }

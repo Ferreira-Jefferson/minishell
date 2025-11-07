@@ -31,17 +31,15 @@ t_hash_table	*env_load(char **envp)
 
 char	*ft_str_toupper(char *str)
 {
-	char	*aux;
 	int		i;
 
 	i = 0;
-	aux = str_new(str);
-	while (aux[i])
+	while (str[i])
 	{
-		aux[i] = ft_toupper(aux[i]);
+		str[i] = ft_toupper(str[i]);
 		i++;
 	}
-	return (aux);
+	return (str);
 }
 
 void	ft_free_str_vector(char **str_vector)
@@ -55,4 +53,27 @@ void	ft_free_str_vector(char **str_vector)
 		aux++;
 	}
 	free(str_vector);
+}
+
+
+t_shell_context	*ft_setup_sc(char **envp)
+{
+	t_shell_context	*sc;
+
+	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
+
+	sc->pid_ms = getpid();
+	//sc->ast_root = create_complex_test_ast();
+	sc->last_status = 0;
+	sc->env = env_load(envp);
+	sc->env_copy = env_load(envp);
+
+	return (sc);
+}
+
+void	free_sc(t_shell_context	*sc)
+{
+	ht_free(sc->env);
+	ht_free(sc->env_copy);
+	free(sc);
 }

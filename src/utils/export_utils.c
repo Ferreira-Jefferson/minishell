@@ -37,5 +37,19 @@ char	*sort_export(char *str_export, int i, int j)
 	if (split[0])
 		str_export = join_str_export(split, str_export);
 	ft_free_str_vector(split);
+
 	return (str_export);
+}
+
+int	ft_isvalid_key(char *key)
+{
+	if (ft_strcmp(key, "_") == 0)
+		return (0);
+	while (*key)
+	{
+		if (!ft_isalnum(*key) && *key != '_')
+			return (0);
+		key++;
+	}
+	return (1);
 }

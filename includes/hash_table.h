@@ -27,7 +27,10 @@ void			ht_insert(t_hash_table *table, char *key, char *value, \
 	t_env_type type);
 char			*ht_search(t_hash_table *table, char *key);
 void			ht_delete(t_hash_table *table, char *key);
+void			ht_free_item(t_env_item *env_item);
 void			ht_free(t_hash_table *table);
 void			ht_print(t_hash_table *table);
+void 			ht_update_insert(t_hash_table *table, char *key, char *value, \
+	t_env_type type);
 
 #endif
