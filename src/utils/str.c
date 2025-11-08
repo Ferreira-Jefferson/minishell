@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:49:27 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/10/16 13:50:25 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/08 17:48:48 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ static char	*str_make_room(char *buf, size_t addlen)
 	new_cap = (str->len + addlen) * 2;
 	old_size = sizeof(t_str) + str->capacity + 1;
 	new_size = sizeof(t_str) + new_cap + 1;
-	new_str = (t_str *) ft_realloc((void **) &str, old_size, new_size, 1);
+	new_str = (t_str *) malloc(new_size);
 	if (!new_str)
 		return (buf);
+	ft_memcpy(new_str, str, old_size);
 	new_str->capacity = new_cap;
+	free(str);
 	return (new_str->buf);
 }
 

@@ -5,6 +5,7 @@
 		"unistd.h": "c",
 		"ranges": "c",
 		"built_in.h": "c",
-		"numbers": "c"
+		"numbers": "c",
+		"random": "c"
 	}
 }

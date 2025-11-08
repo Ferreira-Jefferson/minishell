@@ -8,7 +8,8 @@ char	*ex_get_key(char *str)
 	str_temp = str_new(str);
 	i = 0;
 	while (str_temp[i] && !ft_isspace(str_temp[i]) \
-		&& str_temp[i] != '*' && str_temp[i] != '"')
+		&& str_temp[i] != '*' && str_temp[i] != '"' \
+		&& str_temp[i] != '-')
 		i++;
 	str_temp[i] = '\0';
 	str = str_replace(str, str_temp);
@@ -53,4 +54,14 @@ int	ex_double_dollar(t_shell_context *sc, char **new_str)
 	*new_str = str_cat(*new_str, double_dollar);
 	free(double_dollar);
 	return (1);
+}
+
+int	count_quotes(char *content, char quote)
+{
+	int	size;
+
+	size = 0;
+	while (content[size] == quote)
+		size++;
+	return (size);
 }

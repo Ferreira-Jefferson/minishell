@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constructors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 19:44:31 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/27 09:23:30 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/08 16:18:32 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,3 @@ t_redir	*new_redir(t_redir_kind kind, char *filename)
 	redir->filename = filename;
 	return (redir);
 }
-

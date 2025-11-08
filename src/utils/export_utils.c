@@ -37,7 +37,6 @@ char	*sort_export(char *str_export, int i, int j)
 	if (split[0])
 		str_export = join_str_export(split, str_export);
 	ft_free_str_vector(split);
-
 	return (str_export);
 }
 

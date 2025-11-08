@@ -42,6 +42,8 @@ void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, char **new_s
 		if ((content[index] && content[index + 1]) && \
 			(content[index] == '"' && content[index + 1] == '"'))
 			index += 2;
+		else if (index > 0 && content[index] == '"' && content[index - 1] != '\\')
+			index += 1;
 		str_tmp[0] = content[index];
 		str_tmp[1] = '\0';
 		*new_str = str_cat(*new_str, str_tmp);
@@ -58,19 +60,19 @@ void	expander(t_shell_context *sc, t_dnode *node)
 	int		start_quotes;
 
 	new_str = str_new("");
-	content = str_new(node->content);
+	content = node->content;
 	start_quotes = ex_quotes(&content);
 	ex_tildle(sc, content, &new_str, start_quotes);
 	content = str_new(new_str);
 	new_str = str_replace(new_str, "");
 	ex_vars(sc, content, &new_str, start_quotes);
-	content = str_new(new_str);
+	content = str_replace(content, new_str);
 	new_str = str_replace(new_str, "");
 	ex_wildcard(sc, content, &new_str, start_quotes);
-	content = str_new(new_str);
+	content = str_replace(content, new_str);
 	new_str = str_replace(new_str, "");
 	ex_remove_duplicate_quotes(sc, content, &new_str);
-	content = str_new(new_str);
+	content = str_replace(content, new_str);
 	new_str = str_replace(new_str, "");
 	ex_scape(sc, content, &new_str, start_quotes);
 	node->content = ft_strdup(new_str);

@@ -12,6 +12,7 @@ unsigned long	hash_djb2(char *str)
 	}
 	return (hash);
 }
+
 void	ht_free_item(t_env_item *env_item)
 {
 	str_free(env_item->key);

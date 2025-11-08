@@ -2,12 +2,16 @@
 
 int	ex_quotes(char **content)
 {
-	int		start_quotes;
+	int	start_quotes;
 
 	start_quotes = 0;
-	if (*content && *(content)[0] == '\'')
+	if (*content && *(content)[0] == '\'' && \
+		(*content)[str_len(*content) - 1] == '\'' \
+		&& count_quotes(*content, '\'') % 2 == 1)
 		start_quotes = 1;
-	else if (*content && *(content)[0] == '"')
+	else if (*content && *(content)[0] == '"' && \
+		(*content)[str_len(*content) - 1] == '"' \
+		&& count_quotes(*content, '"') % 2 == 1)
 		start_quotes = 2;
 	if (start_quotes)
 	{
@@ -101,9 +105,9 @@ void	ex_scape(t_shell_context *sc, char *content, \
 	index = 0;
 	while (content[index])
 	{
-		if (start_quotes != 1 \
-			&& content[index] == '\\' \
-			&& content[index + 1])
+		if (start_quotes != 1 && content[index] == '\\' && content[index + 1])
+			if (start_quotes == 0 || \
+				(content[index + 1] == '"' || content[index + 1] == '\\' ))
 				index++;
 		str_tmp[0] = content[index];
 		str_tmp[1] = '\0';

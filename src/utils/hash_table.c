@@ -90,7 +90,8 @@ void	ht_delete(t_hash_table *table, char *key)
 	}
 }
 
-void ht_update_insert(t_hash_table *table, char *key, char *value, t_env_type type)
+void	ht_update_insert(t_hash_table *table, char *key, char *value, \
+	t_env_type type)
 {
 	size_t		index;
 	t_env_item	*item;

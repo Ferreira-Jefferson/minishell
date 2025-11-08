@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_simple_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:14:36 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/29 11:35:30 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/08 16:18:52 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static bool	handle_redirection(t_cmd_node *cmd_node, t_dlist *tokens)
 	return (true);
 }
 
-static bool	build_simple_cmd(t_cmd_node *cmd_node, t_token *token, t_dlist *tokens)
+static bool	build_simple_cmd(t_cmd_node *cmd_node, t_token *token, \
+	t_dlist *tokens)
 {
 	if (token->kind == TK_WORD)
 	{

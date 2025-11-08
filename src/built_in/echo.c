@@ -23,32 +23,47 @@ int	is_valid_flag(t_shell_context *sc, char *flag)
 			is_valid = 0;
 		content++;
 	}
-	free(node->content);
-	free(node);
 	return (is_valid);
+}
+
+static char	*create_content(t_dlist	*args)
+{
+	char	*content;
+	char	*to_free;
+
+	content = str_new("");
+	to_free = content;
+	while (args && args->head)
+	{
+		printf("cat antes: %p\n", content);
+		content = str_cat(content, args->head->content);
+		printf("cat depois: %p\n", content);
+		if (args->head->next)
+			content = str_cat(content, " ");
+		args->head = args->head->next;
+	}
+	return (content);
 }
 
 void	b_echo(t_shell_context *sc, t_dlist	*args)
 {
 	int		valid_flag;
 	t_dnode	*node;
+	char	*tmp;
 
 	(void) sc;
-	node = malloc(sizeof(t_dnode));
 	if (!args)
 		return ;
 	valid_flag = is_valid_flag(sc, args->head->content);
 	if (valid_flag)
-		args->head = args->head->next;
-	while (args->head)
-	{
-		node->content = str_new(args->head->content);
-		expander(sc, node);
-		printf("%s", (char *) node->content);
-		if (args->head->next)
-			printf(" ");
-		args->head = args->head->next;
-	}
+		free(ft_dlstpop_front(args));
+	tmp = create_content(args);
+	node = ft_dlstnew(tmp);
+	printf("%s\n", (char *) node->content);
+	expander(sc, node);
+	printf("%s", (char *) node->content);
+	//printf("teste: %zu\n\n", str_len(tmp));
 	if (!valid_flag)
 		printf("\n");
+	ft_dlstdelone(node, free);
 }

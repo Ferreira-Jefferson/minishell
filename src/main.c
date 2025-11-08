@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/07 18:14:43 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/08 17:53:41 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,79 @@ int	main(int argc, char *argv[], char **envp)
 
 	(void) argc;
 	(void) argv;
-	// t_dlist	*args = ft_dlstinit();	
-	t_dnode *node = malloc(sizeof(t_dnode));
-	node->content = str_new("\"$USR\"\"oi\"\"\"");
+	t_dlist	*args = ft_dlstinit();	
+	t_dnode *node = ft_dlstnew("\"\"\"$USR\"\"oi\"\"\"");
 
 	sc = ft_setup_sc(envp);
 	
-	// node->content = ft_strdup("ZDOTDIR1=1000");
-	// ft_dlstinsert_node_at(args, node, 0);
+	t_dnode *node_1 = ft_dlstnew("$USER-\'$USER\'-\"$USER\"");
+	ft_dlstinsert_node_at(args, node_1, 0);
 
-	// t_dnode *node_2 = malloc(sizeof(t_dnode));
-	// node_2->content = ft_strdup("ZDOTDIR");
+	// t_dnode *node_2 = ft_dlstnew("\\\"");
 	// ft_dlstinsert_node_at(args, node_2, 1);
+
+	// t_dnode *node_3 = ft_dlstnew("\\\\");
+    // ft_dlstinsert_node_at(args, node_3, 2);
+
+    // t_dnode *node_4 = ft_dlstnew("\\n");
+    // ft_dlstinsert_node_at(args, node_4, 3);
+
+    // t_dnode *node_5 = ft_dlstnew("teste\"\"teste");
+    // ft_dlstinsert_node_at(args, node_5, 4);
+
+    // t_dnode *node_6 = ft_dlstnew("~");
+    // ft_dlstinsert_node_at(args, node_6, 5);
+
+    // t_dnode *node_7 = ft_dlstnew("~$HOME");
+    // ft_dlstinsert_node_at(args, node_7, 6);
+
+    // t_dnode *node_8 = ft_dlstnew("$~");
+    // ft_dlstinsert_node_at(args, node_8, 7);
+
+    // t_dnode *node_9 = ft_dlstnew("~$");
+    // ft_dlstinsert_node_at(args, node_9, 8);
+
+    // t_dnode *node_10 = ft_dlstnew("~+N");
+    // ft_dlstinsert_node_at(args, node_10, 9);
+
+    // t_dnode *node_11 = ft_dlstnew("~-N");
+    // ft_dlstinsert_node_at(args, node_11, 10);
+
+    // t_dnode *node_12 = ft_dlstnew("A~");
+    // ft_dlstinsert_node_at(args, node_12, 11);
+
+    // t_dnode *node_13 = ft_dlstnew("~A");
+    // ft_dlstinsert_node_at(args, node_13, 12);
+
+    // t_dnode *node_14 = ft_dlstnew("A~A");
+    // ft_dlstinsert_node_at(args, node_14, 13);
+
+    // t_dnode *node_15 = ft_dlstnew("~+/foo");
+    // ft_dlstinsert_node_at(args, node_15, 14);
+
+    // t_dnode *node_16 = ft_dlstnew("~-/bar");
+    // ft_dlstinsert_node_at(args, node_16, 15);
+
+    // t_dnode *node_17 = ft_dlstnew("$$");
+    // ft_dlstinsert_node_at(args, node_17, 16);
+
+    // t_dnode *node_18 = ft_dlstnew("$?");
+    // ft_dlstinsert_node_at(args, node_18, 17);
+
+    // t_dnode *node_19 = ft_dlstnew("$VA");
+    // ft_dlstinsert_node_at(args, node_19, 18);
+
+    // t_dnode *node_20 = ft_dlstnew("$USR\"\"oi\"\"\"");
+    // ft_dlstinsert_node_at(args, node_20, 19);
 
 	// b_set_export(sc, args);
 	// b_export(sc);
-	// printf("\n");
-	// b_echo(sc, args);
+	printf("\n");
+	b_echo(sc, args);
 
-	printf("Antes:[%s]\n", (char *)node->content);
-		expander(sc, node);
-	printf("Depois:[%s]\n", (char *)node->content);
+	// printf("Antes:[%s]\n", (char *)node->content);
+	// 	expander(sc, node);
+	// printf("Depois:[%s]\n", (char *)node->content);
 	
 	// node->content = str_new("VAR=1000");
 	// set_export(sc, node);
