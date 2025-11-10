@@ -14,7 +14,7 @@ static void	print_env(t_env_item *env_item, char **str_env)
 	free(env_item);
 }
 
-char	*b_env(t_shell_context *sc)
+int	b_env(t_shell_context *sc)
 {
 	t_hash_table	*table;
 	t_env_item		*env_item;
@@ -24,6 +24,8 @@ char	*b_env(t_shell_context *sc)
 	i = 0;
 	str_env = str_new("");
 	table = sc->env;
+	if (!table)
+		return (1);
 	while (i < table->size)
 	{
 		if (table->items[i])
@@ -35,5 +37,5 @@ char	*b_env(t_shell_context *sc)
 		}
 		i++;
 	}
-	return (str_env);
+	return (0);
 }

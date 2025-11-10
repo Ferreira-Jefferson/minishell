@@ -45,15 +45,15 @@ static void	set_var(t_shell_context *sc, t_dlist *args)
 	free(node);
 }
 
-void	b_set_export(t_shell_context *sc, t_dlist	*args)
+int	b_set_export(t_shell_context *sc, t_dlist	*args)
 {
 	char	**split;
 
 	if (!args || !args->head)
-		return ;
+		return (1);
 	split = ft_split(args->head->content, '=');
 	if (!split)
-		return ;
+		return (1);
 	if (split[0][0] == '#')
 	{
 		ft_free_str_vector(split);
@@ -61,4 +61,5 @@ void	b_set_export(t_shell_context *sc, t_dlist	*args)
 	}
 	ft_free_str_vector(split);
 	set_var(sc, args);
+	return (0);
 }

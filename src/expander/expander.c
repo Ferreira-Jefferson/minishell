@@ -53,7 +53,7 @@ void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, char **new_s
 	}
 }
 
-void	expander(t_shell_context *sc, t_dnode *node)
+int	expander(t_shell_context *sc, t_dnode *node)
 {
 	char	*new_str;
 	char	*content;
@@ -78,4 +78,5 @@ void	expander(t_shell_context *sc, t_dnode *node)
 	node->content = ft_strdup(new_str);
 	str_free(new_str);
 	str_free(content);
+	return (0);
 }

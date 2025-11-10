@@ -43,7 +43,7 @@ static char	*create_content(t_dlist	*args)
 	return (content);
 }
 
-void	b_echo(t_shell_context *sc, t_dlist	*args)
+int	b_echo(t_shell_context *sc, t_dlist	*args)
 {
 	int		valid_flag;
 	t_dnode	*node;
@@ -51,18 +51,21 @@ void	b_echo(t_shell_context *sc, t_dlist	*args)
 
 	(void) sc;
 	if (!args)
-		return ;
+		return (1);
 	valid_flag = is_valid_flag(sc, args->head->content);
 	if (valid_flag)
 		free(ft_dlstpop_front(args));
 	tmp = create_content(args);
 	node = ft_dlstnew(tmp);
-	printf("%s\n", (char *) node->content);
-	expander(sc, node);
-	printf("%s", (char *) node->content);
-	//printf("teste: %zu\n\n", str_len(tmp));
+	if (expander(sc, node))
+	{
+		str_free(tmp);
+		ft_dlstdelone(node, free);
+		return (1);
+	}
 	if (!valid_flag)
 		printf("\n");
 	str_free(tmp);
 	ft_dlstdelone(node, free);
+	return (0);
 }
