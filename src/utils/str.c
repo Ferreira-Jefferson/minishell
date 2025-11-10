@@ -6,18 +6,11 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:49:27 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/08 17:48:48 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/10 10:18:46 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/str.h"
-
-static inline t_str	*get_str(const char *buf)
-{
-	if (!buf)
-		return (NULL);
-	return ((t_str *)(buf - sizeof(t_str)));
-}
 
 size_t	str_len(const char *buf)
 {

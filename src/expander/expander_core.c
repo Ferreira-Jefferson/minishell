@@ -75,12 +75,18 @@ void	ex_vars(t_shell_context *sc, char *content, \
 	char	str_tmp[2];
 	char	len;
 	size_t	index;
+	int 	only_copy;
 
+	only_copy = 0;
 	index = 0;
 	while (content[index])
 	{
 		len = 0;
-		if (start_quotes != 1 && content[index] == '$' \
+		if (content[index] == '\'' && only_copy)
+			only_copy = 0;
+		else if (index > 0 && content[index] == '$' && content[index - 1] == '\'')
+			only_copy = 1;
+		else if (start_quotes != 1 && content[index] == '$' \
 			&& content[index + 1] != '\0' \
 			&& (!ft_isspace(content[index + 1]) \
 			&& content[index + 1] != '~'))

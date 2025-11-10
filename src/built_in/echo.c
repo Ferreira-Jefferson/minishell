@@ -29,17 +29,15 @@ int	is_valid_flag(t_shell_context *sc, char *flag)
 static char	*create_content(t_dlist	*args)
 {
 	char	*content;
-	char	*to_free;
 
 	content = str_new("");
-	to_free = content;
 	while (args && args->head)
 	{
 		printf("cat antes: %p\n", content);
-		content = str_cat(content, args->head->content);
+		content = str_cat(str_clear(content), args->head->content);
 		printf("cat depois: %p\n", content);
 		if (args->head->next)
-			content = str_cat(content, " ");
+			content = str_cat(str_clear(content), " ");
 		args->head = args->head->next;
 	}
 	return (content);
@@ -65,5 +63,6 @@ void	b_echo(t_shell_context *sc, t_dlist	*args)
 	//printf("teste: %zu\n\n", str_len(tmp));
 	if (!valid_flag)
 		printf("\n");
+	str_free(tmp);
 	ft_dlstdelone(node, free);
 }

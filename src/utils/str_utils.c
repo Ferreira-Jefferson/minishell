@@ -6,13 +6,13 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:50:37 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/05 08:24:57 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/10 09:26:13 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/str.h"
 
-static inline t_str	*get_str(const char *buf)
+t_str	*get_str(const char *buf)
 {
 	if (!buf)
 		return (NULL);
@@ -43,6 +43,18 @@ char	*str_replace(char *buf, const char *str)
 		return (NULL);
 	str_free(buf);
 	return (str_new(str));
+}
+
+char	*str_clear(char *buf)
+{
+	t_str	*str;
+
+	if (!buf)
+		return (NULL);
+	str = get_str(buf);
+	str->buf[0] = '\0';
+	str->len = 0;
+	return (buf);
 }
 
 void	str_free(char *buf)

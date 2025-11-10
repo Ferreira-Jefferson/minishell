@@ -6,6 +6,7 @@
 		"ranges": "c",
 		"built_in.h": "c",
 		"numbers": "c",
-		"random": "c"
+		"random": "c",
+		"str.h": "c"
 	}
 }
