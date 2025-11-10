@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/10 10:40:44 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/11 10:55:48 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,18 @@ int	main(int argc, char *argv[], char **envp)
 	(void) argc;
 	(void) argv;
 	t_dlist	*args = ft_dlstinit();	
-	t_dnode *node = ft_dlstnew("\"\"\"$USR\"\"oi\"\"\"");
+	// t_dnode *node = ft_dlstnew("$USER-\'$USER\'-\"$USER\"");
 
 	sc = ft_setup_sc(envp);
-	
-	t_dnode *node_1 = ft_dlstnew("$USER-\'$USER\'-\"$USER\"");
+
+//	ht_print(sc->env);
+	t_dnode *node_1 = ft_dlstnew("~/42sp");
 	ft_dlstinsert_node_at(args, node_1, 0);
+
+	printf("pwd (antes): [%s]\n", sc->pwd);
+	b_cd(sc, args);
+	printf("pwd (depois): [%s]\n", sc->pwd);
+	// ht_print(sc->env);
 
 	// t_dnode *node_2 = ft_dlstnew("\\\"");
 	// ft_dlstinsert_node_at(args, node_2, 1);
@@ -109,8 +115,8 @@ int	main(int argc, char *argv[], char **envp)
 
 	// b_set_export(sc, args);
 	// b_export(sc);
-	printf("\n");
-	b_echo(sc, args);
+	// printf("\n");
+	// b_echo(sc, args);
 
 	// printf("Antes:[%s]\n", (char *)node->content);
 	// 	expander(sc, node);
@@ -130,17 +136,19 @@ int	main(int argc, char *argv[], char **envp)
 	// free(node_2);
 	// ft_dlstdestroy(&args, NULL);
 
-	free_sc(sc);
+	// free_sc(sc);
 	
-	printf("\n");
+	// printf("\n");
 
-	return (0);
+	//return (0);
+
 	setup_signals();
-	// rl_catch_signals = 0;
+	t_dnode *node = ft_dlstnew("");
 	rl_event_hook = ft_event_hook;
 	while (1)
 	{
-		input = readline("teste> ");
+		ft_define_rl_prompt(sc);
+		input = readline(sc->rl_prompt);
 		if (!input && get_g_signal_status() == 0)
 		{
 			write(1, "exit\n", 5);
@@ -158,6 +166,7 @@ int	main(int argc, char *argv[], char **envp)
 		free(input);
 	}
 	// ht_free(table);
+	free_sc(sc);
 	return (0);
 }
 

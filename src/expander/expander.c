@@ -7,30 +7,28 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 	int		is_valid;
 	char	*key;
 
-	len = 0;
+	key = NULL;
 	is_valid = (content && (content[index + 1] == '\0' || \
 		(ft_isspace(content[index + 2]) || content[index + 2] == '/')));
+	len = 2;
 	if (is_valid && content[index + 1] == '+')
-	{
 		key = ex_get_key(str_new("PWD"));
-		len = 2;
-	}
 	else if (is_valid && content[index + 1] == '-')
-	{
 		key = ex_get_key(str_new("OLDPWD"));
-		len = 2;
-	}
-	else if (content[index + 1] == '\0' || ft_isspace(content[index + 1]))
+	else if (content[index + 1] == '\0' || content[index + 1] == '/' || ft_isspace(content[index + 1]))
 	{
 		key = ex_get_key(str_new("HOME"));
 		len = 1;
 	}
+	if (key == NULL)
+		len = 0;
 	if (len)
 		ex_get_value_variable(sc, new_str, key);
 	return (len);
 }
 
-void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, char **new_str)
+void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, \
+	char **new_str)
 {
 	char	str_tmp[2];
 	size_t	index;
@@ -42,7 +40,8 @@ void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, char **new_s
 		if ((content[index] && content[index + 1]) && \
 			(content[index] == '"' && content[index + 1] == '"'))
 			index += 2;
-		else if (index > 0 && content[index] == '"' && content[index - 1] != '\\')
+		else if (index > 0 && content[index] == '"' \
+			&& content[index - 1] != '\\')
 			index += 1;
 		str_tmp[0] = content[index];
 		str_tmp[1] = '\0';

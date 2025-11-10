@@ -5,6 +5,7 @@ typedef struct s_node 	t_node;
 
 typedef struct s_shell_context
 {
+	char			*rl_prompt;			 
 	char			*input;
 	t_node			*ast_root;		 // Raiz da árvore sintática
 	t_hash_table	*env;	 		// Tabela de variáveis de ambiente
@@ -22,5 +23,7 @@ char			*ft_str_toupper(char *str);
 void			ft_free_str_vector(char **str_vector);
 t_shell_context	*ft_setup_sc(char **envp);
 void			free_sc(t_shell_context	*sc);
+void			ft_define_rl_prompt(t_shell_context	*sc);
+char			*ft_create_content(t_dlist	*args);
 
 #endif

@@ -55,21 +55,17 @@ void	ft_free_str_vector(char **str_vector)
 	free(str_vector);
 }
 
-t_shell_context	*ft_setup_sc(char **envp)
+char	*ft_create_content(t_dlist	*args)
 {
-	t_shell_context	*sc;
+	char	*content;
 
-	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
-	sc->pid_ms = getpid();
-	sc->last_status = 0;
-	sc->env = env_load(envp);
-	sc->env_copy = env_load(envp);
-	return (sc);
-}
-
-void	free_sc(t_shell_context	*sc)
-{
-	ht_free(sc->env);
-	ht_free(sc->env_copy);
-	free(sc);
+	content = str_new("");
+	while (args && args->head)
+	{
+		content = str_cat(str_clear(content), args->head->content);
+		if (args->head->next)
+			content = str_cat(str_clear(content), " ");
+		args->head = args->head->next;
+	}
+	return (content);
 }

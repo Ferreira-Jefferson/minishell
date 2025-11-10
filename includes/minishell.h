@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/07 16:26:12 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:35:26 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdbool.h>
 # include <dirent.h>
 # include <signal.h>
+# include <errno.h>
 
 # include "../lib/libft/include/libft.h"
 
