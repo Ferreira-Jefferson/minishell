@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exec_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 17:18:45 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:05:14 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ static int	apply_redir(void *data)
 
 static int	execute_builtin(t_dlist *args, t_shell_context *context)
 {
-	if (!ft_strncmp((char *)args->head->content, "echo", 5))
+	if (!ft_strcmp((char *)args->head->content, "echo"))
 		return (b_echo(context, args));
-	if (!ft_strncmp((char *)args->head->content, "cd", 3))
+	if (!ft_strcmp((char *)args->head->content, "cd"))
 		return (b_cd(context, args));
-	if (!ft_strncmp((char *)args->head->content, "pwd", 4))
+	if (!ft_strcmp((char *)args->head->content, "pwd"))
 		return (b_pwd(context, args));
-	if (!ft_strncmp((char *)args->head->content, "export", 7))
+	if (!ft_strcmp((char *)args->head->content, "export"))
 		return (b_export(context, args));
-	if (!ft_strncmp((char *)args->head->content, "unset", 6))
+	if (!ft_strcmp((char *)args->head->content, "unset"))
 		return (b_unset(context, args));
-	if (!ft_strncmp((char *)args->head->content, "env", 4))
+	if (!ft_strcmp((char *)args->head->content, "env"))
 		return (b_env(context));
-	if (!ft_strncmp((char *)args->head->content, "exit", 5))
+	if (!ft_strcmp((char *)args->head->content, "exit"))
 		return (b_exit(context, args));
 	return (1);
 }

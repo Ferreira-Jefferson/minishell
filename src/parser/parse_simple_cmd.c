@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_simple_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:14:36 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/08 16:18:52 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/11 19:24:09 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ static bool	handle_redirection(t_cmd_node *cmd_node, t_dlist *tokens)
 	token = (t_token *)ft_dlstpeek_front(tokens);
 	if (!token || token->kind != TK_WORD)
 	{
+		ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+		if (!token || token->kind == TK_EOF)
+			ft_putstr_fd("newline", 2);
+		else
+			ft_putstr_fd(((char *)token->lexeme), 2);
+		ft_putstr_fd("'\n", 2);
 		free_node(cmd_node);
 		return (false);
 	}

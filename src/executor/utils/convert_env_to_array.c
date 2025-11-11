@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:25:54 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 15:22:37 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:14:57 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	count_items(t_hash_table *hash_items)
 			count++;
 			curr = curr->next;
 		}
+		i++;
 	}
 	return (count);
 }

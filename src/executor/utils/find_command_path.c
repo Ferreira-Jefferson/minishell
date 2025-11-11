@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:04:38 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/10 18:11:40 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:52:24 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ char	*find_command_path(t_hash_table *env, char *cmd)
 	char	*path;
 
 	if (ft_strchr((const char *)cmd, '/'))
-	{
-		if (access((const char *)cmd, F_OK) == 0)
-			return (ft_strdup(cmd));
-		return (NULL);
-	}
+		return (ft_strdup(cmd));
 	path_str = ht_search(env, "PATH");
 	if (!path_str)
 		return (NULL);
