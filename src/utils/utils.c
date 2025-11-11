@@ -20,7 +20,7 @@ t_hash_table	*env_load(char **envp)
 				return (NULL);
 			ft_strlcpy(key, *envp, first_equal - *envp + 1);
 			value = ft_strdup(first_equal + 1);
-			ht_insert(table, key, value);
+			ht_insert(table, key, value, (t_env_type) ENV);
 			free(key);
 			free(value);
 		}
@@ -31,17 +31,15 @@ t_hash_table	*env_load(char **envp)
 
 char	*ft_str_toupper(char *str)
 {
-	char	*aux;
 	int		i;
 
 	i = 0;
-	aux = str_new(str);
-	while (aux[i])
+	while (str[i])
 	{
-		aux[i] = ft_toupper(aux[i]);
+		str[i] = ft_toupper(str[i]);
 		i++;
 	}
-	return (aux);
+	return (str);
 }
 
 void	ft_free_str_vector(char **str_vector)
@@ -55,4 +53,19 @@ void	ft_free_str_vector(char **str_vector)
 		aux++;
 	}
 	free(str_vector);
+}
+
+char	*ft_create_content(t_dlist	*args)
+{
+	char	*content;
+
+	content = str_new("");
+	while (args && args->head)
+	{
+		content = str_cat(str_clear(content), args->head->content);
+		if (args->head->next)
+			content = str_cat(str_clear(content), " ");
+		args->head = args->head->next;
+	}
+	return (content);
 }

@@ -74,6 +74,6 @@ void	remove_duplicated_wildcard(char **content)
 	}
 	new_str[j] = '\0';
 	if (*content)
-		*content = str_replace(*content, new_str);
+		*content = str_cat(str_clear(*content), new_str);
 	free(new_str);
 }

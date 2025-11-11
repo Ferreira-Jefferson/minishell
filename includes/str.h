@@ -12,10 +12,12 @@ typedef struct s_str {
 	char	buf[]; // "Flexible Array Member" (FAM)
 }	t_str;
 
+t_str	*get_str(const char *buf);
 void	str_free(char *buf);
 size_t	str_len(const char *buf);
 char	*str_new(const char *init);
 char	*str_cat(char *buf, const char *s);
 char	*str_replace(char *buf, const char *str);
+char	*str_clear(char *buf);
 
 #endif

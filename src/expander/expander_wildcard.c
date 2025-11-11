@@ -88,6 +88,7 @@ void	ex_wildcard(t_shell_context *sc, char *content, \
 	char **new_str, int start_quotes)
 {
 	char	**content_split;
+	size_t	i;
 
 	if (start_quotes || ft_strchr(content, '/'))
 	{
@@ -96,15 +97,17 @@ void	ex_wildcard(t_shell_context *sc, char *content, \
 	}
 	remove_duplicated_wildcard(&content);
 	content_split = ft_split(content, ' ');
-	while (*content_split)
+	i = 0;
+	while (content_split[i])
 	{
 		if (str_len(*new_str))
 			*new_str = str_cat(*new_str, " ");
-		if (ft_strchr(*content_split, '*'))
+		if (ft_strchr(content_split[i], '*'))
 			*new_str = str_cat(*new_str, \
-				ex_handler_wildcard(sc, *content_split));
+				ex_handler_wildcard(sc, content_split[i]));
 		else
-			*new_str = str_cat(*new_str, *content_split);
-		content_split++;
+			*new_str = str_cat(*new_str, content_split[i]);
+		i++;
 	}
+	ft_free_str_vector(content_split);
 }

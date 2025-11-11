@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/11 15:46:57 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:51:18 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,19 @@
 # include <readline/history.h>
 # include <stdbool.h>
 # include <dirent.h>
-
-typedef struct s_node t_node;
-typedef struct s_shell_context t_shell_context;
+# include <signal.h>
+# include <errno.h>
 
 # include "../lib/libft/include/libft.h"
-# include "signals.h"
-# include "str.h"
+
+# include "lexer.h"
+# include "ast.h"
 # include "hash_table.h"
 # include "utils.h"
-# include "lexer.h"
+# include "signals.h"
+# include "str.h"
 # include "expander.h"
-# include "ast.h"
-
-typedef struct s_node	t_node;
-
-typedef struct s_shell_context
-{
-	char			*input;
-	t_node			*ast_root;		 // Raiz da árvore sintática
-	t_hash_table	*env_global;	 // Tabela de variáveis de ambiente
-	t_hash_table	*env_copy;		 // Cópia Tabela de variáveis de ambiente
-	t_hash_table	*env_local;		 // Variáveis locais (não exportadas)
-	char			*pwd;			 // Diretório atual
-	char			*last_command;	 // Último comando executado
-	int				is_interactive;  // Modo interativo ou script
-	int				should_exit;	 // Flag para encerrar o shell
-	int				pid_ms;			 // pid do minishell inicial
-	int				last_status;	 // last status code
-}   t_shell_context;
+# include "built_in.h"
 
 int		free_str(char *str, int val);
 void	free_arr(char **arr);

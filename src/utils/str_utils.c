@@ -6,19 +6,19 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:50:37 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/10/30 10:49:16 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/10 09:26:13 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/str.h"
 
-static inline t_str	*get_str(const char *buf)
+t_str	*get_str(const char *buf)
 {
 	if (!buf)
 		return (NULL);
 	return ((t_str *)(buf - sizeof(t_str)));
 }
-	
+
 char	*str_new(const char *buf)
 {
 	t_str	*new_str;
@@ -37,12 +37,24 @@ char	*str_new(const char *buf)
 	return (new_str->buf);
 }
 
-char *str_replace(char *buf, const char *str)
+char	*str_replace(char *buf, const char *str)
 {
 	if (!buf)
 		return (NULL);
 	str_free(buf);
 	return (str_new(str));
+}
+
+char	*str_clear(char *buf)
+{
+	t_str	*str;
+
+	if (!buf)
+		return (NULL);
+	str = get_str(buf);
+	str->buf[0] = '\0';
+	str->len = 0;
+	return (buf);
 }
 
 void	str_free(char *buf)

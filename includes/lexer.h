@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:58:07 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/01 15:57:04 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/05 08:23:03 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_token
 	t_token_kind	kind;
 }	t_token;
 
-typedef t_token *(*t_token_handler)(const char *input, int *i);
+typedef t_token	*(*t_token_handler)(const char *input, int *i);
 
 t_dlist	*tokenize(const char *input, int i);
 t_token	*new_token(t_token_kind kind, char *lexeme);

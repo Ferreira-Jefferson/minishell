@@ -10,6 +10,8 @@ LEXER_DIR   = $(SRC_DIR)/lexer
 PARSER_DIR   = $(SRC_DIR)/parser
 EXPANDER_DIR   = $(SRC_DIR)/expander
 EXECUTOR_DIR   = $(SRC_DIR)/executor
+BUILT_IN_DIR   = $(SRC_DIR)/built_in
+
 LIB_DIR	 = lib/libft
 INCLUDES	= includes
 
@@ -18,10 +20,11 @@ LIBFT	   = $(LIB_DIR)/libft.a
 INCLUDE_DIRS = -I$(INCLUDES) -I$(LIB_DIR)
 
 MANDATORY_SRC = main.c signals.c
-UTILS_SRC	  = str.c str_utils.c hash_table.c hash_table_utils.c utils.c
+UTILS_SRC	  = str.c str_utils.c hash_table.c hash_table_utils.c utils.c export_utils.c setup_utils.c
 LEXER_SRC	  = lexer_utils.c lexer.c lexer_handler.c
 PARSER_SRC = constructors.c destructors.c parse_and_or.c parse_cmd_list.c parse_pipeline.c parse_primary.c parse_simple_cmd.c parser_utils.c
-EXPANDER_SRC  = expander.c expander_utils.c expander_core.c expander_wildcard.c expander_wildcard_utils.c
+EXPANDER_SRC  = expander.c expander_utils.c expander_core.c expander_wildcard.c expander_wildcard_utils.c expander_core_vars.c
+BUILT_IN_SRC  = env.c export.c echo.c unset.c set_export.c cd.c exit.c
 
 MANDATORY_SRC_FULL = $(addprefix $(SRC_DIR)/, $(MANDATORY_SRC))
 UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))
@@ -36,6 +39,7 @@ UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))
 LEXER_SRC_FULL	 = $(addprefix $(LEXER_DIR)/, $(LEXER_SRC))
 PARSER_SRC_FULL	 = $(addprefix $(PARSER_DIR)/, $(PARSER_SRC))
 EXECUTOR_SRC_FULL = $(addprefix $(EXECUTOR_DIR/, $(EXECUTOR_SRC)))
+BUILT_IN_SRC_FULL = $(addprefix $(BUILT_IN_DIR)/, $(BUILT_IN_SRC))
 
 MANDATORY_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(MANDATORY_SRC_FULL:.c=.o)))
 UTILS_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(UTILS_SRC_FULL:.c=.o)))
@@ -43,9 +47,10 @@ LEXER_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(LEXER_SRC_FULL:.c=.o)))
 PARSER_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(PARSER_SRC_FULL:.c=.o)))
 EXPANDER_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(EXPANDER_SRC_FULL:.c=.o)))
 EXECUTOR_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(EXECUTOR_SRC_FULL:.c=.o)))
+BUILT_IN_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(BUILT_IN_SRC_FULL:.c=.o)))
 
-vpath %.c $(SRC_DIR) $(UTILS_DIR) $(LEXER_DIR) $(PARSER_DIR) $(EXPANDER_DIR)
-OBJS = $(MANDATORY_OBJ) $(UTILS_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXPANDER_OBJ)
+vpath %.c $(SRC_DIR) $(UTILS_DIR) $(LEXER_DIR) $(PARSER_DIR) $(EXPANDER_DIR) $(BUILT_IN_DIR)
+OBJS = $(MANDATORY_OBJ) $(UTILS_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXPANDER_OBJ) $(BUILT_IN_OBJ)
 
 all: $(NAME)
 

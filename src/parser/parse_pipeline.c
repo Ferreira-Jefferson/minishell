@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipeline.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:41:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/29 10:39:41 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/08 16:19:10 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static bool	build_pipeline(t_pipe_node *pipe_node, t_dlist *tokens)
 	while (tokens->size && ((t_token *)tokens->head->content)->kind == TK_PIPE)
 	{
 		ft_dlstremove_node(tokens, tokens->head, free_token);
-		if (!(t_token *)tokens->head || is_invalid_operator((t_token *)tokens->head->content))
+		if (!(t_token *)tokens->head || \
+			is_invalid_operator((t_token *)tokens->head->content))
 		{
 			free_node(pipe_node);
 			return (false);
@@ -61,9 +62,9 @@ static t_pipe_node	*init_pipe_node(t_node *cmd_node)
 
 t_node	*parse_pipeline(t_dlist *tokens)
 {
-	t_node	*cmd_node;
+	t_node		*cmd_node;
 	t_pipe_node	*pipe_node;
-	t_token	*token;
+	t_token		*token;
 
 	if (!tokens || !tokens->size)
 		return (NULL);
