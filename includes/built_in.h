@@ -3,13 +3,13 @@
 
 # include "minishell.h"
 
-int	b_env(t_shell_context *sc);
-int	b_export(t_shell_context *sc);
-int	b_set_export(t_shell_context *sc, t_dlist	*args);
-int	b_echo(t_shell_context *sc, t_dlist	*args);
-int	b_uset(t_shell_context *sc, t_dlist	*args);
-int	b_pwd(t_shell_context *sc, t_dlist	*args);
-int	b_cd(t_shell_context *sc, t_dlist	*args);
+int		b_env(t_shell_context *sc);
+int		b_export(t_shell_context *sc);
+int		b_set_export(t_shell_context *sc, t_dlist	*args);
+int		b_echo(t_shell_context *sc, t_dlist	*args);
+int		b_uset(t_shell_context *sc, t_dlist	*args);
+int		b_pwd(t_shell_context *sc, t_dlist	*args);
+int		b_cd(t_shell_context *sc, t_dlist	*args);
 void	b_exit(t_shell_context *sc, t_dlist	*args);
 
 // export_utils.c

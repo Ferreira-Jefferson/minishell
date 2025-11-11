@@ -59,7 +59,9 @@ t_shell_context	*ft_setup_sc(char **envp)
 
 void	ft_del_fds(void *fd)
 {
-	int *fd_value = (int *)fd;
+	int	*fd_value;
+
+	fd_value = (int *)fd;
 	close(*fd_value);
 }
 

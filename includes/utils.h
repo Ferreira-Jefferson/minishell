@@ -17,7 +17,7 @@ typedef struct s_shell_context
 	int				should_exit;	 // Flag para encerrar o shell
 	int				pid_ms;			 // pid do minishell inicial
 	int				last_status;	 // last status code
-}   t_shell_context;
+}	t_shell_context;
 
 t_hash_table	*env_load(char **envp);
 char			*ft_str_toupper(char *str);

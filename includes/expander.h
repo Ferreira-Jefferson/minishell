@@ -7,7 +7,7 @@ char	*ex_get_key(char *str);
 int		ex_get_value_variable(t_shell_context *sc, char **new_str, char *key);
 int		ex_question_mark(t_shell_context *sc, char **new_str);
 int		ex_double_dollar(t_shell_context *sc, char **new_str);
-int	expander(t_shell_context *sc, t_dnode *node);
+int		expander(t_shell_context *sc, t_dnode *node);
 int		ex_handle_tilde(t_shell_context *sc, char *content, \
 	int index, char **new_str);
 
