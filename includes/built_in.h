@@ -10,6 +10,7 @@ int	b_echo(t_shell_context *sc, t_dlist	*args);
 int	b_uset(t_shell_context *sc, t_dlist	*args);
 int	b_pwd(t_shell_context *sc, t_dlist	*args);
 int	b_cd(t_shell_context *sc, t_dlist	*args);
+void	b_exit(t_shell_context *sc, t_dlist	*args);
 
 // export_utils.c
 char	*sort_export(char *str_export, int i, int j);
