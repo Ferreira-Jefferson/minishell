@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/11 15:51:18 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:46:29 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,10 @@
 # include "ast.h"
 # include "hash_table.h"
 # include "utils.h"
+# include "built_in.h"
 # include "signals.h"
 # include "str.h"
 # include "expander.h"
-# include "built_in.h"
-
-int		free_str(char *str, int val);
-void	free_arr(char **arr);
-int		free_ret(t_dlist **list, void *arg, void (*del)(void *), int ret);
+# include "executor.h"
 
 #endif

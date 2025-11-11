@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:54:54 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 15:24:48 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:35:44 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define EXECUTOR_H
 
 # include "minishell.h"
+# include "built_in.h"
 # include <errno.h>
 # include <sys/wait.h>
 

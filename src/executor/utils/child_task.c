@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   child_task.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:10:36 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 15:10:52 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:40:03 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static void	child_task(char *path, char **argv, char **envp)
+void	child_task(char *path, char **argv, char **envp)
 {
 	if (!path)
 	{

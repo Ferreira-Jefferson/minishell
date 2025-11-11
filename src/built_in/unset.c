@@ -1,6 +1,6 @@
 #include "built_in.h"
 
-int	b_uset(t_shell_context *sc, t_dlist	*args)
+int	b_unset(t_shell_context *sc, t_dlist	*args)
 {
 	t_dnode	*node;
 

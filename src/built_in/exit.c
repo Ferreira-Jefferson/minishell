@@ -1,19 +1,5 @@
 #include "built_in.h"
 
-int ft_print_error(char *content,  char *message, int status)
-{
-	char *output;
-
-	output = str_new("bash: ");
-	output = str_cat(output, "exit: ");
-	output = str_cat(output, content);
-	output = str_cat(output, " ");
-	output = str_cat(output, message);
-	perror(output);
-	str_free(output);
-	return (status);
-}
-
 int	ft_validate(t_shell_context *sc, t_dlist *args)
 {
 	t_dnode	*node;
@@ -30,10 +16,10 @@ int	ft_validate(t_shell_context *sc, t_dlist *args)
 		status = sc->last_status;
 	else
 	{
-		if (!ft_is_numeric(split[0]))
-			status = ft_print_error(node->content, "numeric argument required", 2);
+		if (split[0] && !ft_is_numeric(split[0]))
+			status = ft_print_error(node->content, "exit:", "numeric argument required", 2);
 		else if (split[1])
-			status = ft_print_error(node->content, "too many arguments", 1);
+			status = ft_print_error(node->content, "exit:", "too many arguments", 1);
 		else
 			status = ft_atoi(split[0]) % 256;
 	}

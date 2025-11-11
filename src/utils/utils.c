@@ -62,10 +62,26 @@ char	*ft_create_content(t_dlist	*args)
 	content = str_new("");
 	while (args && args->head)
 	{
-		content = str_cat(str_clear(content), args->head->content);
+		content = str_cat(content, args->head->content);
 		if (args->head->next)
-			content = str_cat(str_clear(content), " ");
+			content = str_cat(content, " ");
 		args->head = args->head->next;
 	}
 	return (content);
+}
+
+int	ft_print_error(char *content,  char *built, char *message, \
+	int status)
+{
+	char	*output;
+
+	output = str_new("bash: ");
+	output = str_cat(output, built);
+	output = str_cat(output, content);
+	output = str_cat(output, " ");
+	output = str_cat(output, message);
+	output = str_cat(output, "\n");
+	ft_putstr_fd(output, 2);
+	str_free(output);
+	return (status);
 }

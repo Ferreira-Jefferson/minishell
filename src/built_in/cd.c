@@ -35,6 +35,7 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 	char	*path;
 	char	*to_free;
 
+	ft_dlstremove_at(args, 0, free);
 	node = ft_dlstnew("");
 	node->content = ft_create_content(args);
 	to_free = node->content;

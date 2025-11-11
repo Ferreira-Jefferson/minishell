@@ -20,7 +20,7 @@ static void	create_export_list(t_env_item *env_item, char **str_env)
 	free(env_item);
 }
 
-int	b_export(t_shell_context *sc)
+int	b_export(t_shell_context *sc, t_dlist *args)
 {
 	t_hash_table	*table;
 	t_env_item		*env_item;
@@ -28,6 +28,7 @@ int	b_export(t_shell_context *sc)
 	int				i;
 	char			*sorted;
 
+	(void) args;
 	i = 0;
 	str_env = str_new("");
 	table = sc->env;

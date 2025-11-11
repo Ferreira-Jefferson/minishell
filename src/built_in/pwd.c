@@ -2,7 +2,8 @@
 
 int	b_pwd(t_shell_context *sc, t_dlist	*args)
 {
-	if (!sc)
+	(void) args;
+	if (!sc || !args)
 		return (1);
 	if (!sc->pwd)
 		return (1);

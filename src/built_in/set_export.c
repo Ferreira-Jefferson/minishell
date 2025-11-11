@@ -57,7 +57,7 @@ int	b_set_export(t_shell_context *sc, t_dlist	*args)
 	if (split[0][0] == '#')
 	{
 		ft_free_str_vector(split);
-		return (b_export(sc));
+		return (b_export(sc, args));
 	}
 	ft_free_str_vector(split);
 	set_var(sc, args);

@@ -35,17 +35,14 @@ int	b_echo(t_shell_context *sc, t_dlist	*args)
 	(void) sc;
 	if (!args)
 		return (1);
+	ft_dlstremove_at(args, 0, free);
 	valid_flag = is_valid_flag(sc, args->head->content);
 	if (valid_flag)
 		free(ft_dlstpop_front(args));
 	tmp = ft_create_content(args);
 	node = ft_dlstnew(tmp);
-	if (expander(sc, node))
-	{
-		str_free(tmp);
-		ft_dlstdelone(node, free);
-		return (1);
-	}
+	expander(sc, node);
+	printf("%s", (char *) node->content);
 	if (!valid_flag)
 		printf("\n");
 	str_free(tmp);
