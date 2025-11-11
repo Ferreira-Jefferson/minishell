@@ -7,10 +7,10 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 	int		is_valid;
 	char	*key;
 
+	len = 2;
 	key = NULL;
 	is_valid = (content && (content[index + 1] == '\0' || \
 		(ft_isspace(content[index + 2]) || content[index + 2] == '/')));
-	len = 2;
 	if (is_valid && content[index + 1] == '+')
 		key = ex_get_key(str_new("PWD"));
 	else if (is_valid && content[index + 1] == '-')

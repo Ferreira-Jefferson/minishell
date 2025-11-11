@@ -7,8 +7,9 @@ typedef struct s_shell_context
 {
 	char			*rl_prompt;			 
 	char			*input;
+	t_dlist			*fds;
 	t_node			*ast_root;		 // Raiz da árvore sintática
-	t_hash_table	*env;	 		// Tabela de variáveis de ambiente
+	t_hash_table	*env;	 		 // Tabela de variáveis de ambiente
 	t_hash_table	*env_copy;		 // Cópia Tabela de variáveis de ambiente
 	char			*pwd;			 // Diretório atual
 	char			*last_command;	 // Último comando executado

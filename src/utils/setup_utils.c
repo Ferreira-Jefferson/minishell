@@ -57,11 +57,18 @@ t_shell_context	*ft_setup_sc(char **envp)
 	return (sc);
 }
 
+void	ft_del_fds(void *fd)
+{
+	int *fd_value = (int *)fd;
+	close(*fd_value);
+}
+
 void	free_sc(t_shell_context	*sc)
 {
 	ht_free(sc->env);
 	ht_free(sc->env_copy);
 	str_free(sc->pwd);
 	str_free(sc->rl_prompt);
+	ft_dlstdestroy(&sc->fds, ft_del_fds);
 	free(sc);
 }
