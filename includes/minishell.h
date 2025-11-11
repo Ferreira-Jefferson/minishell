@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/03 15:15:49 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:46:57 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@ typedef struct s_shell_context
 	int				pid_ms;			 // pid do minishell inicial
 	int				last_status;	 // last status code
 }   t_shell_context;
+
+int		free_str(char *str, int val);
+void	free_arr(char **arr);
+int		free_ret(t_dlist **list, void *arg, void (*del)(void *), int ret);
 
 #endif

@@ -3,4 +3,4 @@ a.out
 *.o
 check
 test_check
-.vs_code
+.vscode

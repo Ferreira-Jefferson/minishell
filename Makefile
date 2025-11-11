@@ -9,7 +9,7 @@ UTILS_DIR   = $(SRC_DIR)/utils
 LEXER_DIR   = $(SRC_DIR)/lexer
 PARSER_DIR   = $(SRC_DIR)/parser
 EXPANDER_DIR   = $(SRC_DIR)/expander
-
+EXECUTOR_DIR   = $(SRC_DIR)/executor
 LIB_DIR	 = lib/libft
 INCLUDES	= includes
 
@@ -28,12 +28,21 @@ UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))
 LEXER_SRC_FULL	  = $(addprefix $(LEXER_DIR)/, $(LEXER_SRC))
 PARSER_SRC_FULL	  = $(addprefix $(PARSER_DIR)/, $(PARSER_SRC))
 EXPANDER_SRC_FULL = $(addprefix $(EXPANDER_DIR)/, $(EXPANDER_SRC))
+EXECUTOR_SRC = child_task.c convert_env_to_array.c find_command_path.c parent_wait_task.c print_error.c executor_utils.c executor.c \
+			handle_exec_and.c handle_exec_cmd.c handle_exec_list.c handle_exec_or.c handle_exec_pipe.c handle_exec_subshell.c
+
+MANDATORY_SRC_FULL = $(addprefix $(SRC_DIR)/, $(MANDATORY_SRC))
+UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))
+LEXER_SRC_FULL	 = $(addprefix $(LEXER_DIR)/, $(LEXER_SRC))
+PARSER_SRC_FULL	 = $(addprefix $(PARSER_DIR)/, $(PARSER_SRC))
+EXECUTOR_SRC_FULL = $(addprefix $(EXECUTOR_DIR/, $(EXECUTOR_SRC)))
 
 MANDATORY_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(MANDATORY_SRC_FULL:.c=.o)))
 UTILS_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(UTILS_SRC_FULL:.c=.o)))
 LEXER_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(LEXER_SRC_FULL:.c=.o)))
 PARSER_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(PARSER_SRC_FULL:.c=.o)))
 EXPANDER_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(EXPANDER_SRC_FULL:.c=.o)))
+EXECUTOR_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(EXECUTOR_SRC_FULL:.c=.o)))
 
 vpath %.c $(SRC_DIR) $(UTILS_DIR) $(LEXER_DIR) $(PARSER_DIR) $(EXPANDER_DIR)
 OBJS = $(MANDATORY_OBJ) $(UTILS_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXPANDER_OBJ)
@@ -50,7 +59,7 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(EXPANDER_DIR)/%.c 
+$(OBJ_DIR)/%.o: $(EXPANDER_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
 
