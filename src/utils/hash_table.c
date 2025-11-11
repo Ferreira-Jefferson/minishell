@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash_table.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/11 16:17:53 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/11 16:18:42 by joaolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_hash_table	*ht_create(void)
@@ -54,7 +66,7 @@ char	*ht_search(t_hash_table *table, char *key)
 	env_item = table->items[index];
 	while (env_item)
 	{
-		if (ft_strncmp(env_item->key, key, ft_strlen(key)) == 0)
+		if (ft_strcmp(env_item->key, key) == 0)
 			return (str_new(env_item->value));
 		env_item = env_item->next;
 	}
@@ -71,7 +83,7 @@ void	ht_delete(t_hash_table *table, char *key)
 	env_item = table->items[index];
 	if (!env_item)
 		return ;
-	if (ft_strncmp(env_item->key, key, ft_strlen(key)) == 0)
+	if (ft_strcmp(env_item->key, key) == 0)
 	{
 		table->items[index] = env_item->next;
 		return (ht_free_item(env_item));
@@ -80,7 +92,7 @@ void	ht_delete(t_hash_table *table, char *key)
 	env_item = env_item->next;
 	while (env_item)
 	{
-		if (ft_strncmp(env_item->key, key, ft_strlen(key)) == 0)
+		if (ft_strcmp(env_item->key, key) == 0)
 		{
 			before->next = env_item->next;
 			return (ht_free_item(env_item));
