@@ -54,6 +54,7 @@ t_shell_context	*ft_setup_sc(char **envp)
 	sc->env_copy = env_load(envp);
 	sc->pwd = ht_search(sc->env, "PWD");
 	sc->rl_prompt = NULL;
+	sc->fds = ft_dlstinit();
 	return (sc);
 }
 

@@ -43,7 +43,7 @@ int	ft_validate(t_shell_context *sc, t_dlist *args)
 	return (status);	
 }
 
-void	b_exit(t_shell_context *sc, t_dlist	*args)
+int	b_exit(t_shell_context *sc, t_dlist	*args)
 {
 	int	status;
 
@@ -54,4 +54,5 @@ void	b_exit(t_shell_context *sc, t_dlist	*args)
 	free_sc(sc);
 	printf("exit\n");
 	exit(status);
+	return (1);
 }
