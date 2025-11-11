@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/10/31 11:11:45 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/10 16:22:40 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ static void	print_ast(t_node *node, int indent)
 		print_ast(bin_node->left, indent + 1);
 		print_ast(bin_node->right, indent + 1);
 	}
-	else if (node->kind == NK_SUBSHELL) // Assumindo NK_SUB pela sua ast.h
+	else if (node->kind == NK_SUBSHELL)
 	{
 		sub_node = (t_sub_node *)node;
 		print_indent(indent);
@@ -214,4 +214,3 @@ int	main(int argc, char *argv[], char **envp)
 	rl_clear_history();
 	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/10/31 11:13:21 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:16:37 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "hash_table.h"
 # include "utils.h"
 # include "lexer.h"
+# include "ast.h"
 
 typedef struct s_node	t_node;
 
@@ -45,5 +46,9 @@ typedef struct s_shell_context
 	int				pid_ms;			 // pid do minishell inicial
 	int				last_status;	 // last status code
 }   t_shell_context;
+
+int		free_str(char *str, int val);
+void	free_arr(char **arr);
+int		free_ret(t_dlist **list, void *arg, void (*del)(void *), int ret);
 
 #endif
