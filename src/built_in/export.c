@@ -20,20 +20,19 @@ static void	create_export_list(t_env_item *env_item, char **str_env)
 	free(env_item);
 }
 
-int	b_export(t_shell_context *sc, t_dlist *args)
+static int	print_export(t_shell_context *sc)
 {
-	t_hash_table	*table;
-	t_env_item		*env_item;
 	char			*str_env;
 	int				i;
 	char			*sorted;
+	t_env_item		*env_item;
+	t_hash_table	*table;
 
-	(void) args;
-	i = 0;
 	str_env = str_new("");
 	table = sc->env;
 	if (!table)
 		return (1);
+	i = 0;
 	while (i < table->size)
 	{
 		if (table->items[i])
@@ -43,8 +42,19 @@ int	b_export(t_shell_context *sc, t_dlist *args)
 		}
 		i++;
 	}
-	sorted = sort_export(str_env, 0, 0);
-	printf("%s\n", sorted);
+	sorted = sort_export(str_env);
+	printf("%s", sorted);
 	str_free(sorted);
+	return (0);
+}
+
+int	b_export(t_shell_context *sc, t_dlist *args)
+{
+	(void) args;
+	ft_dlstremove_at(args, 0, free);
+	if (args->size == 0)
+		return (print_export(sc));
+	
+
 	return (0);
 }
