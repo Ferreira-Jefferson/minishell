@@ -2,6 +2,8 @@ NAME = minishell
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+SAN_FLAGS = -fsanitize=address,leak,undefined -fno-omit-frame-pointer -fsanitize-address-use-after-scope
+ASAN_ENV = ASAN_OPTIONS="detect_leaks=1:halt_on_error=0:verbosity=2:log_path=asan.log" UBSAN_OPTIONS="print_stacktrace=1"
 
 OBJ_DIR	 = objs
 SRC_DIR	 = src
@@ -70,6 +72,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(NAME)_asan
 	$(MAKE) fclean -C $(LIB_DIR)
 
 re: fclean all
@@ -77,4 +80,11 @@ re: fclean all
 run: all
 	valgrind --suppressions=readline.sup --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishell
 
-.PHONY: all clean fclean re run
+asan: CFLAGS += $(SAN_FLAGS)
+asan: fclean $(NAME)
+	@mv $(NAME) $(NAME)_asan
+	@echo "\033[1;32m[OK]\033[0m Executando com sanitizers...\n"
+	$(ASAN_ENV) ./$(NAME)_asan
+
+
+.PHONY: all clean fclean re run asan

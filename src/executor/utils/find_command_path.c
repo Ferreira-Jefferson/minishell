@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:04:38 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 18:52:24 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/12 09:32:13 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ char	*find_command_path(t_hash_table *env, char *cmd)
 		return (NULL);
 	path = match_path(path_dirs, cmd);
 	free_arr(path_dirs);
+	str_free(path_str);
 	return (path);
 }

@@ -2,7 +2,7 @@
 
 unsigned long	hash_djb2(char *str)
 {
-	int	hash;
+	unsigned long	hash;
 
 	hash = 5381;
 	while (*str)

@@ -34,7 +34,7 @@ void	ft_define_rl_prompt(t_shell_context *sc)
 	if (sc->rl_prompt)
 		str_free(sc->rl_prompt);
 	sc->rl_prompt = ht_search(sc->env, "USER");
-	sc->rl_prompt = str_cat(sc->rl_prompt, ":");
+	sc->rl_prompt = str_cat(sc->rl_prompt, "@");
 	session_manager = ht_search(sc->env, "SESSION_MANAGER");
 	tmp = ft_strchr(session_manager, '/') + 1;
 	tmp[ft_strchr(tmp, '.') - tmp] = '\0';
@@ -72,6 +72,7 @@ void	free_sc(t_shell_context	*sc)
 	ht_free(sc->env_copy);
 	str_free(sc->pwd);
 	str_free(sc->rl_prompt);
+	free_node(sc->ast_root);
 	ft_dlstdestroy(&sc->fds, ft_del_fds);
 	free(sc);
 }
