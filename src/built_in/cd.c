@@ -35,7 +35,10 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 	char	*path;
 	char	*to_free;
 
+	//TODO: tratar [cd] volta pra home
 	ft_dlstremove_at(args, 0, free);
+	if (args->size == 0)
+		return (0);
 	node = ft_dlstnew("");
 	node->content = ft_create_content(args);
 	to_free = node->content;

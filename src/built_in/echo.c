@@ -36,6 +36,8 @@ int	b_echo(t_shell_context *sc, t_dlist	*args)
 	if (!args)
 		return (1);
 	ft_dlstremove_at(args, 0, free);
+	if (args->size == 0)
+		return (0);
 	valid_flag = is_valid_flag(sc, args->head->content);
 	if (valid_flag)
 		free(ft_dlstpop_front(args));
@@ -46,6 +48,6 @@ int	b_echo(t_shell_context *sc, t_dlist	*args)
 	if (!valid_flag)
 		printf("\n");
 	str_free(tmp);
-	ft_dlstdelone(node, free);
+	ft_dlstdelone(node, free);  
 	return (0);
 }

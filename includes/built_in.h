@@ -4,7 +4,7 @@
 # include "minishell.h"
 # include "utils.h"
 
-int		b_env(t_shell_context *sc);
+int		b_env(t_shell_context *sc, t_dlist *args);
 int		b_export(t_shell_context *sc, t_dlist *args);
 int		b_set_export(t_shell_context *sc, t_dlist *args);
 int		b_echo(t_shell_context *sc, t_dlist *args);

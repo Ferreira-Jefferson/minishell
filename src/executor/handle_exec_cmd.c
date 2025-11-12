@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 17:18:45 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/12 09:22:59 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	execute_builtin(t_dlist *args, t_shell_context *context)
 	if (!ft_strncmp((char *)args->head->content, "unset", 6))
 		return (b_unset(context, args));
 	if (!ft_strncmp((char *)args->head->content, "env", 4))
-		return (b_env(context));
+		return (b_env(context, args));
 	if (!ft_strncmp((char *)args->head->content, "exit", 5))
 		return (b_exit(context, args));
 	return (1);

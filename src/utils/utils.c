@@ -70,15 +70,17 @@ char	*ft_create_content(t_dlist	*args)
 	return (content);
 }
 
-int	ft_print_error(char *content,  char *built, char *message, \
+int	ft_print_error(char *built, char *content, char *message, \
 	int status)
 {
 	char	*output;
 
 	output = str_new("bash: ");
 	output = str_cat(output, built);
-	output = str_cat(output, content);
 	output = str_cat(output, " ");
+	output = str_cat(output, content);
+	if (*content)
+		output = str_cat(output, ": ");
 	output = str_cat(output, message);
 	output = str_cat(output, "\n");
 	ft_putstr_fd(output, 2);

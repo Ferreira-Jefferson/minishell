@@ -29,6 +29,9 @@ int	b_export(t_shell_context *sc, t_dlist *args)
 	char			*sorted;
 
 	(void) args;
+	ft_dlstremove_at(args, 0, free);
+	if (args->size == 0)
+		return (0);
 	i = 0;
 	str_env = str_new("");
 	table = sc->env;
