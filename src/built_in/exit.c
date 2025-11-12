@@ -17,9 +17,9 @@ int	ft_validate(t_shell_context *sc, t_dlist *args)
 	else
 	{
 		if (split[0] && !ft_is_numeric(split[0]))
-			status = ft_print_error(node->content, "exit:", "numeric argument required", 2);
+			status = ft_print_error("exit:", split[0], "numeric argument required", 2);
 		else if (split[1])
-			status = ft_print_error(node->content, "exit:", "too many arguments", 1);
+			status = ft_print_error("exit:", "", "too many arguments", 1);
 		else
 			status = ft_atoi(split[0]) % 256;
 	}
@@ -33,7 +33,10 @@ int	b_exit(t_shell_context *sc, t_dlist	*args)
 {
 	int	status;
 
-	if (!args || args->size == 0)
+	if (!args)
+		return (1);
+	ft_dlstremove_at(args, 0, free);
+	if (args->size == 0)
 		status = sc->last_status;
 	else
 		status = ft_validate(sc, args);
