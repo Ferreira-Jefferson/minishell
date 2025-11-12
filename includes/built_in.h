@@ -12,6 +12,7 @@ int		b_unset(t_shell_context *sc, t_dlist *args);
 int		b_pwd(t_shell_context *sc, t_dlist *args);
 int		b_cd(t_shell_context *sc, t_dlist *args);
 int		b_exit(t_shell_context *sc, t_dlist *args);
+int		b_set(t_shell_context *sc, char **content);
 
 // export_utils.c
 char	*sort_export(char *str_export);
