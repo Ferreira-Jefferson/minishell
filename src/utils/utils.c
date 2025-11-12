@@ -32,14 +32,16 @@ t_hash_table	*env_load(char **envp)
 char	*ft_str_toupper(char *str)
 {
 	int		i;
+	char	*str_aux;
 
+	str_aux = str_new(str);
 	i = 0;
-	while (str[i])
+	while (str_aux[i])
 	{
-		str[i] = ft_toupper(str[i]);
+		str_aux[i] = ft_toupper(str_aux[i]);
 		i++;
 	}
-	return (str);
+	return (str_aux);
 }
 
 void	ft_free_str_vector(char **str_vector)
@@ -70,15 +72,17 @@ char	*ft_create_content(t_dlist	*args)
 	return (content);
 }
 
-int	ft_print_error(char *content,  char *built, char *message, \
+int	ft_print_error(char *built, char *content, char *message, \
 	int status)
 {
 	char	*output;
 
 	output = str_new("bash: ");
 	output = str_cat(output, built);
-	output = str_cat(output, content);
 	output = str_cat(output, " ");
+	output = str_cat(output, content);
+	if (*content)
+		output = str_cat(output, ": ");
 	output = str_cat(output, message);
 	output = str_cat(output, "\n");
 	ft_putstr_fd(output, 2);

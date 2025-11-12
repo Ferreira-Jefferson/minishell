@@ -49,12 +49,13 @@ t_shell_context	*ft_setup_sc(char **envp)
 
 	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
 	sc->pid_ms = getpid();
-	sc->last_status = 0;
+	sc->ast_root = NULL;
 	sc->env = env_load(envp);
 	sc->env_copy = env_load(envp);
 	sc->pwd = ht_search(sc->env, "PWD");
 	sc->rl_prompt = NULL;
 	sc->fds = ft_dlstinit();
+	sc->last_status = 0;
 	return (sc);
 }
 

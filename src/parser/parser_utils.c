@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 10:00:31 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/03 14:49:30 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/12 11:50:09 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	free_node(void *data)
 {
 	t_node	*node;
 
-	if (!data)
-		return ;
 	node = (t_node *)data;
+	if (!node)
+		return ;
 	if (node->kind == NK_COMMAND)
 		free_cmd_node((t_cmd_node *)node);
 	else if (node->kind == NK_LIST \

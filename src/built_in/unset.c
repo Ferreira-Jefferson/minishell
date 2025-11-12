@@ -7,6 +7,9 @@ int	b_unset(t_shell_context *sc, t_dlist	*args)
 	node = malloc(sizeof(t_dnode));
 	if (!args)
 		return (1);
+	ft_dlstremove_at(args, 0, free);
+	if (args->size == 0)
+		return (0);
 	while (args->head)
 	{
 		node->content = str_new(args->head->content);
