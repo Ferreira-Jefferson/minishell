@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_env_to_array.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:25:54 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 18:14:57 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/13 13:24:42 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,17 @@ static int	parse_env(t_hash_table *hash_items, char **envp)
 		{
 			envp[j] = ft_strjoinv(NULL, 3, item->key, "=", item->value);
 			if (!envp[j])
+			{
+				while (j-- > 0)
+					free(envp[j]);
 				return (1);
+			}
 			j++;
 			item = item->next;
 		}
 		i++;
 	}
+	envp[j] = NULL;
 	return (0);
 }
 

@@ -1,22 +1,6 @@
 #include "expander.h"
 
-static int	is_valid_pattern(const char *pattern, char *target)
-{
-	if (ft_strcmp((char *)pattern, "*") == 0 && target[0] != '.')
-		return (1);
-	if (pattern[0] != '*' && pattern[0] != target[0])
-		return (0);
-	if (pattern[ft_strlen(pattern) - 1] != '*' && \
-		pattern[ft_strlen(pattern) - 1] != target[ft_strlen(target) - 1])
-		return (0);
-	if (pattern[0] != '.' && target[0] == '.')
-		return (0);
-	if (pattern[0] == '.' && target[0] != '.')
-		return (0);
-	return (1);
-}
-
-int	match_with_pattern(const char *pattern, char *target, int i, int j)
+static int	match_with_pattern(const char *pattern, char *target, int i, int j)
 {
 	if (!is_valid_pattern(pattern, target))
 		return (0);
@@ -44,14 +28,14 @@ int	match_with_pattern(const char *pattern, char *target, int i, int j)
 	return (1);
 }
 
-char	*handle_not_bar(char *pattern)
+static char	*ex_handler_wildcard(char *dir, char *pattern, int has_bar)
 {
 	DIR				*dirp;
 	struct dirent	*dire;
 	char			*all_file_name;
 
 	all_file_name = str_new("");
-	dirp = opendir(".");
+	dirp = opendir(dir);
 	while (dirp)
 	{
 		dire = readdir(dirp);
@@ -61,53 +45,87 @@ char	*handle_not_bar(char *pattern)
 		{
 			if (str_len(all_file_name))
 				all_file_name = str_cat(all_file_name, "\n");
+			if (has_bar)
+			{
+				all_file_name = str_cat(all_file_name, dir);
+				all_file_name = str_cat(all_file_name, "/");
+			}
 			all_file_name = str_cat(all_file_name, dire->d_name);
 		}
 	}
+	closedir(dirp);
 	return (sort_file_name(all_file_name, 0, 0));
 }
 
-char	*ex_handler_wildcard(t_shell_context *sc, char *pattern)
+static void ex_handle_sub_wildcard(char *prefix, char *content_aux, char *split_bar_one, char **result)
 {
-	DIR				*dirp;
-	struct dirent	*dire;
+	char	*ex_prefix;
+	char	**split_prefix;
+	char	*partial;
+	int		i;
 
-	(void) sc;
-	dire = NULL;
-	if (!ft_strchr(pattern, '/'))
-		return (handle_not_bar(pattern));
-	else
+	ex_prefix = ex_handler_wildcard(".", prefix, 0);
+	split_prefix = ft_split(ex_prefix, ' ');
+	if (!split_prefix)
+		return ;
+	i = 0;
+	while (split_prefix[i])
 	{
-		dirp = opendir(pattern);
-		closedir(dirp);
-		return (NULL);
+		content_aux = str_replace(content_aux, split_bar_one);
+		partial = ex_handler_wildcard(split_prefix[i], split_bar_one, 1);
+		*result = str_cat(*result, partial);
+		str_free(partial);
+		i++;
 	}
+	str_free(content_aux);
+	str_free(ex_prefix);
+	ft_free_str_vector(split_prefix);
+}
+
+static	void ex_list_paths(char **split_bar, char **new_str, char *content_aux)
+{
+	char	*prefix;
+	char	*result;
+
+	prefix = str_new("");
+	result = str_new("");
+	if (!split_bar[1])
+		result = ex_handler_wildcard(".", split_bar[0], 0);
+	else if (!split_bar[2])
+	{
+		prefix = str_cat(prefix, split_bar[0]);
+		if (ft_strchr(prefix, '*'))
+			ex_handle_sub_wildcard(prefix, content_aux, split_bar[1], &result);
+		else
+		{
+			content_aux = str_replace(content_aux, split_bar[1]);
+			result = ex_handler_wildcard(prefix, split_bar[1], 1);
+		}
+	}
+	*new_str = str_cat(*new_str, result);
+	str_free(prefix);
+	str_free(result);
 }
 
 void	ex_wildcard(t_shell_context *sc, char *content, \
 	char **new_str, int start_quotes)
 {
-	char	**content_split;
-	size_t	i;
+	char	*content_aux;
+	char	**split_bar;
 
-	if (start_quotes || ft_strchr(content, '/'))
+	(void) sc;
+	if (start_quotes || !ft_strchr(content, '*'))
 	{
-		*new_str = str_replace(*new_str, content);
+		*new_str = str_cat(*new_str, content);
 		return ;
 	}
-	remove_duplicated_wildcard(&content);
-	content_split = ft_split(content, ' ');
-	i = 0;
-	while (content_split[i])
-	{
-		if (str_len(*new_str))
-			*new_str = str_cat(*new_str, " ");
-		if (ft_strchr(content_split[i], '*'))
-			*new_str = str_cat(*new_str, \
-				ex_handler_wildcard(sc, content_split[i]));
-		else
-			*new_str = str_cat(*new_str, content_split[i]);
-		i++;
-	}
-	ft_free_str_vector(content_split);
+	content_aux = str_new(content);
+	remove_duplicated_wildcard(&content_aux);
+	split_bar = ft_split(content_aux, '/');
+	if (!split_bar)
+		return ;
+	ex_list_paths(split_bar, new_str, content_aux);
+	if (str_len(*new_str) == 0)
+		*new_str = str_cat(*new_str, content);
+	ft_free_str_vector(split_bar);
 }

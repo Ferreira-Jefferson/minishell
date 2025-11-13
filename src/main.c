@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/12 10:49:08 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/13 12:33:30 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// int	ft_event_hook(void)
-// {
-// 	if (get_g_signal_status() != 0)
-// 	{
-// 		write(1, "^C", 2);
-// 		rl_done = 1;
-// 		reset_g_signal_status();
-// 	}
-// 	return (0);
-// }
 
 int	ft_event_hook(void)
 {
@@ -37,7 +26,6 @@ int	main(int argc, char *argv[], char **envp)
 {
 	t_shell_context	*sc;
 	t_dlist			*tokens;
-	char			*input;
 
 	(void) argc;
 	(void) argv;
@@ -47,27 +35,25 @@ int	main(int argc, char *argv[], char **envp)
 	while (1)
 	{
 		ft_define_rl_prompt(sc);
-		input = readline(sc->rl_prompt);
+		sc->input = readline(sc->rl_prompt);
 		if (get_g_signal_status() != 0)
 			reset_g_signal_status();
-		else if (!input)
+		if (!sc->input)
 		{
-			free(input);
 			b_exit(sc, NULL);
 			return (0);
 		}
 		else
 		{
-			if (input[0] != '\0')
-				add_history(input);
-			tokens = tokenize(input, 0);
+			if (sc->input[0] != '\0')
+				add_history(sc->input);
+			tokens = tokenize(sc->input, 0);
 			sc->ast_root = parse_cmd_list(tokens);
-			executor(sc);
-			if (sc->ast_root)
-				free_node(sc->ast_root);
 			ft_dlstdestroy(&tokens, free_token);
+			executor(sc);
+			free_node(sc->ast_root);
+			sc->ast_root = NULL; 
 		}
-		free(input);
 	}
 	return (0);
 }

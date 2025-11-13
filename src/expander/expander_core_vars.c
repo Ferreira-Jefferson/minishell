@@ -1,6 +1,5 @@
 #include "expander.h"
 
-
 static int	ex_handler_vars(t_shell_context *sc, char *content, \
 	int index, char **new_str)
 {
@@ -34,19 +33,18 @@ void	ex_vars(t_shell_context *sc, char *content, \
 {
 	char	len;
 	size_t	index;
-	int		only_copy;
+	int		open_simple_quote;
 
-	only_copy = 0;
 	index = 0;
+	open_simple_quote = 0;
 	while (content[index])
 	{
 		len = 0;
-		if (content[index] == '\'' && only_copy)
-			only_copy = 0;
-		else if (index > 0 && content[index] == '$' \
-			&& content[index - 1] == '\'')
-			only_copy = 1;
-		else if (start_quotes != 1 && content[index] == '$' \
+		if (start_quotes != 2 && !open_simple_quote && content[index] == '\'')
+			open_simple_quote = 1;
+		else if (open_simple_quote && content[index] == '\'')
+			open_simple_quote = 0;
+		if (!open_simple_quote && start_quotes != 1 && content[index] == '$' \
 			&& content[index + 1] != '\0' \
 			&& !ft_isspace(content[index + 1]) \
 			&& content[index + 1] != '~')

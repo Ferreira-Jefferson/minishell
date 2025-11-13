@@ -43,18 +43,42 @@ void	ft_define_rl_prompt(t_shell_context *sc)
 	str_free(session_manager);
 }
 
+int	ft_getpid(void)
+{
+	DIR				*dirp;
+	struct dirent	*dire;
+	int				pid;
+
+	dirp = opendir("/proc/self/task");
+	if (!dirp)
+		return (0) ;	
+	dire = readdir(dirp);
+	if (!dire)
+		return (0) ;
+	while (dire)
+	{
+		if (ft_is_numeric(dire->d_name))
+			break ;
+		dire = readdir(dirp);
+	}
+	pid = ft_atoi(dire->d_name);
+	closedir(dirp);
+	return (pid);
+}
+
 t_shell_context	*ft_setup_sc(char **envp)
 {
 	t_shell_context	*sc;
 
 	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
-	sc->pid_ms = getpid();
-	sc->last_status = 0;
+	sc->pid_ms = ft_getpid();
+	sc->ast_root = NULL;
 	sc->env = env_load(envp);
 	sc->env_copy = env_load(envp);
 	sc->pwd = ht_search(sc->env, "PWD");
 	sc->rl_prompt = NULL;
 	sc->fds = ft_dlstinit();
+	sc->last_status = 0;
 	return (sc);
 }
 

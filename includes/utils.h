@@ -24,14 +24,15 @@ t_hash_table	*env_load(char **envp);
 char			*ft_str_toupper(char *str);
 void			ft_free_str_vector(char **str_vector);
 t_shell_context	*ft_setup_sc(char **envp);
-void			free_sc(t_shell_context	*sc);
 void			ft_define_rl_prompt(t_shell_context	*sc);
 char			*ft_create_content(t_dlist	*args);
-int				ft_print_error(char *content,  char *built, char *message, \
+int				ft_print_error(char *built, char *content, char *message, \
 	int status);
-// free_utils.c
-int		free_str(char *str, int val);
-void	free_arr(char **arr);
-int		free_ret(t_dlist **list, void *arg, void (*del)(void *), int ret);
+	
+	// free_utils.c
+int			free_str(char *str, int val);
+void		free_arr(char **arr);
+int			free_ret(t_dlist **list, void *arg, void (*del)(void *), int ret);
+void		free_sc(t_shell_context	*sc);
 
 #endif

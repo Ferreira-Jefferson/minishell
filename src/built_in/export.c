@@ -53,8 +53,7 @@ int	b_export(t_shell_context *sc, t_dlist *args)
 	(void) args;
 	ft_dlstremove_at(args, 0, free);
 	if (args->size == 0)
-		return (print_export(sc));
-	
+		return (print_export(sc));	
 
 	return (0);
 }

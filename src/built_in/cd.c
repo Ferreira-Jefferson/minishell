@@ -1,16 +1,5 @@
 #include "built_in.h"
 
-static int	ft_handler_error(t_shell_context *sc, char *message)
-{
-	sc->last_status = errno;
-	if (errno)
-	{
-		perror(message);
-		return (1);
-	}
-	return (0);
-}
-
 static void	ft_set_paths(t_shell_context *sc)
 {
 	char	*pwd;
@@ -35,9 +24,11 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 	char	*path;
 	char	*to_free;
 
-	//TODO: tratar [cd] volta pra home
-	ft_dlstremove_at(args, 0, free);
-	if (args->size == 0)
+	if (args->size  == 1)
+		ft_strlcpy(args->head->content, "~", ft_strlen(args->head->content));
+	else
+		ft_dlstremove_at(args, 0, free);
+	if (!args || args->size == 0)
 		return (0);
 	node = ft_dlstnew("");
 	node->content = ft_create_content(args);
@@ -50,5 +41,7 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 	free(path);
 	str_free(to_free);
 	ft_dlstdelone(node, free);
-	return (ft_handler_error(sc, "cd"));
+	if (errno != 0)
+		return (ft_print_error("cd:", node->content, strerror(errno), 1));
+	return (0);
 }

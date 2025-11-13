@@ -32,14 +32,16 @@ int	ft_validate(t_shell_context *sc, t_dlist *args)
 int	b_exit(t_shell_context *sc, t_dlist	*args)
 {
 	int	status;
-
 	if (!args)
-		return (1);
-	ft_dlstremove_at(args, 0, free);
-	if (args->size == 0)
 		status = sc->last_status;
 	else
-		status = ft_validate(sc, args);
+	{
+		ft_dlstremove_at(args, 0, free);
+		if (args->size == 0)
+			status = sc->last_status;
+		else
+			status = ft_validate(sc, args);
+	}
 	free_sc(sc);
 	printf("exit\n");
 	exit(status);
