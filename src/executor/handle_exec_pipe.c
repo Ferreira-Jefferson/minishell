@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 10:32:08 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 10:27:08 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:18:40 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 static void parent_process_update(t_pipe_data *data, t_dnode *curr, int *pipefd)
 {
 	if (data->input_fd != STDIN_FILENO)
+	{
 		close(data->input_fd);
+		data->input_fd = STDIN_FILENO;
+	}
 	if (curr->next)
 	{
 		close(pipefd[1]);

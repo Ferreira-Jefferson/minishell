@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   handle_traveler_subshell.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 08:49:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 15:48:15 by joaolive         ###   ########.fr       */
+/*   Created: 2025/11/12 15:23:28 by joaolive          #+#    #+#             */
+/*   Updated: 2025/11/12 15:28:21 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-int	print_error(char *s1, char *s2, int fd)
+int	handle_traveler_subshell(t_node *node, t_shell_context *context)
 {
-	ft_putstr_fd(s1, fd);
-	ft_putchar_fd(':', fd);
-	ft_putchar_fd(' ',fd);
-	ft_putendl_fd(s2, fd);
-	return (1);
-}
+	t_sub_node	*sub_node;
+	int			status;
 
-int	print_here_error(char *s1, int fd)
-{
-	ft_putstr_fd("minishell: warning: here-document at line 2 delimited by end-of-file (wanted `", fd);
-	ft_putstr_fd(s1, fd);
-	ft_putendl_fd("')",fd);
-	return (1);
+	sub_node = (t_sub_node *)node;
+	status = traveler_handler(sub_node->sub_ast, context);
+	return (status);
 }

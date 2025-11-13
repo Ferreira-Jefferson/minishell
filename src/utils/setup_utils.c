@@ -74,5 +74,6 @@ void	free_sc(t_shell_context	*sc)
 	str_free(sc->rl_prompt);
 	free_node(sc->ast_root);
 	ft_dlstdestroy(&sc->fds, ft_del_fds);
+	ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
 	free(sc);
 }
