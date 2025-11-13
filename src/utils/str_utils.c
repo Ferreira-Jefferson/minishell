@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:50:37 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/10 09:26:13 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:46:14 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char	*str_replace(char *buf, const char *str)
 {
 	if (!buf)
 		return (NULL);
+	if (!str)
+		return (buf);
 	str_free(buf);
 	return (str_new(str));
 }

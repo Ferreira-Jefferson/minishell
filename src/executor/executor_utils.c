@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 08:47:28 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 15:13:05 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:27:51 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ char	**copy_args(t_dlist *lst)
 
 bool	is_builtin(const char *cmd)
 {
-	if (!ft_strncmp(cmd, "echo", 5) || !ft_strncmp(cmd, "cd", 3)
-		|| !ft_strncmp(cmd, "pwd", 4) || !ft_strncmp(cmd, "export", 7)
-		|| !ft_strncmp(cmd, "unset", 6) || !ft_strncmp(cmd, "env", 4)
-		|| !ft_strncmp(cmd, "exit", 5))
+	if (!cmd)
+		return (false);
+	if (!ft_strcmp((char *)cmd, "echo") || !ft_strcmp((char *)cmd, "cd")
+		|| !ft_strcmp((char *)cmd, "pwd") || !ft_strcmp((char *)cmd, "export")
+		|| !ft_strcmp((char *)cmd, "unset") || !ft_strcmp((char *)cmd, "env")
+		|| !ft_strcmp((char *)cmd, "exit"))
 		return (true);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 09:35:54 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:30:55 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char *argv[], char **envp)
 {
 	t_shell_context	*sc;
 	t_dlist			*tokens;
-	char			*input;
 
 	(void) argc;
 	(void) argv;
@@ -36,27 +35,24 @@ int	main(int argc, char *argv[], char **envp)
 	while (1)
 	{
 		ft_define_rl_prompt(sc);
-		input = readline(sc->rl_prompt);
+		sc->input = readline(sc->rl_prompt);
 		if (get_g_signal_status() != 0)
 			reset_g_signal_status();
-		if (!input)
+		if (!sc->input)
 		{
-			free(input);
 			b_exit(sc, NULL);
 			return (0);
 		}
 		else
 		{
-			if (input[0] != '\0')
-				add_history(input);
-			tokens = tokenize(input, 0);
+			if (sc->input[0] != '\0')
+				add_history(sc->input);
+			tokens = tokenize(sc->input, 0);
 			sc->ast_root = parse_cmd_list(tokens);
-			executor(sc);
-			if (sc->ast_root)
-				free_node(sc->ast_root);
 			ft_dlstdestroy(&tokens, free_token);
+			executor(sc);
+			free_node(sc->ast_root);
 		}
-		free(input);
 	}
 	return (0);
 }
