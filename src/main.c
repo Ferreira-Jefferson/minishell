@@ -6,22 +6,11 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/12 13:32:04 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 09:08:08 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// int	ft_event_hook(void)
-// {
-// 	if (get_g_signal_status() != 0)
-// 	{
-// 		write(1, "^C", 2);
-// 		rl_done = 1;
-// 		reset_g_signal_status();
-// 	}
-// 	return (0);
-// }
 
 int	ft_event_hook(void)
 {

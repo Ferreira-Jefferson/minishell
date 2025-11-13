@@ -27,5 +27,5 @@ char	*sort_file_name(char *all_file_name, int i, int j);
 int		wild_in_start(char *str);
 char	*join_file_name(char **split, char *all_file_name);
 int		count_quotes(char *content, char quote);
-
+int		is_valid_pattern(const char *pattern, char *target);
 #endif

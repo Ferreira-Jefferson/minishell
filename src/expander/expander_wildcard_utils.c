@@ -77,3 +77,19 @@ void	remove_duplicated_wildcard(char **content)
 		*content = str_cat(str_clear(*content), new_str);
 	free(new_str);
 }
+
+int	is_valid_pattern(const char *pattern, char *target)
+{
+	if (ft_strcmp((char *)pattern, "*") == 0 && target[0] != '.')
+		return (1);
+	if (pattern[0] != '*' && pattern[0] != target[0])
+		return (0);
+	if (pattern[ft_strlen(pattern) - 1] != '*' && \
+		pattern[ft_strlen(pattern) - 1] != target[ft_strlen(target) - 1])
+		return (0);
+	if (pattern[0] != '.' && target[0] == '.')
+		return (0);
+	if (pattern[0] == '.' && target[0] != '.')
+		return (0);
+	return (1);
+}
