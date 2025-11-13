@@ -61,17 +61,23 @@ static void ex_handle_sub_wildcard(char *prefix, char *content_aux, char *split_
 {
 	char	*ex_prefix;
 	char	**split_prefix;
+	char	*partial;
+	int		i;
 
 	ex_prefix = ex_handler_wildcard(".", prefix, 0);
 	split_prefix = ft_split(ex_prefix, ' ');
 	if (!split_prefix)
 		return ;
-	while (*split_prefix)
+	i = 0;
+	while (split_prefix[i])
 	{
 		content_aux = str_replace(content_aux, split_bar_one);
-		*result = str_cat(*result, ex_handler_wildcard(*split_prefix, split_bar_one, 1));
-		split_prefix++;
+		partial = ex_handler_wildcard(split_prefix[i], split_bar_one, 1);
+		*result = str_cat(*result, partial);
+		str_free(partial);
+		i++;
 	}
+	str_free(content_aux);
 	str_free(ex_prefix);
 	ft_free_str_vector(split_prefix);
 }
@@ -121,6 +127,5 @@ void	ex_wildcard(t_shell_context *sc, char *content, \
 	ex_list_paths(split_bar, new_str, content_aux);
 	if (str_len(*new_str) == 0)
 		*new_str = str_cat(*new_str, content);
-	str_free(content_aux);
 	ft_free_str_vector(split_bar);
 }

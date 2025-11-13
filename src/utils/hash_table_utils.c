@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash_table_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/13 13:02:56 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/13 13:10:08 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 unsigned long	hash_djb2(char *str)
@@ -54,7 +66,6 @@ void	ht_print(t_hash_table *table)
 	if (!table)
 		return ;
 	i = 0;
-	i = 0;
 	while (i < table->size)
 	{
 		if (table->items[i])
@@ -65,7 +76,6 @@ void	ht_print(t_hash_table *table)
 				printf("[%d]: {%s: %s}\n", i, env_item->key, env_item->value);
 				env_item = env_item->next;
 			}
-			free(env_item);
 		}
 		i++;
 	}

@@ -52,6 +52,5 @@ int	b_set(t_shell_context *sc, char **content)
 		return (1);
 	}
 	set_var(sc, content);
-	exit (0);
 	return (0);
 }

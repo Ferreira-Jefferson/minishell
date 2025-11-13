@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/12 14:43:37 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 13:34:52 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,11 @@ static int	execute_execve(char **argv, t_shell_context *context)
 		return (free_str(path, 1));
 	}
 	if (pid == 0)
+	{
 		handle_not_built_in(context, argv, envp, path);
+		free_arr(envp);
+		free(path);
+	}
 	else
 	{
 		status = parent_wait_task(pid);
@@ -120,18 +124,16 @@ int	handle_exec_cmd(t_node *node, t_shell_context *context)
 
 	cmd_node = (t_cmd_node *)node;
 	std_bak[0] = dup(STDIN_FILENO);
-	if (std_bak[0] == -1)
-		return (1);
 	std_bak[1] = dup(STDOUT_FILENO);
-	if (std_bak[1] == -1)
-	{
-		close(std_bak[0]);
+	if (std_bak[0] == -1 || std_bak[1] == -1)
 		return (1);
-	}
 	if (ft_dlstforeach(cmd_node->redirections, apply_redir))
-		return (reset_close_fd(std_bak, 1));
-	if (!cmd_node->args || !cmd_node->args->size)
-		return (reset_close_fd(std_bak, 0));
-	status = execute_cmd(cmd_node->args, context);
-	return (reset_close_fd(std_bak, status));
+		status = 1;
+	else if (!cmd_node->args || !cmd_node->args->size)
+		status = 0;
+	else
+		status = execute_cmd(cmd_node->args, context);
+	reset_close_fd(std_bak, 0);
+	return (status);
 }
+

@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 11:30:55 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 12:33:30 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int argc, char *argv[], char **envp)
 			ft_dlstdestroy(&tokens, free_token);
 			executor(sc);
 			free_node(sc->ast_root);
+			sc->ast_root = NULL; 
 		}
 	}
 	return (0);

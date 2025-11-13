@@ -27,6 +27,7 @@ char	*sort_file_name(char *all_file_name, int i, int j)
 {
 	char	**split;
 	char	*tmp;
+	char	*str_aux[2];
 
 	split = ft_split(all_file_name, '\n');
 	while (split[i])
@@ -34,14 +35,18 @@ char	*sort_file_name(char *all_file_name, int i, int j)
 		j = i + 1;
 		while (split[j])
 		{
-			if (ft_strcmp(ft_str_toupper(split[i]) + wild_in_start(split[i]), \
-				ft_str_toupper(split[j]) + wild_in_start(split[j])) > 0)
+			str_aux[0] = ft_str_toupper(split[i]);
+			str_aux[1] = ft_str_toupper(split[j]);
+			if (ft_strcmp(str_aux[0] + wild_in_start(split[i]), \
+				str_aux[1] + wild_in_start(split[j])) > 0)
 			{
 				tmp = split[i];
 				split[i] = split[j];
 				split[j] = tmp;
 			}
 			j++;
+			str_free(str_aux[0]);
+			str_free(str_aux[1]);
 		}
 		i++;
 	}

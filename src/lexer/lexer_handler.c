@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:23:05 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 11:05:06 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 12:12:10 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ t_token	*handle_word(const char *input, int *i)
 {
 	int		start;
 	char	quotes;
-	char	*lexen;
-	t_token	*token;
 
 	start = *i;
 	while (input[*i] && !ft_isspace(input[*i])
@@ -56,10 +54,7 @@ t_token	*handle_word(const char *input, int *i)
 		else
 			(*i)++;
 	}
-	lexen = ft_substr(input, start, *i - start);
-	token = new_token(TK_WORD, lexen);
-	free(lexen);
-	return (token);
+	return (new_token(TK_WORD, ft_substr(input, start, *i - start)));
 }
 
 t_token	*handle_list(const char *input, int *i)

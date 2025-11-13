@@ -26,6 +26,10 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 
 	if (args->size  == 1)
 		ft_strlcpy(args->head->content, "~", ft_strlen(args->head->content));
+	else
+		ft_dlstremove_at(args, 0, free);
+	if (!args || args->size == 0)
+		return (0);
 	node = ft_dlstnew("");
 	node->content = ft_create_content(args);
 	to_free = node->content;
