@@ -53,6 +53,7 @@ static char	*ex_handler_wildcard(char *dir, char *pattern, int has_bar)
 			all_file_name = str_cat(all_file_name, dire->d_name);
 		}
 	}
+	closedir(dirp);
 	return (sort_file_name(all_file_name, 0, 0));
 }
 

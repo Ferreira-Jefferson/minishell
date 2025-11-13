@@ -43,12 +43,35 @@ void	ft_define_rl_prompt(t_shell_context *sc)
 	str_free(session_manager);
 }
 
+int	ft_getpid(void)
+{
+	DIR				*dirp;
+	struct dirent	*dire;
+	int				pid;
+
+	dirp = opendir("/proc/self/task");
+	if (!dirp)
+		return (0) ;	
+	dire = readdir(dirp);
+	if (!dire)
+		return (0) ;
+	while (dire)
+	{
+		if (ft_is_numeric(dire->d_name))
+			break ;
+		dire = readdir(dirp);
+	}
+	pid = ft_atoi(dire->d_name);
+	closedir(dirp);
+	return (pid);
+}
+
 t_shell_context	*ft_setup_sc(char **envp)
 {
 	t_shell_context	*sc;
 
 	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
-	sc->pid_ms = getpid();
+	sc->pid_ms = ft_getpid();
 	sc->ast_root = NULL;
 	sc->env = env_load(envp);
 	sc->env_copy = env_load(envp);
@@ -59,21 +82,3 @@ t_shell_context	*ft_setup_sc(char **envp)
 	return (sc);
 }
 
-void	ft_del_fds(void *fd)
-{
-	int	*fd_value;
-
-	fd_value = (int *)fd;
-	close(*fd_value);
-}
-
-void	free_sc(t_shell_context	*sc)
-{
-	ht_free(sc->env);
-	ht_free(sc->env_copy);
-	str_free(sc->pwd);
-	str_free(sc->rl_prompt);
-	free_node(sc->ast_root);
-	ft_dlstdestroy(&sc->fds, ft_del_fds);
-	free(sc);
-}
