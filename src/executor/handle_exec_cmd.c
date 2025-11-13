@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 17:03:59 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 18:05:06 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	apply_redir(void *data)
 	if (redir->kind == RK_OUTPUT || redir->kind == RK_APPEND)
 	{
 		if (redir->kind == RK_OUTPUT)
-			file_fd = open(redir->filename, O_WRONLY | O_CREAT |O_TRUNC);
+			file_fd = open(redir->filename, O_WRONLY | O_CREAT |O_TRUNC, 0644);
 		else
-			file_fd = open(redir->filename, O_WRONLY | O_CREAT |O_APPEND);
+			file_fd = open(redir->filename, O_WRONLY | O_CREAT |O_APPEND, 0644);
 		std_input = STDOUT_FILENO;
 	}
 	if (file_fd == -1)

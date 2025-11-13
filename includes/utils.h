@@ -5,7 +5,7 @@ typedef struct s_node 	t_node;
 
 typedef struct s_shell_context
 {
-	char			*rl_prompt;			 
+	char			*rl_prompt;
 	char			*input;
 	t_dlist			*fds;
 	t_node			*ast_root;		 // Raiz da árvore sintática
@@ -16,6 +16,7 @@ typedef struct s_shell_context
 	int				is_interactive;  // Modo interativo ou script
 	int				should_exit;	 // Flag para encerrar o shell
 	int				pid_ms;			 // pid do minishell inicial
+	t_dlist			*heredoc_files;
 	int				last_status;	 // last status code
 }	t_shell_context;
 
