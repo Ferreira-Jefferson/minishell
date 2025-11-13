@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   traveler_handle.c                                  :+:      :+:    :+:   */
+/*   traveler_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:29:15 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/12 15:08:37 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/13 19:03:28 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	traveler_handler(t_node *node, t_shell_context *context)
 	};
 
 	if (!node)
-		return (0);
+		return (1);
 	handler = traveler_table[node->kind];
 	return (handler(node, context));
 }

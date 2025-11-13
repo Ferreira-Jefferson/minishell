@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 16:24:31 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 19:09:30 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ int	main(int argc, char *argv[], char **envp)
 				add_history(sc->input);
 			tokens = tokenize(sc->input, 0);
 			sc->ast_root = parse_cmd_list(tokens);
+			if (!traveler_handler(sc->ast_root, sc))
+				executor(sc);
+			ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
 			ft_dlstdestroy(&tokens, free_token);
-			executor(sc);
 			free_node(sc->ast_root);
-			sc->ast_root = NULL; 
+			sc->ast_root = NULL;
 		}
 	}
 	return (0);

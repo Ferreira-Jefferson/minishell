@@ -51,7 +51,7 @@ int	ft_getpid(void)
 
 	dirp = opendir("/proc/self/task");
 	if (!dirp)
-		return (0) ;	
+		return (0) ;
 	dire = readdir(dirp);
 	if (!dire)
 		return (0) ;
@@ -78,26 +78,8 @@ t_shell_context	*ft_setup_sc(char **envp)
 	sc->pwd = ht_search(sc->env, "PWD");
 	sc->rl_prompt = NULL;
 	sc->fds = ft_dlstinit();
+	sc->heredoc_files = ft_dlstinit();
 	sc->last_status = 0;
 	return (sc);
 }
 
-void	ft_del_fds(void *fd)
-{
-	int	*fd_value;
-
-	fd_value = (int *)fd;
-	close(*fd_value);
-}
-
-void	free_sc(t_shell_context	*sc)
-{
-	ht_free(sc->env);
-	ht_free(sc->env_copy);
-	str_free(sc->pwd);
-	str_free(sc->rl_prompt);
-	free_node(sc->ast_root);
-	ft_dlstdestroy(&sc->fds, ft_del_fds);
-	ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
-	free(sc);
-}
