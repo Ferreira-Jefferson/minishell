@@ -14,6 +14,7 @@ EXPANDER_DIR   = $(SRC_DIR)/expander
 BUILT_IN_DIR   = $(SRC_DIR)/built_in
 EXECUTOR_DIR   = $(SRC_DIR)/executor
 EXECUTOR_UTILS_DIR   = $(EXECUTOR_DIR)/utils
+EXECUTOR_HEREDOC_DIR   = $(EXECUTOR_DIR)/heredoc
 
 LIB_DIR	 = lib/libft
 INCLUDES	= includes
@@ -31,7 +32,8 @@ BUILT_IN_SRC  = env.c export.c echo.c unset.c set_export.c cd.c exit.c pwd.c set
 EXECUTOR_SRC = executor_utils.c executor.c handle_exec_and.c handle_exec_cmd.c handle_exec_list.c handle_exec_or.c \
 				handle_exec_pipe.c handle_exec_subshell.c
 EXECUTOR_UTILS_SRC =  child_task.c convert_env_to_array.c find_command_path.c parent_wait_task.c print_error.c
-
+EXECUTOR_HEREDOC_SRC = del_heredoc_files.c gen_filename.c  handle_traveler_and.c handle_traveler_cmd.c handle_traveler_list.c \
+						handle_traveler_or.c handle_traveler_pipe.c handle_traveler_subshell.c traveler_handler.c
 
 MANDATORY_SRC_FULL = $(addprefix $(SRC_DIR)/, $(MANDATORY_SRC))
 UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))
@@ -41,6 +43,7 @@ EXPANDER_SRC_FULL = $(addprefix $(EXPANDER_DIR)/, $(EXPANDER_SRC))
 BUILT_IN_SRC_FULL = $(addprefix $(BUILT_IN_DIR)/, $(BUILT_IN_SRC))
 EXECUTOR_SRC_FULL = $(addprefix $(EXECUTOR_DIR)/, $(EXECUTOR_SRC))
 EXECUTOR_UTILS_SRC_FULL = $(addprefix $(EXECUTOR_UTILS_DIR)/, $(EXECUTOR_UTILS_SRC))
+EXECUTOR_HEREDOC_SRC_FULL = $(addprefix $(EXECUTOR_HEREDOC_DIR)/, $(EXECUTOR_HEREDOC_SRC))
 
 MANDATORY_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(MANDATORY_SRC_FULL:.c=.o)))
 UTILS_OBJ	 = $(addprefix $(OBJ_DIR)/, $(notdir $(UTILS_SRC_FULL:.c=.o)))
@@ -50,9 +53,10 @@ EXPANDER_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(EXPANDER_SRC_FULL:.c=.o)))
 BUILT_IN_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(BUILT_IN_SRC_FULL:.c=.o)))
 EXECUTOR_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(EXECUTOR_SRC_FULL:.c=.o)))
 EXECUTOR_UTILS_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(EXECUTOR_UTILS_SRC_FULL:.c=.o)))
+EXECUTOR_HEREDOC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(EXECUTOR_HEREDOC_SRC_FULL:.c=.o)))
 
-vpath %.c $(SRC_DIR) $(UTILS_DIR) $(LEXER_DIR) $(PARSER_DIR) $(EXPANDER_DIR) $(BUILT_IN_DIR) $(EXECUTOR_DIR) $(EXECUTOR_UTILS_DIR)
-OBJS = $(MANDATORY_OBJ) $(UTILS_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXPANDER_OBJ) $(BUILT_IN_OBJ) $(EXECUTOR_OBJ) $(EXECUTOR_UTILS_OBJ)
+vpath %.c $(SRC_DIR) $(UTILS_DIR) $(LEXER_DIR) $(PARSER_DIR) $(EXPANDER_DIR) $(BUILT_IN_DIR) $(EXECUTOR_DIR) $(EXECUTOR_UTILS_DIR) $(EXECUTOR_HEREDOC_DIR)
+OBJS = $(MANDATORY_OBJ) $(UTILS_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXPANDER_OBJ) $(BUILT_IN_OBJ) $(EXECUTOR_OBJ) $(EXECUTOR_UTILS_OBJ) $(EXECUTOR_HEREDOC_OBJ)
 
 all: $(NAME)
 
@@ -78,13 +82,12 @@ fclean: clean
 re: fclean all
 
 run: all
-	valgrind --suppressions=readline.sup --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishell
+	valgrind --suppressions=readline.sup --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishells
 
 asan: CFLAGS += $(SAN_FLAGS)
 asan: fclean $(NAME)
 	@mv $(NAME) $(NAME)_asan
 	@echo "\033[1;32m[OK]\033[0m Executando com sanitizers...\n"
 	$(ASAN_ENV) ./$(NAME)_asan
-
 
 .PHONY: all clean fclean re run asan
