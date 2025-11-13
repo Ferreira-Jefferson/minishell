@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:54:54 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/11 16:35:44 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:55:35 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		handle_exec_list(t_node *node, t_shell_context *context);
 int		handle_exec_and(t_node *node, t_shell_context *context);
 int		handle_exec_or(t_node *node, t_shell_context *context);
 int		handle_exec_subshell(t_node *node, t_shell_context *context);
-void	child_task(char *path, char **argv, char **envp);
+void	child_task(char *path, char **argv, char **envp, t_shell_context *sc);
 char	**convert_env_to_array(t_hash_table *hash_items);
 char	*find_command_path(t_hash_table *env, char *cmd);
 int		parent_wait_task(pid_t pid);

@@ -29,7 +29,7 @@ int	ft_validate(t_shell_context *sc, t_dlist *args)
 	return (status);	
 }
 
-int	b_exit(t_shell_context *sc, t_dlist	*args)
+int	b_exit(t_shell_context *sc, t_dlist	*args, int print)
 {
 	int	status;
 	if (!args)
@@ -43,7 +43,8 @@ int	b_exit(t_shell_context *sc, t_dlist	*args)
 			status = ft_validate(sc, args);
 	}
 	free_sc(sc);
-	printf("exit\n");
+	if (print)
+		printf("exit\n");
 	exit(status);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 13:34:52 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:03:59 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,6 @@ static int	apply_redir(void *data)
 	close(file_fd);
 	return (0);
 }
-
-static void	handle_not_built_in(t_shell_context *context, char **argv, char **envp, char *path)
-{
-	if (b_set(context, argv) == 0)
-		return ;
-	child_task(path, argv, envp);
-}
 	
 static int	execute_builtin(t_dlist *args, t_shell_context *context)
 {
@@ -64,8 +57,8 @@ static int	execute_builtin(t_dlist *args, t_shell_context *context)
 	if (!ft_strcmp((char *)args->head->content, "env"))
 		return (b_env(context, args));
 	if (!ft_strcmp((char *)args->head->content, "exit"))
-		return (b_exit(context, args));
-	return (1);
+		return (b_exit(context, args, 1));
+	return (b_set(context, args));
 }
 
 static int	execute_execve(char **argv, t_shell_context *context)
@@ -87,11 +80,7 @@ static int	execute_execve(char **argv, t_shell_context *context)
 		return (free_str(path, 1));
 	}
 	if (pid == 0)
-	{
-		handle_not_built_in(context, argv, envp, path);
-		free_arr(envp);
-		free(path);
-	}
+		child_task(path, argv, envp, context);
 	else
 	{
 		status = parent_wait_task(pid);

@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 08:47:28 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 11:27:51 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:06:52 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	is_builtin(const char *cmd)
 	if (!ft_strcmp((char *)cmd, "echo") || !ft_strcmp((char *)cmd, "cd")
 		|| !ft_strcmp((char *)cmd, "pwd") || !ft_strcmp((char *)cmd, "export")
 		|| !ft_strcmp((char *)cmd, "unset") || !ft_strcmp((char *)cmd, "env")
-		|| !ft_strcmp((char *)cmd, "exit"))
+		|| !ft_strcmp((char *)cmd, "exit") || ft_strchr((char *)cmd, '='))
 		return (true);
 	return (false);
 }

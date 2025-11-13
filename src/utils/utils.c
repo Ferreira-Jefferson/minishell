@@ -60,15 +60,22 @@ void	ft_free_str_vector(char **str_vector)
 char	*ft_create_content(t_dlist	*args)
 {
 	char	*content;
+	t_dnode	*node;
+	t_dnode	*head;
 
+	if (!args)
+		return (NULL);
+	head = args->head;
+	node = args->head;
 	content = str_new("");
-	while (args && args->head)
+	while (node)
 	{
-		content = str_cat(content, args->head->content);
-		if (args->head->next)
+		content = str_cat(content, node->content);
+		if (node->next)
 			content = str_cat(content, " ");
-		args->head = args->head->next;
+		node = node->next;
 	}
+	args->head = head;
 	return (content);
 }
 

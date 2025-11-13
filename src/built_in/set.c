@@ -27,30 +27,46 @@ char *validate_set(char **split)
 	while (*split)
 	{
 		if (!ft_strchr(*split, '='))
-			return (str_new(*split));
+			return (*split);
 		split++;
 	}
 	return (NULL);
 }
 
-int	b_set(t_shell_context *sc, char **content)
+int	b_set(t_shell_context *sc, t_dlist *args)
 {
 	char *ret;
-	char *tmp;
+	t_dnode	*node;
+	char	**content;
+	char	*to_free;
 
-	if (!content)
-		return (0);
+	if (!args || args->size == 0)
+		return (1);
+	node = ft_dlstnew("");
+	node->content = ft_create_content(args);
+	to_free = node->content;
+	expander(sc, node);
+	str_free(to_free);
+	content = ft_split(node->content, ' ');
+	free(node->content);
+	free(node);
 	ret = validate_set(content);
+	printf("ret: %s\n", ret);
 	if (ret != NULL)
 	{
-		tmp = content[0];
-		content[0] = str_clear(content[0]);
-		content[0] = str_cat(content[0], ret);
-		content[1] = str_clear(content[1]);
-		content[1] = str_cat(content[1], tmp);
-		str_free(ret);
+		if (args->size > 1)
+		{
+			if (args->head)
+			{
+				to_free = args->head->content;
+				args->head->content = ret;
+				free(to_free);
+			}
+		}
+		ft_free_str_vector(content);
 		return (1);
 	}
 	set_var(sc, content);
+	ft_free_str_vector(content);
 	return (0);
 }
