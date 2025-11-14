@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 16:24:31 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 18:44:05 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	main(int argc, char *argv[], char **envp)
 			tokens = tokenize(sc->input, 0);
 			sc->ast_root = parse_cmd_list(tokens);
 			ft_dlstdestroy(&tokens, free_token);
-			executor(sc);
+			if (traveler_handler(sc->ast_root, sc))
+				executor(sc);
 			free_node(sc->ast_root);
 			sc->ast_root = NULL; 
 		}

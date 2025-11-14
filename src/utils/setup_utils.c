@@ -71,6 +71,7 @@ t_shell_context	*ft_setup_sc(char **envp)
 	t_shell_context	*sc;
 
 	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
+	sc->input = NULL;
 	sc->pid_ms = ft_getpid();
 	sc->ast_root = NULL;
 	sc->env = env_load(envp);
@@ -80,24 +81,4 @@ t_shell_context	*ft_setup_sc(char **envp)
 	sc->fds = ft_dlstinit();
 	sc->last_status = 0;
 	return (sc);
-}
-
-void	ft_del_fds(void *fd)
-{
-	int	*fd_value;
-
-	fd_value = (int *)fd;
-	close(*fd_value);
-}
-
-void	free_sc(t_shell_context	*sc)
-{
-	ht_free(sc->env);
-	ht_free(sc->env_copy);
-	str_free(sc->pwd);
-	str_free(sc->rl_prompt);
-	free_node(sc->ast_root);
-	ft_dlstdestroy(&sc->fds, ft_del_fds);
-	ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
-	free(sc);
 }

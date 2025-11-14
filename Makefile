@@ -82,7 +82,7 @@ fclean: clean
 re: fclean all
 
 run: all
-	valgrind --suppressions=readline.sup --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishells
+	valgrind --suppressions=readline.sup --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishell
 
 asan: CFLAGS += $(SAN_FLAGS)
 asan: fclean $(NAME)

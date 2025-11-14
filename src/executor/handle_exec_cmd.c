@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 18:05:06 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/13 18:27:25 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ static int	execute_builtin(t_dlist *args, t_shell_context *context)
 		return (b_env(context, args));
 	if (!ft_strcmp((char *)args->head->content, "exit"))
 		return (b_exit(context, args, 1));
-	return (b_set(context, args));
+	if (b_set(context, args))
+		return (2);
+	return (0);
 }
 
 static int	execute_execve(char **argv, t_shell_context *context)
@@ -96,7 +98,10 @@ static int	execute_cmd(t_dlist *lst, t_shell_context *context)
 	int		status;
 
 	if (is_builtin((const char *)lst->head->content))
-		return (execute_builtin(lst, context));
+	{
+		if (execute_builtin(lst, context) != 2)
+			return (1);
+	}
 	argv = copy_args(lst);
 	if (!argv)
 		return (1);

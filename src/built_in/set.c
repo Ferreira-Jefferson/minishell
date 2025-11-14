@@ -37,21 +37,19 @@ int	b_set(t_shell_context *sc, t_dlist *args)
 {
 	char *ret;
 	t_dnode	*node;
-	char	**content;
+	char	**content_split;
 	char	*to_free;
+	char	*content;
 
 	if (!args || args->size == 0)
 		return (1);
-	node = ft_dlstnew("");
-	node->content = ft_create_content(args);
-	to_free = node->content;
+	content = ft_create_content(args);
+	node = ft_dlstnew(content);
 	expander(sc, node);
-	str_free(to_free);
-	content = ft_split(node->content, ' ');
-	free(node->content);
+	content_split = ft_split(content, ' ');
+	str_free(content);
 	free(node);
-	ret = validate_set(content);
-	printf("ret: %s\n", ret);
+	ret = validate_set(content_split);
 	if (ret != NULL)
 	{
 		if (args->size > 1)
@@ -63,10 +61,9 @@ int	b_set(t_shell_context *sc, t_dlist *args)
 				free(to_free);
 			}
 		}
-		ft_free_str_vector(content);
 		return (1);
 	}
-	set_var(sc, content);
-	ft_free_str_vector(content);
+	set_var(sc, content_split);
+	ft_free_str_vector(content_split);
 	return (0);
 }
