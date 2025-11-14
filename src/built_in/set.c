@@ -36,12 +36,28 @@ char *validate_set(char **split)
 	return (NULL);
 }
 
+static void ft_handler_cmd_not_found(t_dlist *args,char *ret, \
+	char	**content_split)
+{
+	char	*to_free;
+
+	if (args->size > 1)
+	{
+		if (args->head)
+		{
+			to_free = args->head->content;
+			args->head->content = ft_strdup(ret);
+			free(to_free);
+		}
+	}
+	ft_free_str_vector(content_split);  
+}
+
 int	b_set(t_shell_context *sc, t_dlist *args)
 {
 	char *ret;
 	t_dnode	*node;
 	char	**content_split;
-	char	*to_free;
 	char	*content;
 
 	if (!args || args->size == 0)
@@ -55,16 +71,7 @@ int	b_set(t_shell_context *sc, t_dlist *args)
 	ret = validate_set(content_split);
 	if (ret != NULL)
 	{
-		if (args->size > 1)
-		{
-			if (args->head)
-			{
-				to_free = args->head->content;
-				args->head->content = ft_strdup(ret);
-				free(to_free);
-			}
-		}
-		ft_free_str_vector(content_split);  
+		ft_handler_cmd_not_found(args, ret, content_split);
 		return (1);
 	}
 	set_var(sc, content_split);
