@@ -87,8 +87,8 @@ static	void ex_list_paths(char **split_bar, char **new_str, char *content_aux)
 	char	*prefix;
 	char	*result;
 
-	prefix = str_new("");
 	result = str_new("");
+	prefix = str_new("");
 	if (!split_bar[1])
 		result = ex_handler_wildcard(".", split_bar[0], 0);
 	else if (!split_bar[2])
@@ -99,7 +99,7 @@ static	void ex_list_paths(char **split_bar, char **new_str, char *content_aux)
 		else
 		{
 			content_aux = str_replace(content_aux, split_bar[1]);
-			result = ex_handler_wildcard(prefix, split_bar[1], 1);
+			result = str_cat(result, ex_handler_wildcard(prefix, split_bar[1], 1));
 		}
 	}
 	*new_str = str_cat(*new_str, result);

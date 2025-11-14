@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:08:18 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 09:08:50 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:06:44 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 	node->content = ft_create_content(args);
 	to_free = node->content;
 	expander(sc, node);
+	str_free(to_free);
 	path = ft_strtrim(node->content, " 	");
 	status = chdir(path);
 	if (status == 0)
 		ft_set_paths(sc);
 	free(path);
-	str_free(to_free);
-	ft_dlstdelone(node, free);
 	if (errno != 0)
 		return (ft_print_error("cd:", node->content, strerror(errno), 1));
+	ft_dlstdelone(node, free);
 	return (0);
 }
