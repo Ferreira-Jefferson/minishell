@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 10:32:08 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 15:18:40 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:07:17 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ static void	child_process_exec(t_pipe_data *data, t_dnode *curr, int *pipefd, t_
 		close(pipefd[1]);
 	}
 	status = execute_node(curr->content, context);
+	ft_dlstdestroy(&data->pid_list, NULL);
+	free(data);
+	free_sc(context);
 	exit(status);
 }
 

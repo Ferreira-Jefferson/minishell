@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:49 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/12 17:42:22 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/14 11:55:30 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include "expander.h"
 # include "executor.h"
 
-int	ft_event_hook(void);
+int		ft_event_hook(void);
+void	free_command_data(t_shell_context *sc);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:54:54 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 18:04:51 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 11:21:16 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		parent_wait_task(pid_t pid);
 int		print_error(char *s1, char *s2, int fd);
 int		print_here_error(char *s1, int fd);
 int		reset_close_fd(int *std_bak, int val);
+int		add_fd_to_list(t_shell_context *context, int fd);
+int		remove_fd_from_list(t_shell_context *context, int fd);
 bool	is_builtin(const char *cmd);
 char	**copy_args(t_dlist *lst);
 int		traveler_handler(t_node *node, t_shell_context *context);

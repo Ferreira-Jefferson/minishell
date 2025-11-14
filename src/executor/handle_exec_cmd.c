@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exec_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 18:27:25 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 11:29:12 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	apply_redir(void *data)
 	close(file_fd);
 	return (0);
 }
-	
+
 static int	execute_builtin(t_dlist *args, t_shell_context *context)
 {
 	if (!ft_strcmp((char *)args->head->content, "echo"))
@@ -119,8 +119,14 @@ int	handle_exec_cmd(t_node *node, t_shell_context *context)
 	cmd_node = (t_cmd_node *)node;
 	std_bak[0] = dup(STDIN_FILENO);
 	std_bak[1] = dup(STDOUT_FILENO);
-	if (std_bak[0] == -1 || std_bak[1] == -1)
+	if (add_fd_to_list(context, std_bak[0]))
 		return (1);
+	if (add_fd_to_list(context, std_bak[1]))
+	{
+		remove_fd_from_list(context, std_bak[0]);
+		close(std_bak[0]);
+		return (1);
+	}
 	if (ft_dlstforeach(cmd_node->redirections, apply_redir))
 		status = 1;
 	else if (!cmd_node->args || !cmd_node->args->size)
@@ -128,6 +134,7 @@ int	handle_exec_cmd(t_node *node, t_shell_context *context)
 	else
 		status = execute_cmd(cmd_node->args, context);
 	reset_close_fd(std_bak, 0);
+	remove_fd_from_list(context, std_bak[0]);
+	remove_fd_from_list(context, std_bak[1]);
 	return (status);
 }
-

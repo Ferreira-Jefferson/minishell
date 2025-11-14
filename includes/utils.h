@@ -17,6 +17,7 @@ typedef struct s_shell_context
 	int				should_exit;	 // Flag para encerrar o shell
 	int				pid_ms;			 // pid do minishell inicial
 	t_dlist			*heredoc_files;
+	t_dlist			*tokens;
 	int				last_status;	 // last status code
 }	t_shell_context;
 
@@ -28,7 +29,7 @@ void			ft_define_rl_prompt(t_shell_context	*sc);
 char			*ft_create_content(t_dlist	*args);
 int				ft_print_error(char *built, char *content, char *message, \
 	int status);
-	
+
 	// free_utils.c
 int			free_str(char *str, int val);
 void		free_arr(char **arr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 08:47:28 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 17:06:52 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 11:17:35 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,32 @@ int	reset_close_fd(int *std_bak, int val)
 	close(std_bak[0]);
 	close(std_bak[1]);
 	return (val);
+}
+
+int	add_fd_to_list(t_shell_context *context, int fd)
+{
+	if (fd == -1)
+		return (1);
+	return (!ft_dlstpush_back(context->fds, (void *)(long)fd));
+}
+
+int	remove_fd_from_list(t_shell_context *context, int fd)
+{
+	t_dnode	*curr;
+	t_dnode	*aux;
+
+	curr = context->fds->head;
+	while (curr)
+	{
+		aux = curr->next;
+		if ((int)(long)curr->content == fd)
+		{
+			ft_dlstremove_node(context->fds, curr, NULL);
+			return (0);
+		}
+		curr = aux;
+	}
+	return (1);
 }
 
 

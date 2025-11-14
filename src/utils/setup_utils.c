@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setup_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 11:51:58 by joaolive          #+#    #+#             */
+/*   Updated: 2025/11/14 11:55:06 by joaolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	ft_set_rl_propmt(t_shell_context *sc)
@@ -70,7 +82,9 @@ t_shell_context	*ft_setup_sc(char **envp)
 {
 	t_shell_context	*sc;
 
-	sc = (t_shell_context *) malloc(sizeof(t_shell_context));
+	sc = ft_calloc(1, sizeof(t_shell_context));
+	if (!sc)
+		return (NULL);
 	sc->input = NULL;
 	sc->pid_ms = ft_getpid();
 	sc->ast_root = NULL;

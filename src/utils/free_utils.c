@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:12:27 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 08:03:57 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 11:59:02 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-
 int free_ret(t_dlist **list, void *arg, void (*del)(void *), int ret)
 {
 	if (list)
@@ -38,23 +37,37 @@ int free_ret(t_dlist **list, void *arg, void (*del)(void *), int ret)
 	return (ret);
 }
 
-void	ft_del_fds(void *fd)
+void	close_fd(void *data)
 {
-	int	*fd_value;
+	int	fd;
 
-	fd_value = (int *)fd;
-	close(*fd_value);
+	fd = (int)(long)data;
+	if (fd > 2)
+		close(fd);
 }
+
+// void	free_sc(t_shell_context	*sc)
+// {
+// 	ht_free(sc->env);
+// 	ht_free(sc->env_copy);
+// 	str_free(sc->pwd);
+// 	str_free(sc->rl_prompt);
+// 	free_node(sc->ast_root);
+// 	ft_dlstdestroy(&sc->fds, close_fd);
+// 	ft_dlstdestroy(&sc->tokens, free_token);
+// 	ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
+// 	free(sc);
+// }
 
 void	free_sc(t_shell_context	*sc)
 {
+	if (!sc)
+		return ;
+	free_command_data(sc);
 	ht_free(sc->env);
 	ht_free(sc->env_copy);
 	str_free(sc->pwd);
 	str_free(sc->rl_prompt);
-	free_node(sc->ast_root);
-	ft_dlstdestroy(&sc->fds, ft_del_fds);
-	ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
+	ft_dlstdestroy(&sc->fds, close_fd);
 	free(sc);
 }
-
