@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 09:07:54 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 09:08:04 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "built_in.h"
 
 int	is_valid_flag(t_shell_context *sc, char *flag)
@@ -48,6 +60,6 @@ int	b_echo(t_shell_context *sc, t_dlist	*args)
 	if (!valid_flag)
 		printf("\n");
 	str_free(tmp);
-	ft_dlstdelone(node, free);  
+	ft_dlstdelone(node, free);
 	return (0);
 }

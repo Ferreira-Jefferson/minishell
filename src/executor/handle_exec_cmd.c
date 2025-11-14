@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 18:27:25 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 09:34:21 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,9 @@ static int	execute_cmd(t_dlist *lst, t_shell_context *context)
 
 	if (is_builtin((const char *)lst->head->content))
 	{
-		if (execute_builtin(lst, context) != 2)
-			return (1);
+		status = execute_builtin(lst, context);
+		if (status != 2)
+			return (status);
 	}
 	argv = copy_args(lst);
 	if (!argv)

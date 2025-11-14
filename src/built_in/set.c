@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 09:06:56 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 09:06:57 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "built_in.h"
 
 static void	set_var(t_shell_context *sc, char **split)
@@ -12,9 +24,11 @@ static void	set_var(t_shell_context *sc, char **split)
 		if (ft_strchr(content, '='))
 		{
 			if (split_set[1] == NULL)
-				ht_update_insert(sc->env, split_set[0], "", (t_env_type) EXPORT);
+				ht_update_insert(sc->env, split_set[0], "", \
+					(t_env_type) EXPORT);
 			else
-				ht_update_insert(sc->env, split_set[0], split_set[1], (t_env_type) EXPORT);
+				ht_update_insert(sc->env, split_set[0], split_set[1], \
+					(t_env_type) EXPORT);
 		}
 		str_free(content);
 		ft_free_str_vector(split_set);
@@ -22,10 +36,10 @@ static void	set_var(t_shell_context *sc, char **split)
 	}
 }
 
-char *validate_set(char **split)
+char	*validate_set(char **split)
 {
 	int	i;
-	
+
 	i = 0;
 	while (split[i])
 	{
@@ -36,7 +50,7 @@ char *validate_set(char **split)
 	return (NULL);
 }
 
-static void ft_handler_cmd_not_found(t_dlist *args,char *ret, \
+static void	ft_handler_cmd_not_found(t_dlist *args, char *ret, \
 	char	**content_split)
 {
 	char	*to_free;
@@ -50,12 +64,12 @@ static void ft_handler_cmd_not_found(t_dlist *args,char *ret, \
 			free(to_free);
 		}
 	}
-	ft_free_str_vector(content_split);  
+	ft_free_str_vector(content_split);
 }
 
 int	b_set(t_shell_context *sc, t_dlist *args)
 {
-	char *ret;
+	char	*ret;
 	t_dnode	*node;
 	char	**content_split;
 	char	*content;

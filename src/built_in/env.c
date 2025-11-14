@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 09:07:07 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 09:07:47 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "built_in.h"
 
 static void	print_env(t_env_item *env_item, char **str_env)
@@ -14,7 +26,7 @@ static void	print_env(t_env_item *env_item, char **str_env)
 	free(env_item);
 }
 
-int ft_validate_env(t_shell_context *sc, t_dlist *args)
+int	ft_validate_env(t_shell_context *sc, t_dlist *args)
 {
 	t_dnode	*node;
 	char	*content;

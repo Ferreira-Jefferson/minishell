@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 09:08:07 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 09:14:00 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "built_in.h"
 
 static void	create_export_list(t_env_item *env_item, char **str_env)
@@ -53,7 +65,6 @@ int	b_export(t_shell_context *sc, t_dlist *args)
 	(void) args;
 	ft_dlstremove_at(args, 0, free);
 	if (args->size == 0)
-		return (print_export(sc));	
-
+		return (print_export(sc));
 	return (0);
 }
