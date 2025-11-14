@@ -6,19 +6,19 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:54:54 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 18:04:51 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 09:02:31 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_H
-#define EXECUTOR_H
+# define EXECUTOR_H
 
 # include "minishell.h"
 # include "built_in.h"
 # include <errno.h>
 # include <sys/wait.h>
 
-typedef	int (*t_executor_func)(t_node *node, t_shell_context *context);
+typedef int	(*t_executor_func)(t_node *node, t_shell_context *context);
 
 typedef struct s_pipe_data
 {

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 08:59:04 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 08:59:05 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STR_H
 # define STR_H
 
@@ -9,7 +21,7 @@
 typedef struct s_str {
 	size_t	len;
 	size_t	capacity;
-	char	buf[]; // "Flexible Array Member" (FAM)
+	char	buf[];
 }	t_str;
 
 t_str	*get_str(const char *buf);

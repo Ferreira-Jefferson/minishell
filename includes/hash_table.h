@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash_table.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 08:59:11 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 08:59:50 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef HASH_TABLE_H
 # define HASH_TABLE_H
 
-# define INITIAL_SIZE 256 // load factor = num_elem / table size (256 = 0.39)
+// load factor = num_elem / table size (256 = 0.39)
+# define INITIAL_SIZE 256 
 
 typedef enum e_env_type {
 	ENV,
@@ -13,7 +26,7 @@ typedef struct s_env_item {
 	char				*key;
 	char				*value;
 	enum e_env_type		type;
-	struct s_env_item	*next; // Separate Chaining
+	struct s_env_item	*next;
 }	t_env_item;
 
 typedef struct s_hash_table {
