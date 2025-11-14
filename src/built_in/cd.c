@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:08:18 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 14:06:44 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:06:11 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,22 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 	char	*path;
 	char	*to_free;
 
-	if (args->size == 1)
-		ft_strlcpy(args->head->content, "~", ft_strlen(args->head->content));
-	else
-		ft_dlstremove_at(args, 0, free);
-	if (!args || args->size == 0)
+	ft_dlstremove_at(args, 0, free);
+	if (args->size == 0)
 		return (0);
-	node = ft_dlstnew("");
-	node->content = ft_create_content(args);
-	to_free = node->content;
+	if (args->size > 1)
+		return (ft_print_error("cd:", "", "too many arguments", 1));
+	to_free = ft_create_content(args);
+	node = ft_dlstnew(to_free);
 	expander(sc, node);
-	str_free(to_free);
 	path = ft_strtrim(node->content, " 	");
 	status = chdir(path);
 	if (status == 0)
 		ft_set_paths(sc);
-	free(path);
 	if (errno != 0)
-		return (ft_print_error("cd:", node->content, strerror(errno), 1));
+		ft_print_error("cd:", node->content, strerror(errno), errno);
+	free(path);
+	str_free(to_free);
 	ft_dlstdelone(node, free);
-	return (0);
+	return (errno);
 }
