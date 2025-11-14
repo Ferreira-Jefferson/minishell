@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:08:12 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 09:19:56 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:19:12 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	ft_validate(t_shell_context *sc, t_dlist *args, int status)
 	{
 		to_free = str_replace(to_free, "numeric argument required");
 		if (split[0] && !ft_is_numeric(split[0]))
-			status = ft_print_error("exit:", split[0], to_free, 2);
+			status = ft_print_error(sc, split[0], to_free, 2);
 		else if (split[1])
-			status = ft_print_error("exit:", "", "too many arguments", 1);
+			status = ft_print_error(sc, "", "too many arguments", 1);
 		else
 			status = ft_atoi(split[0]) % 256;
 	}
@@ -45,6 +45,7 @@ int	b_exit(t_shell_context *sc, t_dlist	*args, int print)
 {
 	int	status;
 
+	sc->cmd = str_replace(sc->cmd, "exit:");
 	if (!args)
 		status = sc->last_status;
 	else

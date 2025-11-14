@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:08:18 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 15:06:11 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:24:57 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 	char	*path;
 	char	*to_free;
 
+	sc->cmd = str_replace(sc->cmd, "cd:");
 	ft_dlstremove_at(args, 0, free);
 	if (args->size == 0)
 		return (0);
 	if (args->size > 1)
-		return (ft_print_error("cd:", "", "too many arguments", 1));
+		return (ft_print_error(sc, "", "too many arguments", 1));
 	to_free = ft_create_content(args);
 	node = ft_dlstnew(to_free);
 	expander(sc, node);
@@ -49,7 +50,7 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 	if (status == 0)
 		ft_set_paths(sc);
 	if (errno != 0)
-		ft_print_error("cd:", node->content, strerror(errno), errno);
+		ft_print_error(sc, node->content, strerror(errno), errno);
 	free(path);
 	str_free(to_free);
 	ft_dlstdelone(node, free);

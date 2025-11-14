@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:51:58 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 15:15:32 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:18:02 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_shell_context	*ft_setup_sc(char **envp)
 	if (!sc)
 		return (NULL);
 	sc->input = NULL;
+	sc->cmd = str_new("");
 	sc->pid_ms = ft_getpid();
 	sc->ast_root = NULL;
 	sc->env = env_load(envp);

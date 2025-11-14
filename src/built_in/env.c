@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:07:07 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 13:25:32 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:20:55 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_validate_env(t_shell_context *sc, t_dlist *args)
 	content = str_new("‘");
 	content = str_cat(content, node->content);
 	content = str_cat(content, "’");
-	status = ft_print_error("env:", content, "No such file or directory", 127);
+	status = ft_print_error(sc, content, "No such file or directory", 127);
 	ft_dlstdelone(node, free);
 	str_free(content);
 	return (status);
@@ -55,6 +55,7 @@ int	b_env(t_shell_context *sc, t_dlist *args)
 	char			*str_env;
 	int				i;
 
+	sc->cmd = str_replace(sc->cmd, "env:");
 	if (ft_validate_env(sc, args))
 		return (sc->last_status);
 	str_env = str_new("");

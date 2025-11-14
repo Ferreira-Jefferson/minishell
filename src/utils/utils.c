@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 10:07:36 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 10:07:52 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:21:20 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,14 @@ char	*ft_create_content(t_dlist	*args)
 	return (content);
 }
 
-int	ft_print_error(char *built, char *content, char *message, \
-	int status)
+int	ft_print_error(t_shell_context *sc, char *content, \
+	char *message, int status)
 {
 	char	*output;
 
+	sc->last_status = status;
 	output = str_new("bash: ");
-	output = str_cat(output, built);
+	output = str_cat(output, sc->cmd);
 	output = str_cat(output, " ");
 	output = str_cat(output, content);
 	if (*content)

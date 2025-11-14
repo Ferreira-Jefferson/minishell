@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:00:08 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 12:46:24 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:19:26 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_shell_context
 {
 	char			*rl_prompt;
 	char			*input;
+	char			*cmd;
 	t_dlist			*fds;
 	t_node			*ast_root;
 	t_hash_table	*env;
@@ -39,8 +40,8 @@ void			ft_free_str_vector(char **str_vector);
 t_shell_context	*ft_setup_sc(char **envp);
 void			ft_define_rl_prompt(t_shell_context	*sc);
 char			*ft_create_content(t_dlist	*args);
-int				ft_print_error(char *built, char *content, char *message, \
-	int status);
+int				ft_print_error(t_shell_context *sc, char *content, \
+	char *message, int status);
 
 // free_utils.c
 int				free_str(char *str, int val);
