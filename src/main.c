@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 16:02:26 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:31:33 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	ft_core(t_shell_context	*sc)
 	sc->tokens = tokenize(sc->input, 0);
 	sc->ast_root = parse_cmd_list(sc->tokens);
 	if (!traveler_handler(sc->ast_root, sc))
-		executor(sc);
-	if (traveler_handler(sc->ast_root, sc))
 		executor(sc);
 	free_command_data(sc);
 }
