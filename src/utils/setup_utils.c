@@ -51,7 +51,7 @@ int	ft_getpid(void)
 
 	dirp = opendir("/proc/self/task");
 	if (!dirp)
-		return (0) ;	
+		return (0) ;
 	dire = readdir(dirp);
 	if (!dire)
 		return (0) ;
@@ -79,6 +79,7 @@ t_shell_context	*ft_setup_sc(char **envp)
 	sc->pwd = ht_search(sc->env, "PWD");
 	sc->rl_prompt = NULL;
 	sc->fds = ft_dlstinit();
+	sc->heredoc_files = ft_dlstinit();
 	sc->last_status = 0;
 	return (sc);
 }

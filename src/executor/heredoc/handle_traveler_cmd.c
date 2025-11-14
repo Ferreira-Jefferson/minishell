@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:29:33 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 16:09:30 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/13 19:17:05 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static int	heredoc_check_callback(void *data, void *context_data)
 		free(tmp_filename);
 		return (1);
 	}
-	unlink(tmp_filename);
 	free(redir->filename);
 	redir->filename = ft_strdup(tmp_filename);
 	if (!redir->filename)
@@ -99,9 +98,6 @@ int	handle_traveler_cmd(t_node *node, t_shell_context *context)
 	t_cmd_node	*cmd_node;
 
 	cmd_node = (t_cmd_node *)node;
-	context->heredoc_files = ft_dlstinit();
-	if (!context->heredoc_files)
-		return (1);
 	return (ft_dlstforeach_ctx(cmd_node->redirections,
 		heredoc_check_callback, context));
 }
