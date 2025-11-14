@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:51:58 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 11:55:06 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:15:32 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int	ft_getpid(void)
 
 	dirp = opendir("/proc/self/task");
 	if (!dirp)
-		return (0) ;
+		return (0);
 	dire = readdir(dirp);
 	if (!dire)
-		return (0) ;
+		return (0);
 	while (dire)
 	{
 		if (ft_is_numeric(dire->d_name))

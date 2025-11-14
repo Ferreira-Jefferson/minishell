@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 15:30:27 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 15:30:48 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "expander.h"
 
 int	ex_handle_tilde(t_shell_context *sc, char *content, \
@@ -15,7 +27,8 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 		key = ex_get_key(str_new("PWD"));
 	else if (is_valid && content[index + 1] == '-')
 		key = ex_get_key(str_new("OLDPWD"));
-	else if (content[index + 1] == '\0' || content[index + 1] == '/' || ft_isspace(content[index + 1]))
+	else if (content[index + 1] == '\0' || content[index + 1] == '/' \
+		|| ft_isspace(content[index + 1]))
 	{
 		key = ex_get_key(str_new("HOME"));
 		len = 1;

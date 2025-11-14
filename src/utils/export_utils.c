@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 15:14:59 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 15:15:09 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "built_in.h"
 
 static char	*join_str_export(char **split, char *str_export_split)
@@ -24,7 +36,7 @@ static void	handle_sort_export(char	**split, int i, int j)
 		{
 			str_aux[0] = ft_str_toupper(split[i]);
 			str_aux[1] = ft_str_toupper(split[j]);
-			if (ft_strcmp(str_aux[0] , str_aux[1]) > 0)
+			if (ft_strcmp(str_aux[0], str_aux[1]) > 0)
 			{
 				tmp = split[i];
 				split[i] = split[j];

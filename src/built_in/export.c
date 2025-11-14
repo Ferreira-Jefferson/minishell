@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:08:07 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 13:10:29 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:14:37 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ static void	create_export_list(t_env_item *env_item, char **str_env)
 	free(env_item);
 }
 
-static int	print_export(t_shell_context *sc)
+static int	print_export(t_shell_context *sc, int i)
 {
 	char			*str_env;
-	int				i;
 	char			*sorted;
 	t_env_item		*env_item;
 	t_hash_table	*table;
@@ -44,7 +43,6 @@ static int	print_export(t_shell_context *sc)
 	table = sc->env;
 	if (!table)
 		return (1);
-	i = 0;
 	while (i < table->size)
 	{
 		if (table->items[i])
@@ -68,6 +66,6 @@ int	b_export(t_shell_context *sc, t_dlist *args)
 	(void) args;
 	ft_dlstremove_at(args, 0, free);
 	if (args->size == 0)
-		return (print_export(sc));
+		return (print_export(sc, 0));
 	return (0);
 }

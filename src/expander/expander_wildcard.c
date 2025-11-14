@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander_wildcard.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 15:30:15 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 15:32:16 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "expander.h"
 
 static int	match_with_pattern(const char *pattern, char *target, int i, int j)
@@ -57,7 +69,8 @@ static char	*ex_handler_wildcard(char *dir, char *pattern, int has_bar)
 	return (sort_file_name(all_file_name, 0, 0));
 }
 
-static void ex_handle_sub_wildcard(char *prefix, char *content_aux, char *split_bar_one, char **result)
+static void	ex_handle_sub_wildcard(char *prefix, char *content_aux, \
+	char *split_bar_one, char **result)
 {
 	char	*ex_prefix;
 	char	**split_prefix;
@@ -82,7 +95,7 @@ static void ex_handle_sub_wildcard(char *prefix, char *content_aux, char *split_
 	ft_free_str_vector(split_prefix);
 }
 
-static	void ex_list_paths(char **split_bar, char **new_str, char *content_aux)
+static void	ex_list_paths(char **split_bar, char **new_str, char *content_aux)
 {
 	char	*prefix;
 	char	*result;
@@ -99,7 +112,8 @@ static	void ex_list_paths(char **split_bar, char **new_str, char *content_aux)
 		else
 		{
 			content_aux = str_replace(content_aux, split_bar[1]);
-			result = str_cat(result, ex_handler_wildcard(prefix, split_bar[1], 1));
+			result = str_cat(result, \
+				ex_handler_wildcard(prefix, split_bar[1], 1));
 		}
 	}
 	*new_str = str_cat(*new_str, result);

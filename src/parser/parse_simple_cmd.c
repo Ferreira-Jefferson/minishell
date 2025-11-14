@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:14:36 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 12:15:52 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:22:02 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,13 @@ static bool	handle_redirection(t_cmd_node *cmd_node, t_dlist *tokens)
 static bool	build_simple_cmd(t_cmd_node *cmd_node, t_token *token, \
 	t_dlist *tokens)
 {
+	char	*lexeme_copy;
+
 	if (token->kind == TK_WORD)
 	{
 		token = (t_token *)ft_dlstpop_front(tokens);
-		char *lexeme_copy = ft_strdup(token->lexeme);
-		if (!lexeme_copy)
-		{
-			free_token(token);
-			free_node(cmd_node);
-			return (false);
-		}
-		if (!ft_dlstpush_back(cmd_node->args, lexeme_copy))
+		lexeme_copy = ft_strdup(token->lexeme);
+		if (!lexeme_copy || !ft_dlstpush_back(cmd_node->args, lexeme_copy))
 		{
 			free(lexeme_copy);
 			free_token(token);

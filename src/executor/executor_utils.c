@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 08:47:28 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 11:17:35 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:09:44 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,3 @@ int	remove_fd_from_list(t_shell_context *context, int fd)
 	}
 	return (1);
 }
-
-
-
-
-
-

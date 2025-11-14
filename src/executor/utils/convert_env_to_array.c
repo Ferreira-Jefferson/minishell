@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:25:54 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 13:24:42 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:06:53 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	count_items(t_hash_table *hash_items)
 {
-	int	i;
-	int	count;
+	int			i;
+	int			count;
 	t_env_item	*curr;
 
 	i = 0;

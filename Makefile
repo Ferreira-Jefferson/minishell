@@ -25,9 +25,9 @@ INCLUDE_DIRS = -I$(INCLUDES) -I$(LIB_DIR)
 
 MANDATORY_SRC = main.c signals.c
 UTILS_SRC	  = str.c str_utils.c hash_table.c hash_table_utils.c utils.c export_utils.c setup_utils.c free_utils.c
-LEXER_SRC	  = lexer_utils.c lexer.c lexer_handler.c
+LEXER_SRC	  = lexer_utils.c lexer.c lexer_handler.c lexer_handler_kind.c
 PARSER_SRC = constructors.c destructors.c parse_and_or.c parse_cmd_list.c parse_pipeline.c parse_primary.c parse_simple_cmd.c parser_utils.c
-EXPANDER_SRC  = expander.c expander_utils.c expander_core.c expander_wildcard.c expander_wildcard_utils.c expander_core_vars.c
+EXPANDER_SRC  = expander.c expander_utils.c expander_core.c expander_wildcard.c expander_wildcard_utils.c expander_core_vars.c expander_wildcard_sort.c
 BUILT_IN_SRC  = env.c export.c echo.c unset.c set_export.c cd.c exit.c pwd.c set.c
 EXECUTOR_SRC = executor_utils.c executor.c handle_exec_and.c handle_exec_cmd.c handle_exec_list.c handle_exec_or.c \
 				handle_exec_pipe.c handle_exec_subshell.c

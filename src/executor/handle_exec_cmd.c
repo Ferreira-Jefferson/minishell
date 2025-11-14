@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 13:03:47 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:14:02 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,29 @@
 static int	apply_redir(void *data)
 {
 	t_redir	*redir;
-	int		file_fd;
+	int		f_fd;
 	int		std_input;
 
 	redir = (t_redir *)data;
-	file_fd = -1;
+	f_fd = -1;
 	std_input = -1;
 	if (redir->kind == RK_INPUT || redir->kind == RK_HEREDOC)
 	{
-		file_fd = open(redir->filename, O_RDONLY);
+		f_fd = open(redir->filename, O_RDONLY);
 		std_input = STDIN_FILENO;
 	}
 	if (redir->kind == RK_OUTPUT || redir->kind == RK_APPEND)
 	{
 		if (redir->kind == RK_OUTPUT)
-			file_fd = open(redir->filename, O_WRONLY | O_CREAT |O_TRUNC, 0644);
+			f_fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else
-			file_fd = open(redir->filename, O_WRONLY | O_CREAT |O_APPEND, 0644);
+			f_fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		std_input = STDOUT_FILENO;
 	}
-	if (file_fd == -1)
+	if (f_fd == -1)
 		return (1);
-	dup2(file_fd, std_input);
-	close(file_fd);
+	dup2(f_fd, std_input);
+	close(f_fd);
 	return (0);
 }
 

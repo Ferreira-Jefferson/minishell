@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exec_pipe.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 10:32:08 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 12:07:17 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:09:34 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static void parent_process_update(t_pipe_data *data, t_dnode *curr, int *pipefd)
+static void	parent_process_update(t_pipe_data *data, t_dnode *curr, int *pipefd)
 {
 	if (data->input_fd != STDIN_FILENO)
 	{
@@ -26,7 +26,8 @@ static void parent_process_update(t_pipe_data *data, t_dnode *curr, int *pipefd)
 	}
 }
 
-static void	child_process_exec(t_pipe_data *data, t_dnode *curr, int *pipefd, t_shell_context *context)
+static void	child_process_exec(t_pipe_data *data, t_dnode *curr, int *pipefd, \
+	t_shell_context *context)
 {
 	int	status;
 
@@ -47,7 +48,8 @@ static void	child_process_exec(t_pipe_data *data, t_dnode *curr, int *pipefd, t_
 	exit(status);
 }
 
-static int fork_pipeline(t_pipe_data *data, t_pipe_node *pipe_node, t_shell_context *context)
+static int	fork_pipeline(t_pipe_data *data, t_pipe_node *pipe_node, \
+	t_shell_context *context)
 {
 	t_dnode	*curr;
 	int		pipefd[2];
