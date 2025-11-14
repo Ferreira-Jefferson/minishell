@@ -24,11 +24,14 @@ static void	set_var(t_shell_context *sc, char **split)
 
 char *validate_set(char **split)
 {
-	while (*split)
+	int	i;
+	
+	i = 0;
+	while (split[i])
 	{
-		if (!ft_strchr(*split, '='))
-			return (*split);
-		split++;
+		if (!ft_strchr(split[i], '='))
+			return (split[i]);
+		i++;
 	}
 	return (NULL);
 }
@@ -46,9 +49,9 @@ int	b_set(t_shell_context *sc, t_dlist *args)
 	content = ft_create_content(args);
 	node = ft_dlstnew(content);
 	expander(sc, node);
-	content_split = ft_split(content, ' ');
+	content_split = ft_split(node->content, ' ');
 	str_free(content);
-	free(node);
+	ft_dlstdelone(node, free);
 	ret = validate_set(content_split);
 	if (ret != NULL)
 	{
@@ -57,10 +60,11 @@ int	b_set(t_shell_context *sc, t_dlist *args)
 			if (args->head)
 			{
 				to_free = args->head->content;
-				args->head->content = ret;
+				args->head->content = ft_strdup(ret);
 				free(to_free);
 			}
 		}
+		ft_free_str_vector(content_split);  
 		return (1);
 	}
 	set_var(sc, content_split);
