@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_task.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:10:36 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 12:16:25 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:52:18 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	child_task(char *path, char **argv, char **envp, t_shell_context *sc)
 	{
 		print_error(argv[0], "command not found", 2);
 		free_arr(envp);
+		free(argv);
 		b_exit(sc, NULL, 0);
 	}
 	execve(path, argv, envp);

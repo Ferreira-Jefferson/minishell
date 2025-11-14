@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:12:27 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 11:59:02 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:48:01 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	free_str(char *str, int val)
 
 void	free_arr(char **arr)
 {
-	int i = 0;
+	int	i;
+	
+	i = 0;
 	if (!arr)
 		return;
 	while (arr[i])
@@ -28,7 +30,7 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-int free_ret(t_dlist **list, void *arg, void (*del)(void *), int ret)
+int	free_ret(t_dlist **list, void *arg, void (*del)(void *), int ret)
 {
 	if (list)
 		ft_dlstdestroy(list, del);

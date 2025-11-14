@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 09:08:18 by jtertuli          #+#    #+#             */
+/*   Updated: 2025/11/14 09:08:50 by jtertuli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "built_in.h"
 
 static void	ft_set_paths(t_shell_context *sc)
@@ -24,7 +36,7 @@ int	b_cd(t_shell_context *sc, t_dlist	*args)
 	char	*path;
 	char	*to_free;
 
-	if (args->size  == 1)
+	if (args->size == 1)
 		ft_strlcpy(args->head->content, "~", ft_strlen(args->head->content));
 	else
 		ft_dlstremove_at(args, 0, free);

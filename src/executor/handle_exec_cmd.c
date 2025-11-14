@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exec_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 11:29:12 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/14 13:03:47 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	execute_builtin(t_dlist *args, t_shell_context *context)
 	if (!ft_strcmp((char *)args->head->content, "exit"))
 		return (b_exit(context, args, 1));
 	if (b_set(context, args))
-		return (2);
+		return (-1);
 	return (0);
 }
 
@@ -99,8 +99,9 @@ static int	execute_cmd(t_dlist *lst, t_shell_context *context)
 
 	if (is_builtin((const char *)lst->head->content))
 	{
-		if (execute_builtin(lst, context) != 2)
-			return (1);
+		status = execute_builtin(lst, context);
+		if (status != -1)
+			return (status);
 	}
 	argv = copy_args(lst);
 	if (!argv)
