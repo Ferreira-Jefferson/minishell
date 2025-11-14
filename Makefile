@@ -33,7 +33,7 @@ EXECUTOR_SRC = executor_utils.c executor.c handle_exec_and.c handle_exec_cmd.c h
 				handle_exec_pipe.c handle_exec_subshell.c
 EXECUTOR_UTILS_SRC =  child_task.c convert_env_to_array.c find_command_path.c parent_wait_task.c print_error.c
 EXECUTOR_HEREDOC_SRC = del_heredoc_files.c gen_filename.c  handle_traveler_and.c handle_traveler_cmd.c handle_traveler_list.c \
-						handle_traveler_or.c handle_traveler_pipe.c handle_traveler_subshell.c traveler_handler.c
+						handle_traveler_or.c handle_traveler_pipe.c handle_traveler_subshell.c traveler_handler.c remove_chars.c
 
 MANDATORY_SRC_FULL = $(addprefix $(SRC_DIR)/, $(MANDATORY_SRC))
 UTILS_SRC_FULL	 = $(addprefix $(UTILS_DIR)/, $(UTILS_SRC))

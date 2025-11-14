@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:12:27 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 12:48:01 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:25:06 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	free_str(char *str, int val)
 void	free_arr(char **arr)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!arr)
 		return;
@@ -71,5 +71,6 @@ void	free_sc(t_shell_context	*sc)
 	str_free(sc->pwd);
 	str_free(sc->rl_prompt);
 	ft_dlstdestroy(&sc->fds, close_fd);
+	ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
 	free(sc);
 }

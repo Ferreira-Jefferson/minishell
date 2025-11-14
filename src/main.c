@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 11:55:17 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:26:06 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	free_command_data(t_shell_context *sc)
 		free(sc->input);
 		sc->input = NULL;
 	}
-	ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
-	sc->heredoc_files = NULL;
+	ft_dlstclear(sc->heredoc_files, del_heredoc_files);
 	ft_dlstdestroy(&sc->tokens, free_token);
 	sc->tokens = NULL;
 	free_node(sc->ast_root);
@@ -64,8 +63,6 @@ int	main(int argc, char *argv[], char **envp)
 			sc->tokens = tokenize(sc->input, 0);
 			sc->ast_root = parse_cmd_list(sc->tokens);
 			if (!traveler_handler(sc->ast_root, sc))
-				executor(sc);
-			if (traveler_handler(sc->ast_root, sc))
 				executor(sc);
 			free_command_data(sc);
 		}
