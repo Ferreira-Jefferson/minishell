@@ -31,7 +31,7 @@ EXPANDER_SRC  = expander.c expander_utils.c expander_core.c expander_wildcard.c 
 BUILT_IN_SRC  = env.c export.c echo.c unset.c set_export.c cd.c exit.c pwd.c set.c
 EXECUTOR_SRC = executor_utils.c executor.c handle_exec_and.c handle_exec_cmd.c handle_exec_list.c handle_exec_or.c \
 				handle_exec_pipe.c handle_exec_subshell.c
-EXECUTOR_UTILS_SRC =  child_task.c convert_env_to_array.c find_command_path.c parent_wait_task.c print_error.c
+EXECUTOR_UTILS_SRC =  child_task.c convert_env_to_array.c find_command_path.c parent_wait_task.c print_error.c fake_expander.c
 EXECUTOR_HEREDOC_SRC = del_heredoc_files.c gen_filename.c  handle_traveler_and.c handle_traveler_cmd.c handle_traveler_list.c \
 						handle_traveler_or.c handle_traveler_pipe.c handle_traveler_subshell.c traveler_handler.c
 
