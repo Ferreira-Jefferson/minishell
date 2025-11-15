@@ -6,11 +6,21 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:35:58 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/12 10:27:18 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/15 18:03:11 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
+
+static bool	ret_error(t_node_kind kind)
+{
+	ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
+	if (kind == TK_OR)
+		ft_putendl_fd("`||'", 2);
+	else
+		ft_putendl_fd("`&&'", 2);
+	return (true);
+}
 
 static t_node	*build_and_or(t_node *left_node,
 	t_token_kind kind, t_dlist *tokens)
@@ -38,12 +48,23 @@ static t_node	*build_and_or(t_node *left_node,
 	return (left_node);
 }
 
+static bool	has_initial_error(t_dlist *tokens)
+{
+	if (!tokens || !tokens->size)
+		return (true);
+	if (tokens->head && (((t_token *)tokens->head->content)->kind == TK_OR
+			|| ((t_token *)tokens->head->content)->kind == TK_AND))
+		return (ret_error((t_node_kind)((t_token *)
+				tokens->head->content)->kind));
+	return (false);
+}
+
 t_node	*parse_and_or(t_dlist *tokens)
 {
 	t_node			*left_node;
 	t_token_kind	kind;
 
-	if (!tokens || !tokens->size)
+	if (has_initial_error(tokens))
 		return (NULL);
 	left_node = parse_pipeline(tokens);
 	if (!left_node)

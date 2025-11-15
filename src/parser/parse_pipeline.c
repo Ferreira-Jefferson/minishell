@@ -6,11 +6,17 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:41:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/15 15:50:42 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/15 18:03:50 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
+
+static t_node	*ret_error(void)
+{
+	ft_putendl_fd("minishell: syntax error near unexpected token `|'", 2);
+	return (NULL);
+}
 
 static bool	build_pipeline(t_pipe_node *pipe_node, t_dlist *tokens)
 {
@@ -68,6 +74,8 @@ t_node	*parse_pipeline(t_dlist *tokens)
 
 	if (!tokens || !tokens->size)
 		return (NULL);
+	if (tokens->head && ((t_token *)tokens->head->content)->kind == TK_PIPE)
+		return (ret_error());
 	cmd_node = parse_primary(tokens);
 	if (!cmd_node)
 		return (NULL);
