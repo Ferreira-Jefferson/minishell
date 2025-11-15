@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/15 11:47:01 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:57:11 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int	ft_handle_argv_input(t_shell_context *sc, int argc, char *argv[])
 		if (argc == 2)
 		{
 			ft_print_error(sc, argv[1], "option requires an argument", 2);
-			return (1);			
+			return (1);
 		}
 		sc->input = ft_strdup(argv[2]);
 	}
 	ft_core(sc);
-	return (1);	
+	return (1);
 }
 
 int	main(int argc, char *argv[], char **envp)
