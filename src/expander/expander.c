@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:30:27 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 15:30:48 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:58:30 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 	return (len);
 }
 
-void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, \
-	char **new_str)
+static void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, \
+	char **new_str, int start_quotes)
 {
 	char	str_tmp[2];
 	size_t	index;
@@ -63,6 +63,8 @@ void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, \
 			return ;
 		index++;
 	}
+	if (start_quotes != 2)
+		remove_chars(*new_str, "'\"");
 }
 
 int	expander(t_shell_context *sc, t_dnode *node)
@@ -83,7 +85,7 @@ int	expander(t_shell_context *sc, t_dnode *node)
 	ex_wildcard(sc, content, &new_str, start_quotes);
 	content = str_replace(content, new_str);
 	new_str = str_replace(new_str, "");
-	ex_remove_duplicate_quotes(sc, content, &new_str);
+	ex_remove_duplicate_quotes(sc, content, &new_str, start_quotes);
 	content = str_replace(content, new_str);
 	new_str = str_replace(new_str, "");
 	ex_scape(sc, content, &new_str, start_quotes);
