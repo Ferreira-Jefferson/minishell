@@ -3,13 +3,22 @@
 ![Minishell](https://img.shields.io/badge/42-Minishell-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-GPLv3-green?style=for-the-badge)
 
+# 🐚 Minishell – 42 School Project
+
+The **Minishell** project was developed as part of the [42 School](https://www.42sp.org.br/) curriculum, with the goal of recreating a minimalist shell in C.  
+It aims to reproduce the essential functionalities of a Unix command interpreter, including **process execution**, **redirections**, **pipes**, **environment variables**, and **built-in commands**, while adhering to the school’s standards of good practices and modular design.
+
+This project was a collaboration between me (**Jefferson Ferreira**) and **[João Vitor](https://github.com/joaolive)**, combining efforts to structure, implement, and document each module in a clear and efficient way.
+
+---
+
 - [Project structure](#project-structure)
 
-## Project structure
+## 📁 Project Structure 
 
-The Minishell project structure should follow the modularly organized "Flat Approach" standard, according to best practices for small C projects, prioritizing the separation of responsibilities (Lexer, Parser, Executor, Built-ins) to ensure compliance with the **Standard** and maintainability.
+The **Minishell** project follows a modular "Flat Approach" architecture, which is ideal for small C projects. Each folder encapsulates a specific responsibility, promoting clarity, maintainability, and compliance with the 42 School standards.
 
-Below is the directory structure for the **Mandatory Part**, detailing the function of each main file:
+Below is a detailed explanation of each folder and file, following the structure of the mandatory part:
 
 ```
 ├── includes
@@ -107,13 +116,6 @@ Below is the directory structure for the **Mandatory Part**, detailing the funct
 ├── README.md
 └── readline.sup
 ```
-
-## 📁 Project Structure – Detailed Breakdown
-
-The **Minishell** project follows a modular "Flat Approach" architecture, which is ideal for small C projects. Each folder encapsulates a specific responsibility, promoting clarity, maintainability, and compliance with the 42 School standards.
-
-Below is a detailed explanation of each folder and file, following the structure of the mandatory part:
-
 
 ---
 
@@ -253,3 +255,61 @@ The root `Makefile` compiles all modules and links them into the final executabl
 5. **Execution Preparation** → `io/`, `builtins/`, `utils/`
 6. **Command Execution** → `execution/`
 
+
+## Usage
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Ferreira-Jefferson/minishell
+   cd minishell
+   git clone --recursive git@github.com:joaolive/libftx.git
+   ```
+
+2. **Compile the project:**
+   ```bash
+   make
+   ```
+
+3. **Run the program:**
+   ```bash
+   ./minishell 
+   ```
+
+   ```
+   ./minishell -c ls
+   ```
+
+## Compiling
+
+- To compile the project:
+  ```bash
+  make
+  ```
+
+- To compile with bonus:
+  ```bash
+  make bonus
+  ```
+
+- To clean object files:
+  ```bash
+  make clean
+  ```
+
+- To remove all binaries:
+  ```bash
+  make fclean
+  ```
+
+- To recompile from scratch:
+  ```bash
+  make re
+  ```
+
+## License
+
+This project is licensed under the GNU GENERAL PUBLIC License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+*Project developed as part of the 42*
