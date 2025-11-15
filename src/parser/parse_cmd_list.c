@@ -6,11 +6,17 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:35:07 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/15 15:50:38 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/15 18:03:36 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
+
+static t_node	*ret_error(void)
+{
+	ft_putendl_fd("minishell: syntax error near unexpected token `;'", 2);
+	return (NULL);
+}
 
 static t_node	*build_list(t_dlist *tokens, t_node *left_node)
 {
@@ -39,6 +45,8 @@ t_node	*parse_cmd_list(t_dlist *tokens)
 
 	if (!tokens || !tokens->size)
 		return (NULL);
+	if (tokens->head && ((t_token *)tokens->head->content)->kind == TK_LIST)
+		return (ret_error());
 	left_node = parse_and_or(tokens);
 	if (!left_node)
 		return (NULL);
