@@ -1,4 +1,5 @@
 NAME = minishell
+NAME_BONUS = minishell_bonus
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -60,7 +61,12 @@ OBJS = $(MANDATORY_OBJ) $(UTILS_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXPANDER_OBJ) 
 
 all: $(NAME)
 
+bonus: $(NAME_BONUS)
+
 $(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -o $@ $(OBJS) -L$(LIB_DIR) -lft -lreadline
+
+$(NAME_BONUS): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDE_DIRS) -o $@ $(OBJS) -L$(LIB_DIR) -lft -lreadline
 
 $(LIBFT):
