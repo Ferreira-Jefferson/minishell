@@ -4,6 +4,7 @@ a.out
 check
 test_check
 .vscode
+minishell
 minishell_tester
 42_minishell_tester
 minitester-minishell-tester
