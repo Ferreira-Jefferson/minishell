@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:54:54 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 12:46:44 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:02:40 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int		handle_traveler_or(t_node *node, t_shell_context *context);
 int		handle_traveler_subshell(t_node *node, t_shell_context *context);
 char	*gen_filename(void);
 void	del_heredoc_files(void *data);
+char	*remove_chars(char *str, char *set);
 
 #endif

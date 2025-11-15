@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:12:27 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 18:18:25 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 09:59:54 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void	free_sc(t_shell_context	*sc)
 	str_free(sc->cmd);
 	str_free(sc->rl_prompt);
 	ft_dlstdestroy(&sc->fds, close_fd);
+	ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
 	free(sc);
 }

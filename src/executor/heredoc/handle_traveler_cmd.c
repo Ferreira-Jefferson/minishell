@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:29:33 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/13 19:17:05 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/15 09:48:21 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 static int	expand_text(char **line_ptr, t_shell_context *context)
 {
-	t_dnode	*fake_node;
+	char	*newline;
+	char	*str_aux;
 
-	fake_node = ft_dlstnew(*line_ptr);
-	if (!fake_node)
-		return (1);
-	expander(context, fake_node);
-	*line_ptr = (char *)fake_node->content;
-	ft_dlstdelone(fake_node, NULL);
+	str_aux = str_new("");
+	newline = *line_ptr;
+	ex_vars(context, newline, &str_aux, 2);
+	*line_ptr = ft_strdup(str_aux);
+	free(newline);
+	str_free(str_aux);
 	return (0);
 }
 
-static int	write_file(int fd, char *delimiter, t_shell_context *context)
+static int	write_file(int fd, char *delimiter,
+	t_shell_context *context, int is_expandable)
 {
 	char	*line;
 	rl_event_hook = ft_event_hook;
@@ -44,7 +46,7 @@ static int	write_file(int fd, char *delimiter, t_shell_context *context)
 		}
 		if (ft_strcmp(line, delimiter) == 0)
 			return (free_str(line, 0));
-		if (expand_text(&line, context))
+		if (is_expandable && expand_text(&line, context))
 			return (free_str(line, 1));
 		ft_putendl_fd(line, fd);
 		free(line);
@@ -52,16 +54,31 @@ static int	write_file(int fd, char *delimiter, t_shell_context *context)
 	return (0);
 }
 
-static int	create_file(char *filename, char *delimiter, t_shell_context *context)
+static int	create_file(char *filename,
+	char *delimiter, t_shell_context *context)
 {
+	char	*new_delimiter;
+	char	*remove_quotes;
+	int	is_expandable;
 	int	fd;
 	int	status;
 
+	is_expandable = 1;
+	if (ft_strchr(delimiter, '"') || ft_strchr(delimiter, '\''))
+		is_expandable = 0;
+	new_delimiter = ft_strdup(delimiter);
+	if (!new_delimiter)
+		return (1);
+	remove_quotes = remove_chars(new_delimiter, "\'\"");
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
+	{
+		free(new_delimiter);
 		return (1);
-	status = write_file(fd, delimiter, context);
+	}
+	status = write_file(fd, remove_quotes, context, is_expandable);
 	close(fd);
+	free(new_delimiter);
 	return (status);
 }
 
@@ -70,7 +87,7 @@ static int	heredoc_check_callback(void *data, void *context_data)
 	t_redir			*redir;
 	t_shell_context	*context;
 	char			*tmp_filename;
-	char			*delimiter;
+	char			*filename_copy;
 
 	redir = (t_redir *)data;
 	context = (t_shell_context *)context_data;
@@ -79,17 +96,18 @@ static int	heredoc_check_callback(void *data, void *context_data)
 	tmp_filename = gen_filename();
 	if (!tmp_filename)
 		return (1);
-	delimiter = redir->filename;
-	if (create_file(tmp_filename, delimiter, context) || !ft_dlstpush_back(context->heredoc_files, tmp_filename))
+	if (create_file(tmp_filename, redir->filename, context)
+		|| !ft_dlstpush_back(context->heredoc_files, tmp_filename))
 	{
 		unlink(tmp_filename);
 		free(tmp_filename);
 		return (1);
 	}
-	free(redir->filename);
-	redir->filename = ft_strdup(tmp_filename);
-	if (!redir->filename)
+	filename_copy = ft_strdup(tmp_filename);
+	if (!filename_copy)
 		return (1);
+	free(redir->filename);
+	redir->filename = filename_copy;
 	return (0);
 }
 
@@ -101,4 +119,3 @@ int	handle_traveler_cmd(t_node *node, t_shell_context *context)
 	return (ft_dlstforeach_ctx(cmd_node->redirections,
 		heredoc_check_callback, context));
 }
-

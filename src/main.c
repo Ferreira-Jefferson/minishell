@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 16:31:33 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:00:55 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	free_command_data(t_shell_context *sc)
 		free(sc->input);
 		sc->input = NULL;
 	}
-	ft_dlstdestroy(&sc->heredoc_files, del_heredoc_files);
-	sc->heredoc_files = NULL;
+	ft_dlstclear(sc->heredoc_files, del_heredoc_files);
 	ft_dlstdestroy(&sc->tokens, free_token);
 	sc->tokens = NULL;
 	free_node(sc->ast_root);
