@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exec_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 10:14:16 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 16:14:02 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:25:21 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,20 @@ static int	execute_cmd(t_dlist *lst, t_shell_context *context)
 {
 	char	**argv;
 	int		status;
+	char	*cmd;
 
-	if (is_builtin((const char *)lst->head->content))
+	cmd = fake_expander(context, (char *)lst->head->content);
+	if (!cmd)
+		return (1);
+	if (is_builtin(cmd))
 	{
+		free(lst->head->content);
+		lst->head->content = cmd;
 		status = execute_builtin(lst, context);
 		if (status != -1)
 			return (status);
 	}
+	free(cmd);
 	argv = copy_args(lst);
 	if (!argv)
 		return (1);
