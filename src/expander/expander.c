@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:30:27 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/15 10:58:30 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:16:01 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ex_handle_tilde(t_shell_context *sc, char *content, \
 }
 
 static void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, \
-	char **new_str, int start_quotes)
+	char **new_str)
 {
 	char	str_tmp[2];
 	size_t	index;
@@ -53,7 +53,7 @@ static void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, \
 		if ((content[index] && content[index + 1]) && \
 			(content[index] == '"' && content[index + 1] == '"'))
 			index += 2;
-		else if (index > 0 && content[index] == '"' \
+		else if (index > 0 && content[index] == '"' && content[index] == '\'' \
 			&& content[index - 1] != '\\')
 			index += 1;
 		str_tmp[0] = content[index];
@@ -63,8 +63,7 @@ static void	ex_remove_duplicate_quotes(t_shell_context *sc, char *content, \
 			return ;
 		index++;
 	}
-	if (start_quotes != 2)
-		remove_chars(*new_str, "'\"");
+	remove_chars(*new_str, "\'\"");
 }
 
 int	expander(t_shell_context *sc, t_dnode *node)
@@ -85,7 +84,7 @@ int	expander(t_shell_context *sc, t_dnode *node)
 	ex_wildcard(sc, content, &new_str, start_quotes);
 	content = str_replace(content, new_str);
 	new_str = str_replace(new_str, "");
-	ex_remove_duplicate_quotes(sc, content, &new_str, start_quotes);
+	ex_remove_duplicate_quotes(sc, content, &new_str);
 	content = str_replace(content, new_str);
 	new_str = str_replace(new_str, "");
 	ex_scape(sc, content, &new_str, start_quotes);
