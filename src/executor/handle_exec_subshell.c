@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 11:15:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/03 13:48:40 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:55:04 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	handle_exec_subshell(t_node *node, t_shell_context *context)
 	if (pid == 0)
 	{
 		status = execute_node(sub_node->sub_ast, context);
+		free_sc(context);
 		exit(status);
 	}
 	else
