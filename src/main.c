@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/15 10:16:47 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 11:47:01 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_event_hook(void)
 	return (0);
 }
 
-void	ft_core(t_shell_context	*sc)
+void	ft_core(t_shell_context *sc)
 {
 	if (sc->input[0] != '\0')
 		add_history(sc->input);
@@ -44,15 +44,33 @@ void	ft_core(t_shell_context	*sc)
 	free_command_data(sc);
 }
 
+int	ft_handle_argv_input(t_shell_context *sc, int argc, char *argv[])
+{
+	if (argc == 1)
+		return (0);
+	sc->input = ft_strdup(argv[1]);
+	if (ft_strcmp(argv[1], "-c") == 0)
+	{
+		if (argc == 2)
+		{
+			ft_print_error(sc, argv[1], "option requires an argument", 2);
+			return (1);			
+		}
+		sc->input = ft_strdup(argv[2]);
+	}
+	ft_core(sc);
+	return (1);	
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	t_shell_context	*sc;
 
-	(void) argc;
-	(void) argv;
 	sc = ft_setup_sc(envp);
 	setup_signals();
 	rl_event_hook = ft_event_hook;
+	if (ft_handle_argv_input(sc, argc, argv))
+		return (sc->last_status);
 	while (1)
 	{
 		ft_define_rl_prompt(sc);
