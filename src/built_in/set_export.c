@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:07:03 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 09:07:04 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:24:29 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_var(t_shell_context *sc, t_dlist *args)
 		split = ft_split(node->content, '=');
 		ret_set = handle_set(sc, node, split);
 		str_free(node->content);
-		ft_free_str_vector(split);
+		free_arr(split);
 		if (ret_set == -1)
 			return (free(node));
 		args->head = args->head->next;
@@ -68,10 +68,10 @@ int	b_set_export(t_shell_context *sc, t_dlist	*args)
 		return (1);
 	if (split[0][0] == '#')
 	{
-		ft_free_str_vector(split);
+		free_arr(split);
 		return (b_export(sc, args));
 	}
-	ft_free_str_vector(split);
+	free_arr(split);
 	set_var(sc, args);
 	return (0);
 }

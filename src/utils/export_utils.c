@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:14:59 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 15:15:09 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:24:29 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*sort_export(char *str_export)
 	handle_sort_export(split, 0, 0);
 	if (split[0])
 		str_export = join_str_export(split, str_export);
-	ft_free_str_vector(split);
+	free_arr(split);
 	return (str_export);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 10:07:36 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 18:21:20 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:27:09 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,6 @@ char	*ft_str_toupper(char *str)
 	return (str_aux);
 }
 
-void	ft_free_str_vector(char **str_vector)
-{
-	char	**aux;
-
-	aux = str_vector;
-	while (*aux)
-	{
-		free(*aux);
-		aux++;
-	}
-	free(str_vector);
-}
-
 char	*ft_create_content(t_dlist	*args)
 {
 	char	*content;
@@ -108,4 +95,23 @@ int	ft_print_error(t_shell_context *sc, char *content, \
 	ft_putstr_fd(output, 2);
 	str_free(output);
 	return (status);
+}
+
+char	*remove_chars(char *str, char *set)
+{
+	char	*src;
+	char	*dest;
+
+	if (!str || !set)
+		return (NULL);
+	src = str;
+	dest = str;
+	while (*src)
+	{
+		if (!ft_strchr(set, *src))
+			*dest++ = *src;
+		src++;
+	}
+	*dest = '\0';
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:30:15 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 15:32:16 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:24:29 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	ex_handle_sub_wildcard(char *prefix, char *content_aux, \
 	}
 	str_free(content_aux);
 	str_free(ex_prefix);
-	ft_free_str_vector(split_prefix);
+	free_arr(split_prefix);
 }
 
 static void	ex_list_paths(char **split_bar, char **new_str, char *content_aux)
@@ -141,5 +141,5 @@ void	ex_wildcard(t_shell_context *sc, char *content, \
 	ex_list_paths(split_bar, new_str, content_aux);
 	if (str_len(*new_str) == 0)
 		*new_str = str_cat(*new_str, content);
-	ft_free_str_vector(split_bar);
+	free_arr(split_bar);
 }

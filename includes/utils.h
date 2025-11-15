@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:00:08 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 18:19:26 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:27:56 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_shell_context
 
 t_hash_table	*env_load(char **envp);
 char			*ft_str_toupper(char *str);
-void			ft_free_str_vector(char **str_vector);
 t_shell_context	*ft_setup_sc(char **envp);
 void			ft_define_rl_prompt(t_shell_context	*sc);
 char			*ft_create_content(t_dlist	*args);
@@ -49,5 +48,6 @@ void			free_arr(char **arr);
 int				free_ret(t_dlist **list, void *arg, void (*del)(void *), \
 	int ret);
 void			free_sc(t_shell_context *sc);
+char			*remove_chars(char *str, char *set);
 
 #endif

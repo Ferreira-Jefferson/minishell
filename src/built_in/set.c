@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:06:56 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 13:05:51 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:24:29 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	set_var(t_shell_context *sc, char **split)
 					(t_env_type) SET);
 		}
 		str_free(content);
-		ft_free_str_vector(split_set);
+		free_arr(split_set);
 		split++;
 	}
 }
@@ -64,7 +64,7 @@ static void	ft_handler_cmd_not_found(t_dlist *args, char *ret, \
 			free(to_free);
 		}
 	}
-	ft_free_str_vector(content_split);
+	free_arr(content_split);
 }
 
 int	b_set(t_shell_context *sc, t_dlist *args)
@@ -89,6 +89,6 @@ int	b_set(t_shell_context *sc, t_dlist *args)
 		return (1);
 	}
 	set_var(sc, content_split);
-	ft_free_str_vector(content_split);
+	free_arr(content_split);
 	return (0);
 }

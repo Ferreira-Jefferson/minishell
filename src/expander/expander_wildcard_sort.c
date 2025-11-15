@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:56:20 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 15:57:10 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:24:29 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ char	*sort_file_name(char *all_file_name, int i, int j)
 	}
 	if (split[0])
 		all_file_name = join_file_name(split, all_file_name);
-	ft_free_str_vector(split);
+	free_arr(split);
 	return (all_file_name);
 }

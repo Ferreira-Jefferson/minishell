@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:08:12 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 18:19:12 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:24:29 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_validate(t_shell_context *sc, t_dlist *args, int status)
 			status = ft_atoi(split[0]) % 256;
 	}
 	str_free(to_free);
-	ft_free_str_vector(split);
+	free_arr(split);
 	ft_dlstdelone(node, free);
 	return (status);
 }
