@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_simple_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:14:36 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 15:22:02 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:50:54 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static bool	handle_redirection(t_cmd_node *cmd_node, t_dlist *tokens)
 	return (true);
 }
 
-static bool	build_simple_cmd(t_cmd_node *cmd_node, t_token *token, \
+static bool	build_simple_cmd(t_cmd_node *cmd_node, t_token *token,
 	t_dlist *tokens)
 {
 	char	*lexeme_copy;

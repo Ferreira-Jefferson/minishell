@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_traveler_pipe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:10:09 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 16:08:14 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:54:07 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int	handle_traveler_pipe(t_node *node, t_shell_context *context)
 	t_pipe_node		*pipe_node;
 
 	pipe_node = (t_pipe_node *)node;
-	return (ft_dlstforeach_ctx(pipe_node->commands, \
-		traveler_callback, context));
+	return (ft_dlstforeach_ctx(pipe_node->commands,
+			traveler_callback, context));
 }

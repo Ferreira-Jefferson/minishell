@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:29:33 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/15 09:48:21 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:55:54 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	write_file(int fd, char *delimiter,
 	t_shell_context *context, int is_expandable)
 {
 	char	*line;
+
 	rl_event_hook = ft_event_hook;
 	while (1)
 	{
@@ -59,9 +60,9 @@ static int	create_file(char *filename,
 {
 	char	*new_delimiter;
 	char	*remove_quotes;
-	int	is_expandable;
-	int	fd;
-	int	status;
+	int		is_expandable;
+	int		fd;
+	int		status;
 
 	is_expandable = 1;
 	if (ft_strchr(delimiter, '"') || ft_strchr(delimiter, '\''))
@@ -117,5 +118,5 @@ int	handle_traveler_cmd(t_node *node, t_shell_context *context)
 
 	cmd_node = (t_cmd_node *)node;
 	return (ft_dlstforeach_ctx(cmd_node->redirections,
-		heredoc_check_callback, context));
+			heredoc_check_callback, context));
 }

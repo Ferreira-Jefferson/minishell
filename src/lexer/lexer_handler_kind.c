@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handler_kind.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:29:52 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 15:29:53 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:50:06 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

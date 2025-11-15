@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_env_to_array.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:25:54 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/14 16:06:53 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:47:49 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
