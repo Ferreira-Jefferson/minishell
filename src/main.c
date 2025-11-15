@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:37:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/15 15:57:11 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:29:06 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,9 @@ int	main(int argc, char *argv[], char **envp)
 		if (get_g_signal_status() != 0)
 			reset_g_signal_status();
 		if (!sc->input)
-		{
 			b_exit(sc, NULL, 1);
-			return (0);
-		}
 		else
 			ft_core(sc);
 	}
-	return (0);
+	return (sc->last_status);
 }
