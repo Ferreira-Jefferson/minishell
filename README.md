@@ -12,63 +12,100 @@ The Minishell project structure should follow the modularly organized "Flat Appr
 Below is the directory structure for the **Mandatory Part**, detailing the function of each main file:
 
 ```
-.
-├── libft/                   # Biblioteca Pessoal (Libft)
-│   ├── src/
-│   ├── include/
-│   └── Makefile
-│
-├── include/
-│   ├── minishell.h          # Header principal e inclusões.
-│   ├── structs.h            # Definição das estruturas principais (Token, AST - Tagged Union).
-│   ├── parser.h
+├── includes
+│   ├── ast.h
+│   ├── built_in.h
 │   ├── executor.h
-│   ├── builtins.h
 │   ├── expander.h
-│   └── memory.h             # Protótipos para liberação da AST e outras estruturas.
-│
-├── src/
-│   ├── main.c
-│   ├── signals.c
-│
-│   ├── lexer/
-│   │   ├── tokenizer.c      # Tokenização da entrada em tokens brutos.
-│   │   └── quoting.c        # Lógica de aspas (', ") durante a tokenização.
-│
-│   ├── parser/
-│   │   ├── ast_builder.c    # Constrói a AST a partir dos tokens.
-│   │   └── struct_init.c    # Funções de alocação de nós da AST (usando malloc).
-│
-│   ├── expander/
-│   │   ├── variable_exp.c   # Expansão de $VAR e $?.
-│   │   └── quote_removal.c  # Remoção de aspas após expansão.
-│
-│   ├── execution/
+│   ├── hash_table.h
+│   ├── lexer.h
+│   ├── minishell.h
+│   ├── signals.h
+│   ├── str.h
+│   └── utils.h
+├── lib
+│   └── libft
+│       ├── include
+│       │   └── libft.h
+│       ├── src
+│       └── libft.a
+├── objs
+├── src
+│   ├── built_in
+│   │   ├── cd.c
+│   │   ├── echo.c
+│   │   ├── env.c
+│   │   ├── exit.c
+│   │   ├── export.c
+│   │   ├── pwd.c
+│   │   ├── set.c
+│   │   ├── set_export.c
+│   │   └── unset.c
+│   ├── executor
+│   │   ├── heredoc
+│   │   │   ├── del_heredoc_files.c
+│   │   │   ├── gen_filename.c
+│   │   │   ├── handle_traveler_and.c
+│   │   │   ├── handle_traveler_cmd.c
+│   │   │   ├── handle_traveler_list.c
+│   │   │   ├── handle_traveler_or.c
+│   │   │   ├── handle_traveler_pipe.c
+│   │   │   ├── handle_traveler_subshell.c
+│   │   │   └── traveler_handler.c
+│   │   ├── utils
+│   │   │   ├── child_task.c
+│   │   │   ├── convert_env_to_array.c
+│   │   │   ├── fake_expander.c
+│   │   │   ├── find_command_path.c
+│   │   │   ├── parent_wait_task.c
+│   │   │   └── print_error.c
 │   │   ├── executor.c
-│   │   ├── process_mgmt.c   # Gerenciamento de fork, execve, waitpid.
-│   │   └── search_path.c    # Lógica de busca de binários usando PATH e access.
-│
-│   ├── io/
-│   │   ├── io_redirect.c
-│   │   ├── io_pipe.c
-│   │   └── here_doc.c       # Implementação de << (here-document).
-│	│
-│   └── builtins/            # Comandos built-in
-│       ├── b_cd.c
-│       ├── b_echo.c
-│       ├── b_exit.c
-│       ├── b_export.c
-│       ├── b_pwd.c
-│       └── b_unset.c
-│
-│   └── utils/
-│       ├── hash_table.c       	# **Implementação Customizada de Hash Table para ambiente** .
-│       ├── hash_table_utils.c      
-│       ├── str.c  				# **Funções Customizadas de Buffer/String Dinâmica** (substituindo SDS).    
-│       └── str_utils.c 
-│
-└── Makefile
-
+│   │   ├── executor_utils.c
+│   │   ├── handle_exec_and.c
+│   │   ├── handle_exec_cmd.c
+│   │   ├── handle_exec_list.c
+│   │   ├── handle_exec_or.c
+│   │   ├── handle_exec_pipe.c
+│   │   └── handle_exec_subshell.c
+│   ├── expander
+│   │   ├── expander.c
+│   │   ├── expander_core.c
+│   │   ├── expander_core_vars.c
+│   │   ├── expander_utils.c
+│   │   ├── expander_wildcard.c
+│   │   ├── expander_wildcard_sort.c
+│   │   └── expander_wildcard_utils.c
+│   ├── lexer
+│   │   ├── lexer.c
+│   │   ├── lexer_handler.c
+│   │   ├── lexer_handler_kind.c
+│   │   └── lexer_utils.c
+│   ├── parser
+│   │   ├── constructors.c
+│   │   ├── destructors.c
+│   │   ├── parse_and_or.c
+│   │   ├── parse_cmd_list.c
+│   │   ├── parse_pipeline.c
+│   │   ├── parse_primary.c
+│   │   ├── parse_simple_cmd.c
+│   │   └── parser_utils.c
+│   ├── utils
+│   │   ├── export_utils.c
+│   │   ├── free_utils.c
+│   │   ├── hash_table.c
+│   │   ├── hash_table_utils.c
+│   │   ├── setup_utils.c
+│   │   ├── str.c
+│   │   ├── str_utils.c
+│   │   └── utils.c
+│   ├── main.c
+│   └── signals.c
+├── .gitignore
+├── .gitmodules
+├── LICENSE
+├── Makefile
+├── README.md
+└── readline.sup
 ```
 
 ## 📁 Project Structure – Detailed Breakdown
