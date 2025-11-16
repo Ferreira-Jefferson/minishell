@@ -6,7 +6,7 @@
 /*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 13:42:40 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/12 15:48:50 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/16 09:14:21 by joaolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*gen_filename(void)
 {
 	unsigned char	buffer[8];
 	char			*filename;
+	char			*final_filename;
 	int				fd;
 	int				bytes_read;
 
@@ -50,5 +51,9 @@ char	*gen_filename(void)
 	if (!filename)
 		return (NULL);
 	str_hex(filename, buffer, 8);
-	return (filename);
+	final_filename = ft_strjoin("/tmp/heredoc_", filename);
+	free(filename);
+	if (!final_filename)
+		return (NULL);
+	return (final_filename);
 }
