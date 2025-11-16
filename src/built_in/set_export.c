@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:07:03 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/15 10:24:29 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/16 09:13:01 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,26 @@ static int	handle_set(t_shell_context *sc, t_dnode	*node, char **split)
 
 static void	set_var(t_shell_context *sc, t_dlist *args)
 {
-	t_dnode	*node;
+	t_dnode	*cur;
+	t_dnode	*next;
 	char	**split;
-	int		ret_set;
+	int		ret;
+	char	*copy;
 
-	node = malloc(sizeof(t_dnode));
-	if (!node)
-		return ;
-	while (args->head)
+	cur = args->head;
+	while (cur)
 	{
-		node->content = str_new(args->head->content);
-		split = ft_split(node->content, '=');
-		ret_set = handle_set(sc, node, split);
-		str_free(node->content);
+		next = cur->next;
+		copy = str_new(cur->content);
+		split = ft_split(copy, '=');
+		ret = handle_set(sc, cur, split);
+		str_free(copy);
 		free_arr(split);
-		if (ret_set == -1)
-			return (free(node));
-		args->head = args->head->next;
+		ft_dlstremove_node(args, cur, free);
+		if (ret == -1)
+			return ;
+		cur = next;
 	}
-	free(node);
 }
 
 int	b_set_export(t_shell_context *sc, t_dlist	*args)

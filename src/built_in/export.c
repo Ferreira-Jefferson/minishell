@@ -6,7 +6,7 @@
 /*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:08:07 by jtertuli          #+#    #+#             */
-/*   Updated: 2025/11/14 15:14:37 by jtertuli         ###   ########.fr       */
+/*   Updated: 2025/11/16 09:16:54 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,8 @@ static int	print_export(t_shell_context *sc, int i)
 
 int	b_export(t_shell_context *sc, t_dlist *args)
 {
-	(void) args;
 	ft_dlstremove_at(args, 0, free);
 	if (args->size == 0)
 		return (print_export(sc, 0));
-	return (0);
+	return (b_set_export(sc, args));
 }
