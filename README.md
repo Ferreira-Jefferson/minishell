@@ -1,9 +1,7 @@
-# Minishell - 42 School Project
+# 🐚 Minishell – 42 School Project
 
 ![Minishell](https://img.shields.io/badge/42-Minishell-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-GPLv3-green?style=for-the-badge)
-
-# 🐚 Minishell – 42 School Project
 
 The **Minishell** project was developed as part of the [42 School](https://www.42sp.org.br/) curriculum, with the goal of recreating a minimalist shell in C.  
 It aims to reproduce the essential functionalities of a Unix command interpreter, including **process execution**, **redirections**, **pipes**, **environment variables**, and **built-in commands**, while adhering to the school’s standards of good practices and modular design.
@@ -11,8 +9,6 @@ It aims to reproduce the essential functionalities of a Unix command interpreter
 This project was a collaboration between me (**Jefferson Ferreira**) and **[João Vitor](https://github.com/joaolive)**, combining efforts to structure, implement, and document each module in a clear and efficient way.
 
 ---
-
-- [Project structure](#project-structure)
 
 ## 📁 Project Structure 
 
@@ -138,7 +134,6 @@ This folder centralizes all header files, organizing prototypes and structure de
 - `minishell.h`: Main header file that includes all others.
 - `structs.h`: Defines core data structures like `Token`, `ASTNode`, and tagged unions.
 - `parser.h`, `executor.h`, `builtins.h`, `expander.h`: Module-specific prototypes.
-- `memory.h`: Functions for freeing AST and other dynamically allocated structures.
 
 🔗 **Integration**: Ensures consistent interfaces and type definitions across the entire project.
 
@@ -233,8 +228,8 @@ Implements shell-native commands that do not require external binaries.
 
 You contributed to this module, which provides reusable components for other parts of the shell.
 
-- `env_hash.c`: Implements a **custom hash table** for storing and accessing environment variables efficiently.
-- `dynamic_string.c`: Provides a **dynamic string buffer** system, replacing external libraries like SDS.
+- `hash_table.c`: Implements a **custom hash table** for storing and accessing environment variables efficiently.
+- `str.c`: Provides a **dynamic string buffer** system, replacing external libraries like SDS.
 
 🔗 **Integration**: Used by the expander, parser, and executor to manage strings and environment data.
 
