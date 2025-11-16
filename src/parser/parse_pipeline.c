@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipeline.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaolive <joaolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jtertuli <jtertuli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:41:47 by joaolive          #+#    #+#             */
-/*   Updated: 2025/11/15 18:03:50 by joaolive         ###   ########.fr       */
+/*   Updated: 2025/11/16 08:22:30 by jtertuli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ t_node	*parse_pipeline(t_dlist *tokens)
 		return (cmd_node);
 	pipe_node = init_pipe_node(cmd_node);
 	if (!pipe_node)
+	{
+		free_node(cmd_node);
 		return (NULL);
+	}
 	if (!build_pipeline(pipe_node, tokens))
 		return (NULL);
 	return ((t_node *)pipe_node);
